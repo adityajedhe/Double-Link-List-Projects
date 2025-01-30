@@ -54,6 +54,16 @@ DiskNode* DiskNode::GetNextDiskNode() const
 //-------------------------------------------------------------------
 /**
  * @brief Sets the next disk node in the sequence.
+ * @param ipPreviousDiskNode Pointer to the previous disk node in the sequence.
+ */
+void DiskNode::SetPreviousDiskNode(DiskNode* ipPreviousDiskNode)
+{
+    _pPreviousDiskNode = ipPreviousDiskNode;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Sets the next disk node in the sequence.
  * @param ipNextDiskNode Pointer to the next disk node in the sequence.
  */
 void DiskNode::SetNextDiskNode(DiskNode* ipNextDiskNode)

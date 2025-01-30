@@ -53,7 +53,7 @@ public:
 
     /**
      * @brief Sets the next disk node in the sequence.
-     * @param ipNextDiskNode Pointer to the next disk node in the sequence.
+     * @param ipPreviousDiskNode Pointer to the previous disk node in the sequence.
      */
     void SetPreviousDiskNode(DiskNode* ipPreviousDiskNode);
 

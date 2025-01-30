@@ -60,10 +60,15 @@ void DiskStack::PrintStack()
 
     while (nullptr != pDiskNode)
     {
-        std::cout << "Disk " << pDiskNode->GetDiskNumber() << std::endl;
+        std::cout << "Disk " << pDiskNode->GetDiskNumber();
 
         pDiskNode = pDiskNode->GetNextDiskNode();
+
+        if (nullptr != pDiskNode)
+            std::cout << ", ";
     }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
