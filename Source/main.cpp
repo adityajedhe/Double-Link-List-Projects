@@ -10,8 +10,8 @@
 #include "DiskStack.h"
 
 
-// 
-// --------------------------------------------
+// Global variables to count the number of transfers
+// -------------------------------------------------
 int nbIterations = 0;
 
 /**
