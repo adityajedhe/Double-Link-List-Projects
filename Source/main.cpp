@@ -1,6 +1,8 @@
 //===================================================================
 // This file contains the main function that solves the Tower of
 // Hanoi problem.
+// @author Aditya Jedhe
+// @date   2025/01/30
 //===================================================================
 
 #include <iostream>
@@ -8,12 +10,20 @@
 #include "DiskStack.h"
 
 
-// Global variables to represent the three rods
-// --------------------------------------------
+// Global variables to count the number of transfers
+// -------------------------------------------------
 int nbIterations = 0;
+
+/**
+ * @brief Global variables to represent the three rods
+ *        Pointer to the DiskStack object representing stack A.
+ *        Pointer to the DiskStack object representing stack B.
+ *        Pointer to the DiskStack object representing stack C.
+ */
 DiskStack* pStackA = nullptr;
 DiskStack* pStackB = nullptr;
 DiskStack* pStackC = nullptr;
+
 
 //-------------------------------------------------------------------
 /**
@@ -22,6 +32,8 @@ DiskStack* pStackC = nullptr;
 void PrintStacks()
 {
     std::cout << "Iteration: " << nbIterations++ << std::endl;
+
+    std::cout << "       [TOP]" << std::endl;
 
     std::cout << "Rod A: ";
     pStackA->PrintStack();
@@ -75,7 +87,7 @@ void TowerOfHanoi(DiskNode* ipCurrentDiskNode, DiskStack* ipSourceRod, DiskStack
 
 //-------------------------------------------------------------------
 /**
- * @brief Function to delete the stack
+ * @brief Function to delete the stack and its all nodes
  * @param ipStack Pointer to the stack to be deleted
  */
 void DeleteStack(DiskStack*& ipStack)
@@ -98,7 +110,7 @@ void DeleteStack(DiskStack*& ipStack)
 
 //-------------------------------------------------------------------
 /**
- * @brief Main function
+ * @brief Main function to solve the Tower of Hanoi problem
  */
 int main()
 {
