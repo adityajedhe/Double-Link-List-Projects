@@ -1,7 +1,11 @@
+//===================================================================
+// Class: DiskNode
+//===================================================================
 
 #ifndef _DISKNODE_H_
 #define _DISKNODE_H_
 
+//------------------------------------------------------------------------
 /**
  * @class DiskNode
  * @brief Represents a node in the Tower of Hanoi game, encapsulating a disk and its relationship to other disks.
@@ -22,15 +26,20 @@ public:
     /**
      * @brief Constructor for DiskNode
      * @param inDiskNumber Disk number
-     * @param ipPreviousDiskNode Pointer to the previous disk node
      */
-    DiskNode(const int inDiskNumber = 0, DiskNode* ipPreviousDiskNode = nullptr);
+    DiskNode(const int inDiskNumber = 0);
 
     /**
      * @brief This identifies the disk number
      * @return Disk number
      */
     int GetDiskNumber() const;
+
+    /**
+     * @brief Returns the previous disk node
+     * @return Previous disk node
+     */
+    DiskNode* GetPreviousDiskNode() const;
 
     /**
      * @brief Retrieves the next DiskNode in the sequence.
@@ -43,11 +52,15 @@ public:
     DiskNode* GetNextDiskNode() const;
 
     /**
-     * @brief Returns the previous disk node
-     * @return Previous disk node
+     * @brief Sets the next disk node in the sequence.
+     * @param ipNextDiskNode Pointer to the next disk node in the sequence.
      */
-    DiskNode* GetPreviousDiskNode() const;
+    void SetPreviousDiskNode(DiskNode* ipPreviousDiskNode);
 
+    /**
+     * @brief Sets the next disk node in the sequence.
+     * @param ipNextDiskNode Pointer to the next disk node in the sequence.
+     */
     void SetNextDiskNode(DiskNode* ipNextDiskNode);
 
 
@@ -60,14 +73,14 @@ private:
     int _nDiskNumber;
 
     /**
-     * @brief Pointer to the next DiskNode in the sequence.
-     */
-    DiskNode* _pNextDiskNode;
-
-    /**
      * @brief Pointer to the previous disk node in the Tower of Hanoi structure.
      */
     DiskNode* _pPreviousDiskNode;
+
+    /**
+     * @brief Pointer to the next DiskNode in the sequence.
+     */
+    DiskNode* _pNextDiskNode;
 
 };
 

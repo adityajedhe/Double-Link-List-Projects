@@ -1,3 +1,7 @@
+//===================================================================
+// This file contains the implementation of the DiskNode class.
+//===================================================================
+
 #include "DiskNode.h"
 #include <iostream>
 
@@ -5,13 +9,12 @@
 /**
  * @brief Constructor for DiskNode
  * @param inDiskNumber Disk number
- * @param ipPreviousDiskNode Pointer to the previous disk node
  */
- //-------------------------------------------------------------------
-DiskNode::DiskNode(const int inDiskNumber, DiskNode* ipPreviousDiskNode)
+DiskNode::DiskNode(const int inDiskNumber) :
+    _nDiskNumber(inDiskNumber),
+    _pPreviousDiskNode(nullptr),
+    _pNextDiskNode(nullptr)
 {
-    _nDiskNumber = inDiskNumber;
-    _pPreviousDiskNode = ipPreviousDiskNode;
 }
 
 //-------------------------------------------------------------------
@@ -19,10 +22,19 @@ DiskNode::DiskNode(const int inDiskNumber, DiskNode* ipPreviousDiskNode)
  * @brief This identifies the disk number
  * @return Disk number
  */
- //-------------------------------------------------------------------
 int DiskNode::GetDiskNumber() const
 {
     return _nDiskNumber;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Returns the previous disk node
+ * @return Previous disk node
+ */
+DiskNode* DiskNode::GetPreviousDiskNode() const
+{
+    return _pPreviousDiskNode;
 }
 
 //-------------------------------------------------------------------
@@ -34,7 +46,6 @@ int DiskNode::GetDiskNumber() const
  *
  * @return DiskNode* Pointer to the next DiskNode.
  */
- //-------------------------------------------------------------------
 DiskNode* DiskNode::GetNextDiskNode() const
 {
     return _pNextDiskNode;
@@ -42,21 +53,10 @@ DiskNode* DiskNode::GetNextDiskNode() const
 
 //-------------------------------------------------------------------
 /**
- * @brief Returns the previous disk node
- * @return Previous disk node
- */
- //-------------------------------------------------------------------
-DiskNode* DiskNode::GetPreviousDiskNode() const
-{
-    return _pPreviousDiskNode;
-}
-
-//-------------------------------------------------------------------
-/**
  * @brief Sets the next disk node in the sequence.
  * @param ipNextDiskNode Pointer to the next disk node in the sequence.
  */
- //-------------------------------------------------------------------
 void DiskNode::SetNextDiskNode(DiskNode* ipNextDiskNode)
 {
+    _pNextDiskNode = ipNextDiskNode;
 }

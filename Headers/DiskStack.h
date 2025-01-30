@@ -1,3 +1,6 @@
+//===================================================================
+// Class: DiskStack
+//===================================================================
 
 #ifndef _DISKSTACK_H_
 #define _DISKSTACK_H_
@@ -38,6 +41,11 @@ public:
      * @return Pointer to the disk node that was popped from the stack.
      */
     DiskNode* PopFromStack();
+
+    /**
+     * @brief Prints the contents of the stack.
+     */
+    void PrintStack();
 
     /**
      *  @brief Returns the top disk node from the stack.
