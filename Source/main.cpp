@@ -10,8 +10,8 @@
 #include "DiskStack.h"
 
 
-// Global variables to count the number of transfers
-// -------------------------------------------------
+// Global variable to count the number of transfers
+// ------------------------------------------------
 int nbIterations = 0;
 
 /**
@@ -49,6 +49,49 @@ void PrintStacks()
 
 //-------------------------------------------------------------------
 /**
+ * @brief Function to move the disk from the source rod to the destination rod
+ * @param ipSourceRod Pointer to the source rod
+ * @param ipDestinationRod Pointer to the destination rod
+ * @return true if the disk was moved successfully, false otherwise
+ */
+bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRod)
+{
+    bool bDiskMoved(false);
+
+    if ((nullptr != ipSourceRod) && (nullptr != ipDestinationRod))
+    {
+        // Get the top disk from the source rod and the destination rod
+        // ------------------------------------------------------------
+        DiskNode* pSourceTop = ipSourceRod->GetTopDisk();
+        DiskNode* pDestinationTop = ipDestinationRod->GetTopDisk();
+
+        bool bMoveTheDisk(false);
+
+        // If the destination rod is empty, or
+        // the top disk of the source rod is smaller than the top disk of the destination rod
+        // then move the disk from the source rod to the destination rod
+        // ----------------------------------------------------------------------------------
+        if (nullptr == pDestinationTop)
+            bMoveTheDisk = true;
+        else if ((nullptr != pSourceTop) && (nullptr != pDestinationTop) &&
+            (pSourceTop->GetDiskNumber() < pDestinationTop->GetDiskNumber()))
+            bMoveTheDisk = true;
+
+        if (bMoveTheDisk)
+        {
+            ipDestinationRod->PushToStack(ipSourceRod->PopFromStack());
+
+            PrintStacks();
+
+            bDiskMoved = true;
+        }
+    }
+
+    return bDiskMoved;
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Function to solve the Tower of Hanoi problem
  * @param ipCurrentDiskNode Pointer to the current disk node
  * @param ipSourceRod Pointer to the source rod
@@ -68,18 +111,12 @@ void TowerOfHanoi(DiskNode* ipCurrentDiskNode, DiskStack* ipSourceRod, DiskStack
     DiskNode* pDiskNode = ipCurrentDiskNode->GetPreviousDiskNode();
 
     if (nullptr == pDiskNode)
-    {
-        ipDestinationRod->PushToStack(ipSourceRod->PopFromStack());
-
-        PrintStacks();
-    }
+        MoveTheDiskToDestination(ipSourceRod, ipDestinationRod);
     else
     {
         TowerOfHanoi(pDiskNode, ipSourceRod, ipHelperRod, ipDestinationRod);
 
-        ipDestinationRod->PushToStack(ipSourceRod->PopFromStack());
-
-        PrintStacks();
+        MoveTheDiskToDestination(ipSourceRod, ipDestinationRod);
 
         TowerOfHanoi(pDiskNode, ipHelperRod, ipDestinationRod, ipSourceRod);
     }
