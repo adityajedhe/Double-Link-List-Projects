@@ -30,6 +30,11 @@ public:
     DiskNode(const int inDiskNumber = 0);
 
     /**
+     * @brief Destructor for DiskNode
+     */
+    ~DiskNode();
+
+    /**
      * @brief This identifies the disk number
      * @return Disk number
      */

@@ -19,7 +19,15 @@ DiskStack::DiskStack() :
 
 //-------------------------------------------------------------------
 /**
- * @brief Returns the top disk node from the stack.
+ * @brief Destructor for DiskStack
+ */
+DiskStack::~DiskStack()
+{
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Pushes a disk node onto the stack.
  * @return DiskNode* Pointer to the top disk node in the stack.
  *         Returns nullptr if the stack is empty.
  */
