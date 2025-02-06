@@ -21,6 +21,14 @@ DiskNode::DiskNode(const int inDiskNumber) :
 
 //-------------------------------------------------------------------
 /**
+ * @brief Destructor for DiskNode
+ */
+DiskNode::~DiskNode()
+{
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief This identifies the disk number
  * @return Disk number
  */

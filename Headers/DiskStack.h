@@ -1,13 +1,17 @@
 //===================================================================
 // Class: DiskStack
+// @author Aditya Jedhe @adityajedhe
+// @date   2025/01/30
 //===================================================================
 
 #ifndef _DISKSTACK_H_
 #define _DISKSTACK_H_
 
-
+// Forward declaration
+// -------------------
 class DiskNode;
 
+//------------------------------------------------------------------------
 /**
  * @class DiskStack
  * @brief Represents a stack of disks in the Tower of Hanoi game.
@@ -18,8 +22,25 @@ class DiskNode;
  * @note This class does not manage memory for the disk nodes. It is the responsibility of the user to ensure
  * that the disk nodes remain valid for the lifetime of the DiskStack instance.
  *
- * @author Aditya Jedhe
- * @date   2025/01/30
+ * @fn DiskStack::DiskStack()
+ * @brief Constructor for DiskStack
+ *
+ * @fn DiskStack::~DiskStack()
+ * @brief Destructor for DiskStack
+ *
+ * @fn void DiskStack::PushToStack(DiskNode* ipDiskNode)
+ * @brief Pushes a disk node onto the stack.
+ * @param ipDiskNode Pointer to the disk node to be pushed onto the stack.
+ *
+ * @fn DiskNode* DiskStack::PopFromStack()
+ * @brief Pops the top disk node from the stack.
+ *
+ * @fn void DiskStack::PrintStack()
+ * @brief Prints the contents of the stack.
+ *
+ * @fn DiskNode* DiskStack::GetTopDisk() const
+ * @brief Returns the top disk node from the stack.
+ *
  */
 class DiskStack
 {
@@ -29,6 +50,11 @@ public:
      *  @brief Constructor for DiskStack
      */
     DiskStack();
+
+    /**
+     *  @brief Destructor for DiskStack
+     */
+    virtual ~DiskStack();
 
     /**
      * @brief Pushes a disk node onto the stack.
