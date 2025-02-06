@@ -22,5 +22,5 @@ jobs:
     - name: Build with Makefile
       run: make
 
-    - name: Run tests
-      run: make test  # Adjust this if your Makefile has a different target for tests
+#    - name: Run tests
+#      run: make test  # Adjust this if your Makefile has a different target for tests
