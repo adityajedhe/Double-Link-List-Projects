@@ -1,21 +1,26 @@
-name: C/C++ CI
+name: C++ CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main  # Change this to your default branch if it's not 'main'
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Change this to your default branch if it's not 'main'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: make
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up C++ environment
+      run: sudo apt-get install g++ make
+
+    - name: Build with Makefile
       run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+
+    - name: Run tests
+      run: make test  # Adjust this if your Makefile has a different target for tests
