@@ -1,5 +1,7 @@
 //===================================================================
-// Class: DiskNode
+// Class: BinaryTreeNode
+// @author Aditya Jedhe
+// @date   2025/01/30
 //===================================================================
 
 #ifndef _DISKNODE_H_
@@ -16,8 +18,6 @@
  * @note This class does not manage memory for the previous disk node. It is the responsibility of the user
  * to ensure that the previous disk node remains valid for the lifetime of the DiskNode instance.
  *
- * @author Aditya Jedhe
- * @date   2025/01/30
  */
 class DiskNode
 {
@@ -43,10 +43,6 @@ public:
 
     /**
      * @brief Retrieves the next DiskNode in the sequence.
-     *
-     * This function returns a pointer to the next DiskNode in the sequence.
-     * It is a constant member function, meaning it does not modify any member variables.
-     *
      * @return DiskNode* Pointer to the next DiskNode.
      */
     DiskNode* GetNextDiskNode() const;
@@ -68,7 +64,6 @@ private:
 
     /**
      * @brief Represents the disk number in the Tower of Hanoi game.
-     * This variable is used to identify and differentiate between different disks.
      */
     int _nDiskNumber;
 
