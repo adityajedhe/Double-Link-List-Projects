@@ -1,7 +1,8 @@
 //===================================================================
-// Class: DiskStack
-// @author Aditya Jedhe @adityajedhe
-// @date   2025/01/30
+// Name         : DiskStack.h
+// Description  : Header file for the DiskStack class
+// @author      : Aditya Jedhe [@adityajedhe]
+// @date        : 2025/01/30
 //===================================================================
 
 #ifndef _DISKSTACK_H_

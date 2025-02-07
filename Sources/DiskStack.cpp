@@ -1,7 +1,8 @@
 //===================================================================
-// This file contains the implementation of the DiskStack class.
-// @author Aditya Jedhe
-// @date   2025/01/30
+// Name         : DiskStack.cpp
+// Description  : Implementation file for the DiskStack class
+// @author      : Aditya Jedhe [@adityajedhe]
+// @date        : 2025/01/30
 //===================================================================
 
 #include "DiskStack.h"
@@ -20,6 +21,9 @@ DiskStack::DiskStack() :
 //-------------------------------------------------------------------
 /**
  * @brief Destructor for DiskStack
+ *
+ * Deletes all disk nodes in the stack.
+ *
  */
 DiskStack::~DiskStack()
 {
