@@ -7,6 +7,7 @@ CFLAGS = -Wall -Wextra -std=c++11 -I ./Headers/ -fPIC
 # Directories
 SRC_DIR = ./Sources
 OBJ_DIR = ./Objects
+OUTPUT_DIR = ../bin
 
 # Source files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
@@ -15,10 +16,10 @@ SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Output dll
-TARGET = $(OBJ_DIR)/Node.dll
+TARGET = $(OUTPUT_DIR)/Node.dll
 
 # Default target
-all: $(OBJ_DIR) $(TARGET)
+all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 
 # Link object files to create the executable
 $(TARGET): $(OBJS)
@@ -29,6 +30,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@$(CCPP) $(CFLAGS) -c $< -o $@
 
 # Create output directory if it isn't exist
+$(OUTPUT_DIR):
+	@mkdir -p $(OUTPUT_DIR)
+
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 

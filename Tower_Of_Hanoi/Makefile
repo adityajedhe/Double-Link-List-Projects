@@ -18,7 +18,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 TARGET = $(OBJ_DIR)/tower_of_hanoi
 
 # Path to dll
-DLL_PATH = ../Objects/Node.dll
+DLL_PATH = ../$(OBJ_DIR)/Node.dll
 
 # Default target
 all: $(OBJ_DIR) $(TARGET)
