@@ -23,6 +23,14 @@ DiskStack::DiskStack() :
  */
 DiskStack::~DiskStack()
 {
+    DiskNode* pDiskNode = PopFromStack();
+
+    while (nullptr != pDiskNode)
+    {
+        delete pDiskNode;
+
+        pDiskNode = PopFromStack();
+    }
 }
 
 //-------------------------------------------------------------------
@@ -58,6 +66,16 @@ DiskNode* DiskStack::PopFromStack()
     }
 
     return pDiskNode;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Checks if the stack is empty.
+ * @return True if the stack is empty, false otherwise.
+ */
+bool DiskStack::IsStackEmpty() const
+{
+    return (nullptr == _pTopDisk);
 }
 
 //-------------------------------------------------------------------

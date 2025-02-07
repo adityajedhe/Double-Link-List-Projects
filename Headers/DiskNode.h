@@ -32,7 +32,7 @@ public:
     /**
      * @brief Destructor for DiskNode
      */
-    ~DiskNode();
+    virtual ~DiskNode();
 
     /**
      * @brief This identifies the disk number

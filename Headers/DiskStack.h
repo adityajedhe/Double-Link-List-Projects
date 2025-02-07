@@ -69,6 +69,12 @@ public:
     DiskNode* PopFromStack();
 
     /**
+     * @brief Checks if the stack is empty.
+     * @return True if the stack is empty, false otherwise.
+     */
+    bool IsStackEmpty() const;
+
+    /**
      * @brief Prints the contents of the stack.
      */
     void PrintStack();
