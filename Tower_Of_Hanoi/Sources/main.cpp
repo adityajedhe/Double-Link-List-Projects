@@ -6,7 +6,7 @@
 //===================================================================
 
 #include <iostream>
-#include "DiskNode.h"
+#include "Node.h"
 #include "DiskStack.h"
 
 
@@ -64,8 +64,8 @@ bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRo
     {
         // Get the top disk from the source rod and the destination rod
         // ------------------------------------------------------------
-        DiskNode* pSourceTop = ipSourceRod->GetTopDisk();
-        DiskNode* pDestinationTop = ipDestinationRod->GetTopDisk();
+        Node* pSourceTop = ipSourceRod->GetTopDisk();
+        Node* pDestinationTop = ipDestinationRod->GetTopDisk();
 
         bool bMoveTheDisk(false);
 
@@ -76,7 +76,7 @@ bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRo
         if (nullptr == pDestinationTop)
             bMoveTheDisk = true;
         else if ((nullptr != pSourceTop) && (nullptr != pDestinationTop) &&
-            (pSourceTop->GetDiskNumber() < pDestinationTop->GetDiskNumber()))
+            (pSourceTop->GetData() < pDestinationTop->GetData()))
             bMoveTheDisk = true;
 
         if (bMoveTheDisk)
@@ -95,32 +95,32 @@ bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRo
 //-------------------------------------------------------------------
 /**
  * @brief Function to solve the Tower of Hanoi problem
- * @param ipCurrentDiskNode Pointer to the current disk node
+ * @param ipCurrentNode Pointer to the current disk node
  * @param ipSourceRod Pointer to the source rod
  * @param ipDestinationRod Pointer to the destination rod
  * @param ipHelperRod Pointer to the helper rod
  *
  * @note This function is a recursive function that solves the Tower of Hanoi problem.
  */
-void TowerOfHanoi(DiskNode* ipCurrentDiskNode, DiskStack* ipSourceRod, DiskStack* ipDestinationRod, DiskStack* ipHelperRod)
+void TowerOfHanoi(Node* ipCurrentNode, DiskStack* ipSourceRod, DiskStack* ipDestinationRod, DiskStack* ipHelperRod)
 {
-    if ((nullptr == ipCurrentDiskNode) || (nullptr == ipSourceRod) || (nullptr == ipDestinationRod) || (nullptr == ipHelperRod))
+    if ((nullptr == ipCurrentNode) || (nullptr == ipSourceRod) || (nullptr == ipDestinationRod) || (nullptr == ipHelperRod))
     {
         std::cout << "Invalid input" << std::endl;
         return;
     }
 
-    DiskNode* pDiskNode = ipCurrentDiskNode->GetPreviousDiskNode();
+    Node* pNode = ipCurrentNode->GetLeftChild();
 
-    if (nullptr == pDiskNode)
+    if (nullptr == pNode)
         MoveTheDiskToDestination(ipSourceRod, ipDestinationRod);
     else
     {
-        TowerOfHanoi(pDiskNode, ipSourceRod, ipHelperRod, ipDestinationRod);
+        TowerOfHanoi(pNode, ipSourceRod, ipHelperRod, ipDestinationRod);
 
         MoveTheDiskToDestination(ipSourceRod, ipDestinationRod);
 
-        TowerOfHanoi(pDiskNode, ipHelperRod, ipDestinationRod, ipSourceRod);
+        TowerOfHanoi(pNode, ipHelperRod, ipDestinationRod, ipSourceRod);
     }
 }
 
@@ -172,16 +172,16 @@ int main()
         return -1;
     }
 
-    DiskNode* pDiskNode = nullptr;
-    DiskNode* pFirstDiskNode = nullptr;
+    Node* pNode = nullptr;
+    Node* pFirstNode = nullptr;
 
     // Push the disks onto the source rod
     // ----------------------------------
     for (int nDiskIndex = nbDisks; nDiskIndex > 0; --nDiskIndex)
     {
-        pDiskNode = new DiskNode(nDiskIndex);
+        pNode = new Node(nDiskIndex);
 
-        if (nullptr == pDiskNode)
+        if (nullptr == pNode)
         {
             std::cout << "Memory allocation failed" << std::endl;
 
@@ -192,25 +192,25 @@ int main()
             return -1;
         }
 
-        if (nullptr == pFirstDiskNode)
-            pFirstDiskNode = pDiskNode;
+        if (nullptr == pFirstNode)
+            pFirstNode = pNode;
 
         // Set the previous disk node to the top disk node
         // This has to be done only once i.e. while initializing the stack
         // ---------------------------------------------------------------
-        DiskNode* pTopDisk = pStackA->GetTopDisk();
+        Node* pTopDisk = pStackA->GetTopDisk();
 
         if (nullptr != pTopDisk)
-            pTopDisk->SetPreviousDiskNode(pDiskNode);
+            pTopDisk->SetLeftChild(pNode);
 
         // Push the disk onto the source rod
         // ---------------------------------
-        pStackA->PushToStack(pDiskNode);
+        pStackA->PushToStack(pNode);
     }
 
     PrintStacks();
 
-    TowerOfHanoi(pFirstDiskNode, pStackA, pStackC, pStackB);
+    TowerOfHanoi(pFirstNode, pStackA, pStackC, pStackB);
 
     DeleteStack(pStackA);
     DeleteStack(pStackB);

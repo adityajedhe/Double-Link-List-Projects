@@ -3,7 +3,8 @@
 //===================================================================
 
 #include <iostream>
-#include "BinaryTreeNode.h"
+#include "BinaryTree.h"
+#include "Node.h"
 
 int main()
 {
