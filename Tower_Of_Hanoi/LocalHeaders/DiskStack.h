@@ -10,7 +10,7 @@
 
 // Forward declaration
 // -------------------
-class DiskNode;
+class Node;
 
 //------------------------------------------------------------------------
 /**
@@ -29,17 +29,17 @@ class DiskNode;
  * @fn DiskStack::~DiskStack()
  * @brief Destructor for DiskStack
  *
- * @fn void DiskStack::PushToStack(DiskNode* ipDiskNode)
+ * @fn void DiskStack::PushToStack(Node* ipNode)
  * @brief Pushes a disk node onto the stack.
- * @param ipDiskNode Pointer to the disk node to be pushed onto the stack.
+ * @param ipNode Pointer to the disk node to be pushed onto the stack.
  *
- * @fn DiskNode* DiskStack::PopFromStack()
+ * @fn Node* DiskStack::PopFromStack()
  * @brief Pops the top disk node from the stack.
  *
  * @fn void DiskStack::PrintStack()
  * @brief Prints the contents of the stack.
  *
- * @fn DiskNode* DiskStack::GetTopDisk() const
+ * @fn Node* DiskStack::GetTopDisk() const
  * @brief Returns the top disk node from the stack.
  *
  */
@@ -59,15 +59,15 @@ public:
 
     /**
      * @brief Pushes a disk node onto the stack.
-     * @param ipDiskNode Pointer to the disk node to be pushed onto the stack.
+     * @param ipNode Pointer to the disk node to be pushed onto the stack.
      */
-    void PushToStack(DiskNode* ipDiskNode);
+    void PushToStack(Node* ipNode);
 
     /**
      * @brief Pops the top disk node from the stack.
      * @return Pointer to the disk node that was popped from the stack.
      */
-    DiskNode* PopFromStack();
+    Node* PopFromStack();
 
     /**
      * @brief Checks if the stack is empty.
@@ -84,7 +84,7 @@ public:
      *  @brief Returns the top disk node from the stack.
      * @return Pointer to the top disk node in the stack.
      */
-    DiskNode* GetTopDisk() const;
+    Node* GetTopDisk() const;
 
 
 private:
@@ -92,7 +92,7 @@ private:
     /**
      *  @brief Pointer to the top disk in the stack.
      */
-    DiskNode* _pTopDisk;
+    Node* _pTopDisk;
 
 };
 

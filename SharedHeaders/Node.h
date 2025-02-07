@@ -1,62 +1,59 @@
 //===================================================================
-// Name         : BinaryTreeNode.h
-// Description  : Header file for the BinaryTreeNode class
+// Name         : Node.h
+// Description  : Header file for the Node class
 // @author      : Aditya Jedhe [@adityajedhe]
 // @date        : 2025/02/05
 //===================================================================
 
-#ifndef _BINARYTREENODE_H_
-#define _BINARYTREENODE_H_
+#ifndef _NODE_H_
+#define _NODE_H_
 
 
 //-------------------------------------------------------------------
 /**
- * @class BinaryTreeNode
- * @brief Represents a node in a binary tree,
- * encapsulating a data element and pointers to child nodes.
+ * @class Node
+ * @brief Represents a node, encapsulating a data element and two
+ * pointers to child nodes.
  *
- * The BinaryTreeNode class is used to model the nodes in a binary tree.
- * Each node contains a data element and pointers to the left and right child nodes.
- *
- * @fn BinaryTreeNode::BinaryTreeNode(const int inData)
- * @brief Constructor for BinaryTreeNode
+ * @fn Node::Node(const int inData)
+ * @brief Constructor for Node
  * @param inData Data element to store in the node
  *
- * @fn BinaryTreeNode::~BinaryTreeNode()
- * @brief Destructor for BinaryTreeNode
+ * @fn Node::~Node()
+ * @brief Destructor for Node
  *
- * @fn int BinaryTreeNode::GetData() const
+ * @fn int Node::GetData() const
  * @brief Retrieves the data element stored in the node
  * @return Data element stored in the node
  *
- * @fn BinaryTreeNode* BinaryTreeNode::GetLeftChild() const
+ * @fn Node* Node::GetLeftChild() const
  * @brief Retrieves the left child node
  * @return Pointer to the left child node
  *
- * @fn BinaryTreeNode* BinaryTreeNode::GetRightChild() const
+ * @fn Node* Node::GetRightChild() const
  * @brief Retrieves the right child node
  * @return Pointer to the right child node
  *
- * @fn void BinaryTreeNode::SetLeftChild(BinaryTreeNode* ipLeftChild)
+ * @fn void Node::SetLeftChild(Node* ipLeftChild)
  * @brief Sets the left child node
  * @param ipLeftChild Pointer to the left child node
  *
- * @fn void BinaryTreeNode::SetRightChild(BinaryTreeNode* ipRightChild)
+ * @fn void Node::SetRightChild(Node* ipRightChild)
  * @brief Sets the right child node
  * @param ipRightChild Pointer to the right child node
  *
  */
-class BinaryTreeNode
+class Node
 {
 public:
 
     /**
-     * @brief Constructor for BinaryTreeNode
+     * @brief Constructor for Node
      * @param inData Data element to store in the node
      */
-    BinaryTreeNode(const int inData = 0);
+    Node(const int inData = 0);
 
-    virtual ~BinaryTreeNode();
+    virtual ~Node();
 
     /**
      * @brief Retrieves the data element stored in the node
@@ -72,7 +69,7 @@ public:
      *
      * @return Pointer to the left child node
      */
-    BinaryTreeNode* GetLeftChild() const;
+    Node* GetLeftChild() const;
 
     /**
      * @brief Retrieves the right child node
@@ -80,19 +77,19 @@ public:
      *
      * @return Pointer to the right child node
      */
-    BinaryTreeNode* GetRightChild() const;
+    Node* GetRightChild() const;
 
     /**
      * @brief Sets the left child node
      * @param ipLeftChild Pointer to the left child node
      */
-    void SetLeftChild(BinaryTreeNode* ipLeftChild);
+    void SetLeftChild(Node* ipLeftChild);
 
     /**
      * @brief Sets the right child node
      * @param ipRightChild Pointer to the right child node
      */
-    void SetRightChild(BinaryTreeNode* ipRightChild);
+    void SetRightChild(Node* ipRightChild);
 
 
 private:
@@ -108,13 +105,13 @@ private:
     /**
      * @brief Pointer to the left child node
      */
-    BinaryTreeNode* _pLeftChild;
+    Node* _pLeftChild;
 
     /**
-     * @brief Pointer to the right child node of the binary tree.
+     * @brief Pointer to the right child node
      */
-    BinaryTreeNode* _pRightChild;
+    Node* _pRightChild;
 
 };
 
-#endif // _BINARYTREENODE_H_
+#endif // _NODE_H_

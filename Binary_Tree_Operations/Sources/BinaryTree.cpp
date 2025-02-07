@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "BinaryTree.h"
-#include "BinaryTreeNode.h"
+#include "Node.h"
 
 //-------------------------------------------------------------------
 /**
@@ -38,7 +38,7 @@ BinaryTree::~BinaryTree()
  * @param pParentNode Parent node whose children are to be removed
  * @return True if the children are removed, false otherwise
  */
-void BinaryTree::RemoveChildren(BinaryTreeNode* pParentNode)
+void BinaryTree::RemoveChildren(Node* pParentNode)
 {
     if (nullptr == pParentNode)    return;
 
@@ -73,12 +73,12 @@ void BinaryTree::InsertInBinarySearchTree(int inData)
      * Create a new node with the data element
      * and insert it into the binary search tree
      */
-    BinaryTreeNode* pNewNode = new BinaryTreeNode(inData);
+    Node* pNewNode = new Node(inData);
 
     if (nullptr != _pRootNode)
     {
-        BinaryTreeNode* pCurrentNode = _pRootNode;
-        BinaryTreeNode* pParentNode = nullptr;
+        Node* pCurrentNode = _pRootNode;
+        Node* pParentNode = nullptr;
 
         while (nullptr != pCurrentNode)
         {
@@ -153,7 +153,7 @@ void BinaryTree::InOrderTraversal()
  * @param pNode Node whose height is to be calculated
  * @return Height of the binary tree
  */
-int BinaryTree::HeightOfBinaryTreeNode(BinaryTreeNode* pNode)
+int BinaryTree::HeightOfBinaryTreeNode(Node* pNode)
 {
     int nHeight(-1);
 
@@ -176,7 +176,7 @@ int BinaryTree::HeightOfBinaryTreeNode(BinaryTreeNode* pNode)
  *
  * @param pNode Node to traverse
  */
-void BinaryTree::InOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode)
+void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node* pNode)
 {
     if (nullptr == pNode)    return;
 
@@ -197,7 +197,7 @@ void BinaryTree::InOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode)
  *
  * @param pNode Node to traverse
  */
-void BinaryTree::PreOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode)
+void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node* pNode)
 {
     if (nullptr == pNode)    return;
 
@@ -218,7 +218,7 @@ void BinaryTree::PreOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode)
  *
  * @param pNode Node to traverse
  */
-void BinaryTree::PostOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode)
+void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node* pNode)
 {
     if (nullptr == pNode)    return;
 

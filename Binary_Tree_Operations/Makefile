@@ -2,7 +2,7 @@
 CCPP = g++
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -std=c++11 -I ../Common/Headers/ -I ./LocalHeaders/
+CFLAGS = -Wall -Wextra -std=c++11 -I ../SharedHeaders/ -I ./LocalHeaders/
 
 # Directories
 SRC_DIR = ./Sources

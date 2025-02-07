@@ -6,7 +6,7 @@
 //===================================================================
 
 #include "DiskStack.h"
-#include "DiskNode.h"
+#include "Node.h"
 #include <iostream>
 
 //-------------------------------------------------------------------
@@ -27,49 +27,49 @@ DiskStack::DiskStack() :
  */
 DiskStack::~DiskStack()
 {
-    DiskNode* pDiskNode = PopFromStack();
+    Node* pNode = PopFromStack();
 
-    while (nullptr != pDiskNode)
+    while (nullptr != pNode)
     {
-        delete pDiskNode;
+        delete pNode;
 
-        pDiskNode = PopFromStack();
+        pNode = PopFromStack();
     }
 }
 
 //-------------------------------------------------------------------
 /**
  * @brief Pushes a disk node onto the stack.
- * @return DiskNode* Pointer to the top disk node in the stack.
+ * @return Node* Pointer to the top disk node in the stack.
  *         Returns nullptr if the stack is empty.
  */
-void DiskStack::PushToStack(DiskNode* ipDiskNode)
+void DiskStack::PushToStack(Node* ipNode)
 {
-    if (nullptr != ipDiskNode)
+    if (nullptr != ipNode)
     {
-        ipDiskNode->SetNextDiskNode(_pTopDisk);
-        _pTopDisk = ipDiskNode;
+        ipNode->SetRightChild(_pTopDisk);
+        _pTopDisk = ipNode;
     }
 }
 
 //-------------------------------------------------------------------
 /**
  * @brief Removes the top disk from the stack and returns it.
- * @return DiskNode* Pointer to the disk node that was removed from the stack.
+ * @return Node* Pointer to the disk node that was removed from the stack.
  *         Returns nullptr if the stack is empty.
  */
-DiskNode* DiskStack::PopFromStack()
+Node* DiskStack::PopFromStack()
 {
-    DiskNode* pDiskNode = _pTopDisk;
+    Node* pNode = _pTopDisk;
 
-    if (nullptr != pDiskNode)
+    if (nullptr != pNode)
     {
-        _pTopDisk = pDiskNode->GetNextDiskNode();
+        _pTopDisk = pNode->GetRightChild();
 
-        pDiskNode->SetNextDiskNode(nullptr);
+        pNode->SetRightChild(nullptr);
     }
 
-    return pDiskNode;
+    return pNode;
 }
 
 //-------------------------------------------------------------------
@@ -88,15 +88,15 @@ bool DiskStack::IsStackEmpty() const
  */
 void DiskStack::PrintStack()
 {
-    DiskNode* pDiskNode = _pTopDisk;
+    Node* pNode = _pTopDisk;
 
-    while (nullptr != pDiskNode)
+    while (nullptr != pNode)
     {
-        std::cout << "Disk " << pDiskNode->GetDiskNumber();
+        std::cout << "Disk " << pNode->GetData();
 
-        pDiskNode = pDiskNode->GetNextDiskNode();
+        pNode = pNode->GetRightChild();
 
-        if (nullptr != pDiskNode)
+        if (nullptr != pNode)
             std::cout << ", ";
     }
 
@@ -107,7 +107,7 @@ void DiskStack::PrintStack()
 /**
  * @brief Returns the top disk node from the stack.
  */
-DiskNode* DiskStack::GetTopDisk() const
+Node* DiskStack::GetTopDisk() const
 {
     return _pTopDisk;
 }

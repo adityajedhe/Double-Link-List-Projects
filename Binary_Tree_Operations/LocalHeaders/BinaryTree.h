@@ -5,7 +5,7 @@
 // @date        : 2025/02/06
 //===================================================================
 
-class BinaryTreeNode;
+class Node;
 
 //-------------------------------------------------------------------
 /**
@@ -98,7 +98,7 @@ public:
      * @param pParentNode Parent node whose children are to be removed
      * @return True if the children are removed, false otherwise
      */
-    void RemoveChildren(BinaryTreeNode* pParentNode);
+    void RemoveChildren(Node* pParentNode);
 
     /**
      * @brief Checks if the binary tree is empty
@@ -215,7 +215,7 @@ private:
      * @param pNode Node whose height is to be calculated
      * @return Height of the binary tree
      */
-    int HeightOfBinaryTreeNode(BinaryTreeNode* pNode);
+    int HeightOfBinaryTreeNode(Node* pNode);
 
     /**
      * @brief Performs an in-order traversal of the binary tree node
@@ -224,7 +224,7 @@ private:
      *
      * @param pNode Node to traverse
      */
-    void InOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode);
+    void InOrderTraversalOfBinaryTreeNode(Node* pNode);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
@@ -233,7 +233,7 @@ private:
      *
      * @param pNode Node to traverse
      */
-    void PreOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode);
+    void PreOrderTraversalOfBinaryTreeNode(Node* pNode);
 
     /**
      * @brief Performs an post-order traversal of the binary tree node
@@ -242,7 +242,7 @@ private:
      *
      * @param pNode Node to traverse
      */
-    void PostOrderTraversalOfBinaryTreeNode(BinaryTreeNode* pNode);
+    void PostOrderTraversalOfBinaryTreeNode(Node* pNode);
 
 
     //---------------------------------------------------------------
@@ -253,6 +253,6 @@ private:
      * The root node is the starting point of the tree.
      * It is the topmost node in the tree.
      */
-    BinaryTreeNode* _pRootNode;
+    Node* _pRootNode;
 
 };
