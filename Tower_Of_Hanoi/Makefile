@@ -2,11 +2,12 @@
 CCPP = g++
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -std=c++11 -I ../Headers/ -I ./LocalHeaders/
+CFLAGS = -Wall -Wextra -std=c++11 -I ../Common/Headers/ -I ./LocalHeaders/
 
 # Directories
 SRC_DIR = ./Sources
 OBJ_DIR = ./Objects
+OUTPUT_DIR = ../bin
 
 # Source files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
@@ -15,29 +16,29 @@ SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Target executable
-TARGET = $(OBJ_DIR)/tower_of_hanoi
-
-# Path to dll
-DLL_PATH = ../$(OBJ_DIR)/Node.dll
+TARGET = $(OUTPUT_DIR)/tower_of_hanoi
 
 # Default target
-all: $(OBJ_DIR) $(TARGET)
+all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 
 # Link object files to create the executable
 $(TARGET): $(OBJS)
-	@$(CCPP) -o $@ $^ -L ../Objects/ -lNode
+	@$(CCPP) -o $@ $^ -L $(OUTPUT_DIR)/ -lNode
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@$(CCPP) $(CFLAGS) -c $< -o $@
 
 # Create output directory if it isn't exist
+$(OUTPUT_DIR):
+	@mkdir -p $(OUTPUT_DIR)
+
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 # Clean up build files
 clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
+	@rm -rf $(OBJ_DIR) $(TARGET)
 
 # Run the program
 run: $(TARGET)
