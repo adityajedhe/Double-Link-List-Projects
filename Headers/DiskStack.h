@@ -1,7 +1,8 @@
 //===================================================================
-// Class: DiskStack
-// @author Aditya Jedhe @adityajedhe
-// @date   2025/01/30
+// Name         : DiskStack.h
+// Description  : Header file for the DiskStack class
+// @author      : Aditya Jedhe [@adityajedhe]
+// @date        : 2025/01/30
 //===================================================================
 
 #ifndef _DISKSTACK_H_
@@ -67,6 +68,12 @@ public:
      * @return Pointer to the disk node that was popped from the stack.
      */
     DiskNode* PopFromStack();
+
+    /**
+     * @brief Checks if the stack is empty.
+     * @return True if the stack is empty, false otherwise.
+     */
+    bool IsStackEmpty() const;
 
     /**
      * @brief Prints the contents of the stack.

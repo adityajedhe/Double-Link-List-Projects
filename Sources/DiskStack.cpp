@@ -1,7 +1,8 @@
 //===================================================================
-// This file contains the implementation of the DiskStack class.
-// @author Aditya Jedhe
-// @date   2025/01/30
+// Name         : DiskStack.cpp
+// Description  : Implementation file for the DiskStack class
+// @author      : Aditya Jedhe [@adityajedhe]
+// @date        : 2025/01/30
 //===================================================================
 
 #include "DiskStack.h"
@@ -20,9 +21,20 @@ DiskStack::DiskStack() :
 //-------------------------------------------------------------------
 /**
  * @brief Destructor for DiskStack
+ *
+ * Deletes all disk nodes in the stack.
+ *
  */
 DiskStack::~DiskStack()
 {
+    DiskNode* pDiskNode = PopFromStack();
+
+    while (nullptr != pDiskNode)
+    {
+        delete pDiskNode;
+
+        pDiskNode = PopFromStack();
+    }
 }
 
 //-------------------------------------------------------------------
@@ -58,6 +70,16 @@ DiskNode* DiskStack::PopFromStack()
     }
 
     return pDiskNode;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Checks if the stack is empty.
+ * @return True if the stack is empty, false otherwise.
+ */
+bool DiskStack::IsStackEmpty() const
+{
+    return (nullptr == _pTopDisk);
 }
 
 //-------------------------------------------------------------------

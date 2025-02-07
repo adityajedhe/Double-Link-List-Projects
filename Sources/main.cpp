@@ -16,9 +16,11 @@ int nbIterations = 0;
 
 /**
  * @brief Global variables to represent the three rods
- *        Pointer to the DiskStack object representing stack A.
- *        Pointer to the DiskStack object representing stack B.
- *        Pointer to the DiskStack object representing stack C.
+ *
+ * Pointer to the DiskStack object representing stack A.
+ * Pointer to the DiskStack object representing stack B.
+ * Pointer to the DiskStack object representing stack C.
+ *
  */
 DiskStack* pStackA = nullptr;
 DiskStack* pStackB = nullptr;
@@ -131,15 +133,6 @@ void DeleteStack(DiskStack*& ipStack)
 {
     if (nullptr != ipStack)
     {
-        DiskNode* pDiskNode = ipStack->PopFromStack();
-
-        while (nullptr != pDiskNode)
-        {
-            delete pDiskNode;
-
-            pDiskNode = ipStack->PopFromStack();
-        }
-
         delete ipStack;
         ipStack = nullptr;
     }

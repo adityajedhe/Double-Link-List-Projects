@@ -1,7 +1,8 @@
 //===================================================================
-// Class: BinaryTreeNode
-// @author Aditya Jedhe
-// @date   2025/01/30
+// Name         : DiskNode.h
+// Description  : Header file for the DiskNode class
+// @author      : Aditya Jedhe [@adityajedhe]
+// @date        : 2025/01/30
 //===================================================================
 
 #ifndef _DISKNODE_H_
@@ -32,7 +33,7 @@ public:
     /**
      * @brief Destructor for DiskNode
      */
-    ~DiskNode();
+    virtual ~DiskNode();
 
     /**
      * @brief This identifies the disk number
