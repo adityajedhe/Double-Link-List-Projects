@@ -11,6 +11,9 @@
 /**
  * @brief Constructor for Node
  * @param inData Data element to store in the node
+ *
+ * @note By default, both the nodes are set to nullptr
+ *
  */
 Node::Node(const int inData) :
     _nData(inData),
