@@ -42,8 +42,8 @@ void BinaryTree::RemoveChildren(Node* pParentNode)
 {
     if (nullptr == pParentNode)    return;
 
-    RemoveChildren(pParentNode->GetLeftChild());
-    RemoveChildren(pParentNode->GetRightChild());
+    RemoveChildren(pParentNode->GetLeftNode());
+    RemoveChildren(pParentNode->GetRightNode());
 
     delete pParentNode;
     pParentNode = nullptr;
@@ -86,21 +86,21 @@ void BinaryTree::InsertInBinarySearchTree(int inData)
 
             if (inData < pCurrentNode->GetData())
             {
-                pCurrentNode = pCurrentNode->GetLeftChild();
+                pCurrentNode = pCurrentNode->GetLeftNode();
             }
             else
             {
-                pCurrentNode = pCurrentNode->GetRightChild();
+                pCurrentNode = pCurrentNode->GetRightNode();
             }
         }
 
         if (inData < pParentNode->GetData())
         {
-            pParentNode->SetLeftChild(pNewNode);
+            pParentNode->SetLeftNode(pNewNode);
         }
         else
         {
-            pParentNode->SetRightChild(pNewNode);
+            pParentNode->SetRightNode(pNewNode);
         }
     }
     else
@@ -159,8 +159,8 @@ int BinaryTree::HeightOfBinaryTreeNode(Node* pNode)
 
     if (nullptr != pNode)
     {
-        int nLeftHeight = HeightOfBinaryTreeNode(pNode->GetLeftChild());
-        int nRightHeight = HeightOfBinaryTreeNode(pNode->GetRightChild());
+        int nLeftHeight = HeightOfBinaryTreeNode(pNode->GetLeftNode());
+        int nRightHeight = HeightOfBinaryTreeNode(pNode->GetRightNode());
 
         nHeight = (nLeftHeight > nRightHeight) ? (nLeftHeight + 1) : (nRightHeight + 1);
     }
@@ -180,13 +180,13 @@ void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node* pNode)
 {
     if (nullptr == pNode)    return;
 
-    InOrderTraversalOfBinaryTreeNode(pNode->GetLeftChild());
+    InOrderTraversalOfBinaryTreeNode(pNode->GetLeftNode());
 
     // Print the data element
     // ----------------------------------
     std::cout << pNode->GetData() << " ";
 
-    InOrderTraversalOfBinaryTreeNode(pNode->GetRightChild());
+    InOrderTraversalOfBinaryTreeNode(pNode->GetRightNode());
 }
 
 //-------------------------------------------------------------------
@@ -205,9 +205,9 @@ void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node* pNode)
     // ----------------------------------
     std::cout << pNode->GetData() << " ";
 
-    PreOrderTraversalOfBinaryTreeNode(pNode->GetLeftChild());
+    PreOrderTraversalOfBinaryTreeNode(pNode->GetLeftNode());
 
-    PreOrderTraversalOfBinaryTreeNode(pNode->GetRightChild());
+    PreOrderTraversalOfBinaryTreeNode(pNode->GetRightNode());
 }
 
 //-------------------------------------------------------------------
@@ -222,9 +222,9 @@ void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node* pNode)
 {
     if (nullptr == pNode)    return;
 
-    PostOrderTraversalOfBinaryTreeNode(pNode->GetLeftChild());
+    PostOrderTraversalOfBinaryTreeNode(pNode->GetLeftNode());
 
-    PostOrderTraversalOfBinaryTreeNode(pNode->GetRightChild());
+    PostOrderTraversalOfBinaryTreeNode(pNode->GetRightNode());
 
     // Print the data element
     // ----------------------------------

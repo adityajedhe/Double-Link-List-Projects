@@ -14,8 +14,8 @@
  */
 Node::Node(const int inData) :
     _nData(inData),
-    _pLeftChild(nullptr),
-    _pRightChild(nullptr)
+    _pLeftNode(nullptr),
+    _pRightNode(nullptr)
 {
 }
 
@@ -39,40 +39,40 @@ int Node::GetData() const
 
 //-------------------------------------------------------------------
 /**
- * @brief Retrieves the left child node
- * @return Pointer to the left child node
+ * @brief Retrieves the left node
+ * @return Pointer to the left node
  */
-Node* Node::GetLeftChild() const
+Node* Node::GetLeftNode() const
 {
-    return _pLeftChild;
+    return _pLeftNode;
 }
 
 //-------------------------------------------------------------------
 /**
- * @brief Retrieves the right child node
- * @return Pointer to the right child node
+ * @brief Retrieves the right node
+ * @return Pointer to the right node
  */
-Node* Node::GetRightChild() const
+Node* Node::GetRightNode() const
 {
-    return _pRightChild;
+    return _pRightNode;
 }
 
 //-------------------------------------------------------------------
 /**
- * @brief Sets the left child node
- * @param ipLeftChild Pointer to the left child node
+ * @brief Sets the left node
+ * @param ipLeftNode Pointer to the left node
  */
-void Node::SetLeftChild(Node* ipLeftChild)
+void Node::SetLeftNode(Node* ipLeftNode)
 {
-    _pLeftChild = ipLeftChild;
+    _pLeftNode = ipLeftNode;
 }
 
 //-------------------------------------------------------------------
 /**
- * @brief Sets the right child node
- * @param ipRightChild Pointer to the right child node
+ * @brief Sets the right node
+ * @param ipRightNode Pointer to the right node
  */
-void Node::SetRightChild(Node* ipRightChild)
+void Node::SetRightNode(Node* ipRightNode)
 {
-    _pRightChild = ipRightChild;
+    _pRightNode = ipRightNode;
 }

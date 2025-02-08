@@ -110,7 +110,7 @@ void TowerOfHanoi(Node* ipCurrentNode, DiskStack* ipSourceRod, DiskStack* ipDest
         return;
     }
 
-    Node* pNode = ipCurrentNode->GetLeftChild();
+    Node* pNode = ipCurrentNode->GetLeftNode();
 
     if (nullptr == pNode)
         MoveTheDiskToDestination(ipSourceRod, ipDestinationRod);
@@ -201,7 +201,7 @@ int main()
         Node* pTopDisk = pStackA->GetTopDisk();
 
         if (nullptr != pTopDisk)
-            pTopDisk->SetLeftChild(pNode);
+            pTopDisk->SetLeftNode(pNode);
 
         // Push the disk onto the source rod
         // ---------------------------------
