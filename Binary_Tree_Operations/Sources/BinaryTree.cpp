@@ -6,6 +6,7 @@
 //===================================================================
 
 #include <iostream>
+#include <queue>
 #include "BinaryTree.h"
 #include "Node.h"
 
@@ -194,6 +195,85 @@ int BinaryTree::HeightOfBinaryTreeNode(Node* pNode)
 
 //-------------------------------------------------------------------
 /**
+ * @brief Performs a level-order traversal of the binary tree
+ *
+ * Prints all elements in the binary tree in level-order sequence.
+ *
+ */
+void BinaryTree::LevelOrderTraversal()
+{
+    if (nullptr == _pRootNode)    return;
+
+    std::cout << "Level order traversal: ";
+
+    std::queue<Node*> qNodes;
+
+    qNodes.push(_pRootNode);
+
+    Node* pNode = nullptr;
+
+    while (!qNodes.empty())
+    {
+        pNode = qNodes.front();
+
+        qNodes.pop();
+
+        if (nullptr == pNode)    continue;
+
+        std::cout << pNode->GetData() << " ";
+
+        if (nullptr != pNode->GetLeftNode())
+        {
+            qNodes.push(pNode->GetLeftNode());
+        }
+
+        if (nullptr != pNode->GetRightNode())
+        {
+            qNodes.push(pNode->GetRightNode());
+        }
+    }
+
+    std::cout << std::endl;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all leaf nodes of the binary tree
+ */
+void BinaryTree::PrintLeafNodes()
+{
+    std::cout << "Leaf nodes: ";
+
+    PrintLeafNodes(_pRootNode);
+
+    std::cout << std::endl;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all non-leaf nodes of the binary tree
+ */
+void BinaryTree::PrintNonLeafNodes()
+{
+    std::cout << "Leaf nodes: ";
+
+    PrintNonLeafNodes(_pRootNode);
+
+    std::cout << std::endl;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all nodes at a distance k from the root node
+ * @param k Distance from the root node
+ */
+void BinaryTree::PrintAllNodesAtKDistance(int k)
+{
+    PrintAllNodesAtKDistance(_pRootNode, k);
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Performs an in-order traversal of the binary tree node
  *
  * Prints all elements under the binary tree node in in-order sequence.
@@ -256,3 +336,60 @@ void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node* pNode)
 }
 
 //-------------------------------------------------------------------
+/**
+ * @brief Prints all leaf nodes of the binary tree
+ * @param pNode Node to traverse
+ */
+void BinaryTree::PrintLeafNodes(Node* pNode)
+{
+    if (nullptr == pNode)    return;
+
+    if ((nullptr == pNode->GetLeftNode()) && (nullptr == pNode->GetRightNode()))
+    {
+        std::cout << pNode->GetData() << " ";
+    }
+    else
+    {
+        PrintLeafNodes(pNode->GetLeftNode());
+        PrintLeafNodes(pNode->GetRightNode());
+    }
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all non-leaf nodes of the binary tree
+ * @param pNode Node to traverse
+ */
+void BinaryTree::PrintNonLeafNodes(Node* pNode)
+{
+    if (nullptr == pNode)    return;
+
+    if ((nullptr != pNode->GetLeftNode()) || (nullptr != pNode->GetRightNode()))
+    {
+        std::cout << pNode->GetData() << " ";
+
+        PrintLeafNodes(pNode->GetLeftNode());
+        PrintLeafNodes(pNode->GetRightNode());
+    }
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all nodes at a distance k from the root node
+ * @param pNode Node to traverse
+ * @param k Distance from the root node
+ */
+void BinaryTree::PrintAllNodesAtKDistance(Node* pNode, int k)
+{
+    if (nullptr == pNode)    return;
+
+    if (0 == k)
+    {
+        std::cout << pNode->GetData() << " ";
+    }
+    else
+    {
+        PrintAllNodesAtKDistance(pNode->GetLeftNode(), k - 1);
+        PrintAllNodesAtKDistance(pNode->GetRightNode(), k - 1);
+    }
+}
