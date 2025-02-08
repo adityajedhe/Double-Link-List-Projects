@@ -12,8 +12,8 @@
 //-------------------------------------------------------------------
 /**
  * @class Node
- * @brief Represents a node, encapsulating a data element and two
- * pointers to child nodes.
+ * @brief Represents a node, encapsulating a data element and
+ * pointers to two nodes.
  *
  * @fn Node::Node(const int inData)
  * @brief Constructor for Node
@@ -26,21 +26,21 @@
  * @brief Retrieves the data element stored in the node
  * @return Data element stored in the node
  *
- * @fn Node* Node::GetLeftChild() const
- * @brief Retrieves the left child node
- * @return Pointer to the left child node
+ * @fn Node* Node::GetLeftNode() const
+ * @brief Retrieves the left node
+ * @return Pointer to the left node
  *
- * @fn Node* Node::GetRightChild() const
- * @brief Retrieves the right child node
- * @return Pointer to the right child node
+ * @fn Node* Node::GetRightNode() const
+ * @brief Retrieves the right node
+ * @return Pointer to the right node
  *
- * @fn void Node::SetLeftChild(Node* ipLeftChild)
- * @brief Sets the left child node
- * @param ipLeftChild Pointer to the left child node
+ * @fn void Node::SetLeftNode(Node* ipLeftNode)
+ * @brief Sets the left node
+ * @param ipLeftNode Pointer to the left node
  *
- * @fn void Node::SetRightChild(Node* ipRightChild)
- * @brief Sets the right child node
- * @param ipRightChild Pointer to the right child node
+ * @fn void Node::SetRightNode(Node* ipRightNode)
+ * @brief Sets the right node
+ * @param ipRightNode Pointer to the right node
  *
  */
 class Node
@@ -64,32 +64,32 @@ public:
     int GetData() const;
 
     /**
-     * @brief Retrieves the left child node
+     * @brief Retrieves the left node
      * It is a constant member function, meaning it does not modify any member variables.
      *
-     * @return Pointer to the left child node
+     * @return Pointer to the left node
      */
-    Node* GetLeftChild() const;
+    Node* GetLeftNode() const;
 
     /**
-     * @brief Retrieves the right child node
+     * @brief Retrieves the right node
      * It is a constant member function, meaning it does not modify any member variables.
      *
-     * @return Pointer to the right child node
+     * @return Pointer to the right node
      */
-    Node* GetRightChild() const;
+    Node* GetRightNode() const;
 
     /**
-     * @brief Sets the left child node
-     * @param ipLeftChild Pointer to the left child node
+     * @brief Sets the left node
+     * @param ipLeftNode Pointer to the left node
      */
-    void SetLeftChild(Node* ipLeftChild);
+    void SetLeftNode(Node* ipLeftNode);
 
     /**
-     * @brief Sets the right child node
-     * @param ipRightChild Pointer to the right child node
+     * @brief Sets the right node
+     * @param ipRightNode Pointer to the right node
      */
-    void SetRightChild(Node* ipRightChild);
+    void SetRightNode(Node* ipRightNode);
 
 
 private:
@@ -103,14 +103,14 @@ private:
     int _nData;
 
     /**
-     * @brief Pointer to the left child node
+     * @brief Pointer to the left node
      */
-    Node* _pLeftChild;
+    Node* _pLeftNode;
 
     /**
-     * @brief Pointer to the right child node
+     * @brief Pointer to the right node
      */
-    Node* _pRightChild;
+    Node* _pRightNode;
 
 };
 
