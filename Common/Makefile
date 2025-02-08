@@ -20,15 +20,15 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Library settings
 ifeq ($(OS),Linux)
+    LIB_NAME = libNode
     LIB_SUFFIX := .so
-else ifeq ($(OS),Darwin)
-    LIB_SUFFIX := .dylib
 else
+    LIB_NAME = Node
     LIB_SUFFIX := .dll
 endif
 
 # Output dll
-TARGET = $(OUTPUT_DIR)/Node$(LIB_SUFFIX)
+TARGET = $(OUTPUT_DIR)/$(LIB_NAME)$(LIB_SUFFIX)
 
 # Default target
 all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
