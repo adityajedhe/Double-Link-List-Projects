@@ -146,6 +146,30 @@ void BinaryTree::InOrderTraversal()
 
 //-------------------------------------------------------------------
 /**
+ * @brief Performs an pre-order traversal of the binary tree
+ *
+ * Prints all elements in the binary tree in pre-order sequence.
+ *
+ */
+void BinaryTree::PreOrderTraversal()
+{
+    PreOrderTraversalOfBinaryTreeNode(_pRootNode);
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Performs an post-order traversal of the binary tree
+ *
+ * Prints all elements in the binary tree in post-order sequence.
+ *
+ */
+void BinaryTree::PostOrderTraversal()
+{
+    PostOrderTraversalOfBinaryTreeNode(_pRootNode);
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Returns the height of the given binary tree node
  *
  * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
