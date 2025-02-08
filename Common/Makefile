@@ -1,3 +1,6 @@
+# Detect the operating system
+OS := $(shell uname)
+
 # Compiler
 CCPP = g++
 
@@ -15,8 +18,17 @@ SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 # Object files (in the obj directory)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
+# Library settings
+ifeq ($(OS),Linux)
+    LIB_SUFFIX := .so
+else ifeq ($(OS),Darwin)
+    LIB_SUFFIX := .dylib
+else
+    LIB_SUFFIX := .dll
+endif
+
 # Output dll
-TARGET = $(OUTPUT_DIR)/Node.dll
+TARGET = $(OUTPUT_DIR)/Node$(LIB_SUFFIX)
 
 # Default target
 all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
