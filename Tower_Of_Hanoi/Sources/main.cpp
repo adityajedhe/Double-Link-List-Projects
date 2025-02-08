@@ -1,8 +1,9 @@
 //===================================================================
-// This file contains the main function that solves the Tower of
-// Hanoi problem.
-// @author Aditya Jedhe
-// @date   2025/01/30
+// Name         : main.cpp
+// Description  : This file contains the main function that solves
+// the Tower of Hanoi problem.
+// @author      : Aditya Jedhe [@adityajedhe]
+// @date        : 2025/01/30
 //===================================================================
 
 #include <iostream>
