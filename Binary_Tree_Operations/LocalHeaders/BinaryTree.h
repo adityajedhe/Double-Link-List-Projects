@@ -75,9 +75,6 @@ class Node;
  * @fn void BinaryTree::PrintLevel(int inData)
  * @brief Prints the level of a given data element in the binary tree
  * @param inData Data element whose level is to be printed
- *
- * @fn void BinaryTree::PrintLevelOrderTraversal()
- * @brief Prints the level-order traversal of the binary tree
  */
 class BinaryTree
 {
@@ -202,8 +199,6 @@ public:
 
     void PrintLevel(int inData);
 
-    void PrintLevelOrderTraversal();
-
 
 private:
 
@@ -244,12 +239,32 @@ private:
      */
     void PostOrderTraversalOfBinaryTreeNode(Node* pNode);
 
+    /**
+     * @brief Prints all leaf nodes of the binary tree
+     * @param pNode Node to traverse
+     */
+    void PrintLeafNodes(Node* pNode);
+
+    /**
+     * @brief Prints all non-leaf nodes of the binary tree
+     * @param pNode Node to traverse
+     */
+    void PrintNonLeafNodes(Node* pNode);
+
+    /**
+     * @brief Prints all nodes at a distance k from the root node
+     * @param pNode Node to traverse
+     * @param k Distance from the root node
+     */
+    void PrintAllNodesAtKDistance(Node* pNode, int k);
+
 
     //---------------------------------------------------------------
     // Member variables
     //---------------------------------------------------------------
     /**
      * @brief Represents the root node of the binary tree
+     *
      * The root node is the starting point of the tree.
      * It is the topmost node in the tree.
      */
