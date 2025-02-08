@@ -22,8 +22,9 @@ jobs:
         sudo apt-get install -y g++ make
 
     - name: Build with Makefile
-      run: make -C Common
-      run: make -C Tower_Of_Hanoi
+      run: |
+      make -C Common
+      make -C Tower_Of_Hanoi
 
     - name: List output directory
       run: ls -l ./bin  # Adjust the path if necessary
