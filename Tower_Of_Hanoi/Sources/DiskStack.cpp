@@ -47,7 +47,7 @@ void DiskStack::PushToStack(Node* ipNode)
 {
     if (nullptr != ipNode)
     {
-        ipNode->SetRightChild(_pTopDisk);
+        ipNode->SetRightNode(_pTopDisk);
         _pTopDisk = ipNode;
     }
 }
@@ -64,9 +64,9 @@ Node* DiskStack::PopFromStack()
 
     if (nullptr != pNode)
     {
-        _pTopDisk = pNode->GetRightChild();
+        _pTopDisk = pNode->GetRightNode();
 
-        pNode->SetRightChild(nullptr);
+        pNode->SetRightNode(nullptr);
     }
 
     return pNode;
@@ -94,7 +94,7 @@ void DiskStack::PrintStack()
     {
         std::cout << "Disk " << pNode->GetData();
 
-        pNode = pNode->GetRightChild();
+        pNode = pNode->GetRightNode();
 
         if (nullptr != pNode)
             std::cout << ", ";
