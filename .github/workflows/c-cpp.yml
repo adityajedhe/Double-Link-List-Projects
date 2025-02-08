@@ -22,7 +22,11 @@ jobs:
         sudo apt-get install -y g++ make
 
     - name: Build with Makefile
-      run: make
+      run: 
+        make -C Common
+        make -C Binary_Tree_Operations
+        make -C Tower_Of_Hanoi
+        make
 
 #    - name: Run tests
 #      run: make test  # Adjust this if your Makefile has a different target for tests
