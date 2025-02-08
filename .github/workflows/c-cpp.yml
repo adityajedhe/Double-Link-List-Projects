@@ -24,9 +24,12 @@ jobs:
     - name: Build with Makefile
       run: |
         make -C Common
-        make -C Tower_Of_Hanoi
+#        make -C Tower_Of_Hanoi
 #        make -C Binary_Tree_Operations
 #        make
+
+    - name: List output directory
+        run: ls -l ./bin
 
 #    - name: Run tests
 #      run: make test  # Adjust this if your Makefile has a different target for tests
