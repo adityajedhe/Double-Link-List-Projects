@@ -130,7 +130,7 @@ void BinaryTree::Delete(int inData)
  */
 int BinaryTree::HeightOfBinaryTree()
 {
-    return HeightOfBinaryTreeNode(_pRootNode);
+    return HeightOfSubBinaryTree(_pRootNode);
 }
 
 //-------------------------------------------------------------------
@@ -142,7 +142,11 @@ int BinaryTree::HeightOfBinaryTree()
  */
 void BinaryTree::InOrderTraversal()
 {
+    std::cout << "In order traversal: ";
+
     InOrderTraversalOfBinaryTreeNode(_pRootNode);
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -154,7 +158,11 @@ void BinaryTree::InOrderTraversal()
  */
 void BinaryTree::PreOrderTraversal()
 {
+    std::cout << "Pre order traversal: ";
+
     PreOrderTraversalOfBinaryTreeNode(_pRootNode);
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -166,31 +174,11 @@ void BinaryTree::PreOrderTraversal()
  */
 void BinaryTree::PostOrderTraversal()
 {
+    std::cout << "Post order traversal: ";
+
     PostOrderTraversalOfBinaryTreeNode(_pRootNode);
-}
 
-//-------------------------------------------------------------------
-/**
- * @brief Returns the height of the given binary tree node
- *
- * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
- *
- * @param ipNode Node whose height is to be calculated
- * @return Height of the binary tree
- */
-int BinaryTree::HeightOfBinaryTreeNode(Node* ipNode)
-{
-    int nHeight(-1);
-
-    if (nullptr != ipNode)
-    {
-        int nLHeight = HeightOfBinaryTreeNode(ipNode->GetLeftNode());
-        int nRHeight = HeightOfBinaryTreeNode(ipNode->GetRightNode());
-
-        nHeight = (nLHeight > nRHeight) ? (nLHeight + 1) : (nRHeight + 1);
-    }
-
-    return nHeight;
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -235,6 +223,30 @@ void BinaryTree::LevelOrderTraversal()
 
     std::cout << std::endl;
 }
+/*
+void BinaryTree::LevelOrderTraversal(std::queue<Node*>& ioqNodes)
+{
+    if (ioqNodes.empty())    return;
+
+    Node* pNode = ioqNodes.front();
+
+    ioqNodes.pop();
+
+    if (nullptr == pNode)    return;
+
+    std::cout << pNode->GetData() << " ";
+
+    if (nullptr != pNode->GetLeftNode())
+    {
+        ioqNodes.push(pNode->GetLeftNode());
+    }
+
+    if (nullptr != pNode->GetRightNode())
+    {
+        ioqNodes.push(pNode->GetRightNode());
+    }
+}
+//*/
 
 //-------------------------------------------------------------------
 /**
@@ -255,7 +267,7 @@ void BinaryTree::PrintLeafNodes()
  */
 void BinaryTree::PrintNonLeafNodes()
 {
-    std::cout << "Leaf nodes: ";
+    std::cout << "Non-leaf nodes: ";
 
     PrintNonLeafNodes(_pRootNode);
 
@@ -269,7 +281,22 @@ void BinaryTree::PrintNonLeafNodes()
  */
 void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
 {
+    std::cout << "All nodes at 'k' distance: ";
+
     PrintAllNodesAtKDistance(_pRootNode, inKDistance);
+
+    std::cout << std::endl;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Finds the node with the given data element
+ * @param inData Data element to find
+ * @return Distance from the given node, if found. Otherwise -1
+ */
+int BinaryTree::FindDistanceFromRootNode(int inData)
+{
+    return FindDistanceFromNode(_pRootNode, inData);
 }
 
 //-------------------------------------------------------------------
@@ -279,11 +306,51 @@ void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
  */
 void BinaryTree::PrintAncestor(int inData)
 {
-    std::cout << "Ancestors of " << inData << ": ";
+    std::cout << "Ancestor of " << inData << ": ";
 
     PrintAncestor(_pRootNode, inData);
 
     std::cout << std::endl;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all cousin nodes of a given data element
+ * @param inData Data element whose cousins are to be printed
+ */
+void BinaryTree::PrintCousins(int inData)
+{
+    std::cout << "Cousins of " << inData << ": ";
+
+    int nDistance = FindDistanceFromRootNode(inData);
+
+    PrintCousins(_pRootNode, inData, nDistance);
+
+    std::cout << std::endl;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Returns the height of the given binary tree node
+ *
+ * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
+ *
+ * @param ipNode Node whose height is to be calculated
+ * @return Height of the binary tree
+ */
+int BinaryTree::HeightOfSubBinaryTree(Node* ipNode)
+{
+    int nHeight(-1);
+
+    if (nullptr != ipNode)
+    {
+        int nLHeight = HeightOfSubBinaryTree(ipNode->GetLeftNode());
+        int nRHeight = HeightOfSubBinaryTree(ipNode->GetRightNode());
+
+        nHeight = (nLHeight > nRHeight) ? (nLHeight + 1) : (nRHeight + 1);
+    }
+
+    return nHeight;
 }
 
 //-------------------------------------------------------------------
@@ -410,6 +477,37 @@ void BinaryTree::PrintAllNodesAtKDistance(Node* ipNode, int inKDistance)
 
 //-------------------------------------------------------------------
 /**
+ * @brief Finds the distance of node with the given data element from the given node
+ * @param ipNode Node to traverse
+ * @param inData Data element to find
+ * @return Distance from the given node, if found. Otherwise -1
+ */
+int BinaryTree::FindDistanceFromNode(Node* ipNode, int inData)
+{
+    int nDistance(-1);
+
+    if (nullptr == ipNode)    return nDistance;
+
+    if (ipNode->GetData() == inData)
+    {
+        nDistance = 0;
+    }
+    else
+    {
+        nDistance = FindDistanceFromNode(ipNode->GetLeftNode(), inData);
+
+        if (0 > nDistance)
+            nDistance = FindDistanceFromNode(ipNode->GetRightNode(), inData);
+
+        if (0 <= nDistance)
+            ++nDistance;
+    }
+
+    return nDistance;
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Prints all ancestor nodes of a given data element
  * @param ipNode Node to traverse
  * @param inData Data element whose ancestors are to be printed
@@ -435,3 +533,102 @@ void BinaryTree::PrintAncestor(Node* ipNode, int inData)
         PrintAncestor(pRNode, inData);
     }
 }
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all cousin nodes of a given data element
+ * @param ipNode Node to traverse
+ * @param inData Data element whose cousins are to be printed
+ * @param inNodeHeight Height of the node
+ */
+void BinaryTree::PrintCousins(Node* ipNode, int inData, int inNodeHeight)
+{
+    if (nullptr == ipNode)    return;
+
+    if (0 == inNodeHeight)
+    {
+        std::cout << ipNode->GetData() << " ";
+    }
+    else
+    {
+        Node* pLNode = ipNode->GetLeftNode();
+        Node* pRNode = ipNode->GetRightNode();
+
+        if (((nullptr != pLNode) && (pLNode->GetData() == inData)) ||
+            ((nullptr != pRNode) && (pRNode->GetData() == inData)))
+        {
+        }
+        else
+        {
+            PrintAllNodesAtKDistance(pLNode, inNodeHeight - 1);
+            PrintAllNodesAtKDistance(pRNode, inNodeHeight - 1);
+        }
+    }
+}
+//-------------------------------------------------------------------
+/*
+{
+    if (nullptr == ipNode || ipNode->GetData() == inData) return;
+
+    std::queue<Node*> qNodes;
+
+    qNodes.push(ipNode);
+
+    Node* pNode = nullptr;
+    Node* pLNode = nullptr;
+    Node* pRNode = nullptr;
+
+    bool bFound = false;
+
+    while (!qNodes.empty() && !bFound)
+    {
+        int size = qNodes.size();
+
+        while (size--)
+        {
+            pNode = qNodes.front();
+
+            qNodes.pop();
+
+            if (nullptr == pNode)    continue;
+
+            pLNode = pNode->GetLeftNode();
+            pRNode = pNode->GetRightNode();
+
+            if (((nullptr != pLNode) && (pLNode->GetData() == inData)) ||
+                ((nullptr != pRNode) && (pRNode->GetData() == inData)))
+            {
+                bFound = true;
+            }
+            else
+            {
+                if (nullptr != pLNode)
+                {
+                    qNodes.push(pNode->GetLeftNode());
+                }
+
+                if (nullptr != pRNode)
+                {
+                    qNodes.push(pNode->GetRightNode());
+                }
+            }
+        }
+    }
+
+    if (bFound)
+    {
+        while (!qNodes.empty())
+        {
+            pNode = qNodes.front();
+
+            qNodes.pop();
+
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+    else
+    {
+        std::cout << "No cousins found for the given data element." << std::endl;
+    }
+}
+//*/
