@@ -1,21 +1,9 @@
-# Tower of Hanoi Project
+# Double Link List Projects
 
-This project implements the Tower of Hanoi puzzle, a classic problem in computer science and mathematics. The Tower of Hanoi puzzle consists of three rods and a number of disks of different sizes which can slide onto any rod. The puzzle starts with the disks neatly stacked in ascending order of size on one rod, the smallest at the top, making a conical shape.
+## Projects
 
-## Objective
+### 1. Binary Tree Operations Using Double Link List
+In this project, I have implemented various binary tree operations using a double link list. The operations include insertion, deletion, traversal, and searching within a binary tree structure.
 
-The objective of the puzzle is to move the entire stack to another rod, obeying the following simple rules:
-1. Only one disk can be moved at a time.
-2. Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack or on an empty rod.
-3. No disk may be placed on top of a smaller disk.
-
-## Implementation
-
-The project includes the following key components:
-- **Recursive Algorithm**: The core logic to solve the Tower of Hanoi puzzle using a recursive approach.
-- **User Interface**: A simple command-line interface to interact with the puzzle.
-- **Visualization**: (Optional) A graphical representation of the puzzle to visualize the moves.
-
-## Usage
-
-To run the Tower of Hanoi project, execute the main script. The program will prompt you to enter the number of disks and will then display the sequence of moves required to solve the puzzle.
+### 2. Tower of Hanoi
+This project involves solving the classic Tower of Hanoi problem using a double link list. The solution demonstrates the use of double link lists to manage the movement of disks between the towers efficiently.
