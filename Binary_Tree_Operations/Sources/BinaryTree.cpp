@@ -706,9 +706,16 @@ bool BinaryTree::PrintSibling(Node* ipNode, int inData)
         bFound = true;
     }
 
-    if (nullptr != pNode)
+    if (bFound)
     {
-        std::cout << pNode->GetData() << " ";
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+        else
+        {
+            std::cout << "No sibling present for the given data element." << std::endl;
+        }
     }
     else
     {

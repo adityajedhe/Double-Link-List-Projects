@@ -75,10 +75,6 @@ class Node;
  * @fn void BinaryTree::PrintSibling(int inData)
  * @brief Prints all sibling nodes of a given data element
  * @param inData Data element whose siblings are to be printed
- *
- * @fn void BinaryTree::PrintLevel(int inData)
- * @brief Prints the level of a given data element in the binary tree
- * @param inData Data element whose level is to be printed
  */
 class BinaryTree
 {
@@ -219,8 +215,6 @@ public:
      * @param inData Data element whose siblings are to be printed
      */
     void PrintSibling(int inData);
-
-    void PrintLevel(int inData);
 
 
 private:
