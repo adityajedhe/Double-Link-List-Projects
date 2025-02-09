@@ -72,7 +72,7 @@ class Node;
  * @brief Prints all cousin nodes of a given data element
  * @param inData Data element whose cousins are to be printed
  *
- * @fn void BinaryTree::PrintSiblings(int inData)
+ * @fn void BinaryTree::PrintSibling(int inData)
  * @brief Prints all sibling nodes of a given data element
  * @param inData Data element whose siblings are to be printed
  *
@@ -166,7 +166,7 @@ public:
     /**
      * @brief Performs a reverse level-order traversal of the binary tree
      *
-     * Prints all elements in the binary tree in reverse level-order sequence.
+     * Prints all elements in the binary tree in level-order sequence in reverse manner.
      *
      */
     void ReverseLevelOrderTraversal();
@@ -214,7 +214,11 @@ public:
      */
     void PrintCousins(int inData);
 
-    void PrintSiblings(int inData);
+    /**
+     * @brief Prints all sibling nodes of a given data element
+     * @param inData Data element whose siblings are to be printed
+     */
+    void PrintSibling(int inData);
 
     void PrintLevel(int inData);
 
@@ -222,7 +226,7 @@ public:
 private:
 
     /**
-     * @brief Returns the height of the given binary tree node
+     * @brief Returns the height of sub binary tree having root node as given node
      *
      * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
      *
@@ -259,13 +263,13 @@ private:
     void PostOrderTraversalOfBinaryTreeNode(Node* ipNode);
 
     /**
-     * @brief Prints all leaf nodes of the binary tree
+     * @brief Prints all leaf nodes of sub binary tree having root node as given node
      * @param ipNode Node to traverse
      */
     void PrintLeafNodes(Node* ipNode);
 
     /**
-     * @brief Prints all non-leaf nodes of the binary tree
+     * @brief Prints all non-leaf nodes of sub binary tree having root node as given node
      * @param ipNode Node to traverse
      */
     void PrintNonLeafNodes(Node* ipNode);
@@ -289,8 +293,9 @@ private:
      * @brief Prints all ancestor nodes of a given data element
      * @param ipNode Node to traverse
      * @param inData Data element whose ancestors are to be printed
+     * @return True if ancestor is found, false otherwise
      */
-    void PrintAncestor(Node* ipNode, int inData);
+    bool PrintAncestor(Node* ipNode, int inData);
 
     /**
      * @brief Prints all cousin nodes of a given data element
@@ -299,6 +304,14 @@ private:
      * @param inNodeHeight Height of the node
      */
     void PrintCousins(Node* ipNode, int inData, int inNodeHeight);
+
+    /**
+     * @brief Prints sibling node of a given data element
+     * @param ipNode Node to traverse
+     * @param inData Data element whose cousins are to be printed
+     * @return True if sibling is found, false otherwise
+     */
+    bool PrintSibling(Node* ipNode, int inData);
 
 
     //---------------------------------------------------------------
