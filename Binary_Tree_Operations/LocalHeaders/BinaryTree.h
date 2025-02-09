@@ -60,7 +60,7 @@ class Node;
  * @brief Prints all nodes at a distance k from the root node
  * @param k Distance from the root node
  *
- * @fn void BinaryTree::PrintAncestors(int inData)
+ * @fn void BinaryTree::PrintAncestor(int inData)
  * @brief Prints all ancestor nodes of a given data element
  * @param inData Data element whose ancestors are to be printed
  *
@@ -92,10 +92,10 @@ public:
 
     /**
      * @brief Removes all children of a given node
-     * @param pParentNode Parent node whose children are to be removed
+     * @param ipParentNode Parent node whose children are to be removed
      * @return True if the children are removed, false otherwise
      */
-    void RemoveChildren(Node* pParentNode);
+    void RemoveChildren(Node* ipParentNode);
 
     /**
      * @brief Checks if the binary tree is empty
@@ -187,11 +187,15 @@ public:
 
     /**
      * @brief Prints all nodes at a distance k from the root node
-     * @param k Distance from the root node
+     * @param inKDistance Distance from the root node
      */
-    void PrintAllNodesAtKDistance(int k);
+    void PrintAllNodesAtKDistance(int inKDistance);
 
-    void PrintAncestors(int inData);
+    /**
+     * @brief Prints all ancestor nodes of a given data element
+     * @param inData Data element whose ancestors are to be printed
+     */
+    void PrintAncestor(int inData);
 
     void PrintCousins(int inData);
 
@@ -207,67 +211,74 @@ private:
      *
      * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
      *
-     * @param pNode Node whose height is to be calculated
+     * @param ipNode Node whose height is to be calculated
      * @return Height of the binary tree
      */
-    int HeightOfBinaryTreeNode(Node* pNode);
+    int HeightOfBinaryTreeNode(Node* ipNode);
 
     /**
      * @brief Performs an in-order traversal of the binary tree node
      *
      * Prints all elements under the binary tree node in in-order sequence.
      *
-     * @param pNode Node to traverse
+     * @param ipNode Node to traverse
      */
-    void InOrderTraversalOfBinaryTreeNode(Node* pNode);
+    void InOrderTraversalOfBinaryTreeNode(Node* ipNode);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
      *
      * Prints all elements under the binary tree node in pre-order sequence.
      *
-     * @param pNode Node to traverse
+     * @param ipNode Node to traverse
      */
-    void PreOrderTraversalOfBinaryTreeNode(Node* pNode);
+    void PreOrderTraversalOfBinaryTreeNode(Node* ipNode);
 
     /**
      * @brief Performs an post-order traversal of the binary tree node
      *
      * Prints all elements under the binary tree node in post-order sequence.
      *
-     * @param pNode Node to traverse
+     * @param ipNode Node to traverse
      */
-    void PostOrderTraversalOfBinaryTreeNode(Node* pNode);
+    void PostOrderTraversalOfBinaryTreeNode(Node* ipNode);
 
     /**
      * @brief Prints all leaf nodes of the binary tree
-     * @param pNode Node to traverse
+     * @param ipNode Node to traverse
      */
-    void PrintLeafNodes(Node* pNode);
+    void PrintLeafNodes(Node* ipNode);
 
     /**
      * @brief Prints all non-leaf nodes of the binary tree
-     * @param pNode Node to traverse
+     * @param ipNode Node to traverse
      */
-    void PrintNonLeafNodes(Node* pNode);
+    void PrintNonLeafNodes(Node* ipNode);
 
     /**
      * @brief Prints all nodes at a distance k from the root node
-     * @param pNode Node to traverse
-     * @param k Distance from the root node
+     * @param ipNode Node to traverse
+     * @param inKDistance Distance from the root node
      */
-    void PrintAllNodesAtKDistance(Node* pNode, int k);
+    void PrintAllNodesAtKDistance(Node* ipNode, int inKDistance);
 
-
-    //---------------------------------------------------------------
-    // Member variables
-    //---------------------------------------------------------------
     /**
-     * @brief Represents the root node of the binary tree
-     *
-     * The root node is the starting point of the tree.
-     * It is the topmost node in the tree.
+     * @brief Prints all ancestor nodes of a given data element
+     * @param ipNode Node to traverse
+     * @param inData Data element whose ancestors are to be printed
      */
+    void PrintAncestor(Node* ipNode, int inData);
+
+
+    //---------------------------------------------------------------
+// Member variables
+//---------------------------------------------------------------
+/**
+ * @brief Represents the root node of the binary tree
+ *
+ * The root node is the starting point of the tree.
+ * It is the topmost node in the tree.
+ */
     Node* _pRootNode;
 
 };
