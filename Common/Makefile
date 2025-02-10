@@ -1,3 +1,9 @@
+# Makefile for compiling a C++ project into a shared library.
+# Detects the operating system to set appropriate library suffix.
+# Compiles source files from ./Sources directory into object files in ./Objects directory.
+# Links object files to create a shared library in ../bin directory.
+# Provides targets for building, cleaning, and creating necessary directories.
+
 # Detect the operating system
 OS := $(shell uname)
 
@@ -27,7 +33,7 @@ else
     LIB_SUFFIX := .dll
 endif
 
-# Output dll
+# Output Library
 TARGET = $(OUTPUT_DIR)/$(LIB_NAME)$(LIB_SUFFIX)
 
 # Default target
@@ -35,22 +41,22 @@ all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 
 # Link object files to create the executable
 $(TARGET): $(OBJS)
-	@$(CCPP) -shared -o $@ $^
+    @$(CCPP) -shared -o $@ $^
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@$(CCPP) $(CFLAGS) -c $< -o $@
+    @$(CCPP) $(CFLAGS) -c $< -o $@
 
 # Create output directory if it isn't exist
 $(OUTPUT_DIR):
-	@mkdir -p $(OUTPUT_DIR)
+    @mkdir -p $(OUTPUT_DIR)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+    @mkdir -p $(OBJ_DIR)
 
 # Clean up build files
 clean:
-	@rm -rf $(OBJ_DIR) $(TARGET)
+    @rm -rf $(OBJ_DIR) $(TARGET)
 
 # Phony targets
 .PHONY: all clean
