@@ -5,6 +5,8 @@
 // @date        : 2025/02/06
 //===================================================================
 
+#include <stack>
+
 class Node;
 
 //-------------------------------------------------------------------
@@ -199,10 +201,16 @@ public:
     int FindDistanceFromRootNode(int inData);
 
     /**
+     * @brief Prints immidiate ancestor node of a given data element
+     * @param inData Data element whose ancestor is to be printed
+     */
+    void PrintAncestor(int inData);
+
+    /**
      * @brief Prints all ancestor nodes of a given data element
      * @param inData Data element whose ancestors are to be printed
      */
-    void PrintAncestor(int inData);
+    void PrintAncestors(int inData);
 
     /**
      * @brief Prints all cousin nodes of a given data element
@@ -279,9 +287,10 @@ private:
      * @brief Finds the node with the given data element
      * @param ipNode Node to traverse
      * @param inData Data element to find
+     * @param iosNodePath Stack to store the path of the node
      * @return Distance from the given node, if found. Otherwise -1
      */
-    int FindDistanceFromNode(Node* ipNode, int inData);
+    int FindDistanceFromNode(Node* ipNode, int inData, std::stack<int>& iosNodePath);
 
     /**
      * @brief Prints all ancestor nodes of a given data element
@@ -290,6 +299,13 @@ private:
      * @return True if ancestor is found, false otherwise
      */
     bool PrintAncestor(Node* ipNode, int inData);
+
+    /**
+     * @brief Prints all ancestor nodes of a given data element by traversing the path and printing the nodes
+     * @param ipNode Node to traverse
+     * @param iosNodePath Stack to store the path of the node
+     */
+    void PrintAncestors(Node* ipNode, std::stack<int>& iosNodePath);
 
     /**
      * @brief Prints all cousin nodes of a given data element
