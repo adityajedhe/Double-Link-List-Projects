@@ -41,22 +41,22 @@ all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 
 # Link object files to create the executable
 $(TARGET): $(OBJS)
-    @$(CCPP) -shared -o $@ $^
+	@$(CCPP) -shared -o $@ $^
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-    @$(CCPP) $(CFLAGS) -c $< -o $@
+	@$(CCPP) $(CFLAGS) -c $< -o $@
 
 # Create output directory if it isn't exist
 $(OUTPUT_DIR):
-    @mkdir -p $(OUTPUT_DIR)
+	@mkdir -p $(OUTPUT_DIR)
 
 $(OBJ_DIR):
-    @mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 # Clean up build files
 clean:
-    @rm -rf $(OBJ_DIR) $(TARGET)
+	@rm -rf $(OBJ_DIR) $(TARGET)
 
 # Phony targets
 .PHONY: all clean
