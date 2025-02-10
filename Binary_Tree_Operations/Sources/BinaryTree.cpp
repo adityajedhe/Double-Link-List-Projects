@@ -30,6 +30,7 @@ BinaryTree::~BinaryTree()
 {
     RemoveChildren(_pRootNode);
 
+    delete _pRootNode;
     _pRootNode = nullptr;
 }
 
@@ -43,11 +44,17 @@ void BinaryTree::RemoveChildren(Node* ipParentNode)
 {
     if (nullptr == ipParentNode)    return;
 
-    RemoveChildren(ipParentNode->GetLeftNode());
-    RemoveChildren(ipParentNode->GetRightNode());
+    Node* pLNode = ipParentNode->GetLeftNode();
+    Node* pRNode = ipParentNode->GetRightNode();
 
-    delete ipParentNode;
-    ipParentNode = nullptr;
+    RemoveChildren(pLNode);
+    RemoveChildren(pRNode);
+
+    delete pLNode;
+    delete pRNode;
+
+    pLNode = nullptr;
+    pRNode = nullptr;
 }
 
 //-------------------------------------------------------------------
@@ -318,13 +325,15 @@ void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
  */
 int BinaryTree::FindDistanceFromRootNode(int inData)
 {
-    return FindDistanceFromNode(_pRootNode, inData);
+    std::stack<int> sNodePath;
+
+    return FindDistanceFromNode(_pRootNode, inData, sNodePath);
 }
 
 //-------------------------------------------------------------------
 /**
  * @brief Prints all ancestor nodes of a given data element
- * @param inData Data element whose ancestors are to be printed
+ * @param inData Data element whose ancestor is to be printed
  */
 void BinaryTree::PrintAncestor(int inData)
 {
@@ -334,6 +343,69 @@ void BinaryTree::PrintAncestor(int inData)
 
     std::cout << std::endl;
 }
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all ancestor nodes of a given data element
+ * @param inData Data element whose ancestors are to be printed
+ */
+void BinaryTree::PrintAncestors(int inData)
+{
+    std::cout << "Ancestors of " << inData << ": ";
+
+    if (nullptr == _pRootNode)
+    {
+        std::cout << "ERR<<Tree is empty.>>" << std::endl;
+        return;
+    }
+
+    std::stack<int> sNodePath;
+
+    int nDistance = FindDistanceFromNode(_pRootNode, inData, sNodePath);
+
+    if (0 < nDistance)
+    {
+        PrintAncestors(_pRootNode, sNodePath);
+    }
+    else
+    {
+        std::cout << "Node is not found for the given data element." << std::endl;
+    }
+
+    std::cout << std::endl;
+}
+/*
+{
+    std::cout << "Ancestors of " << inData << ": ";
+
+    if (nullptr == _pRootNode)
+    {
+        std::cout << "ERR<<Tree is empty.>>" << std::endl;
+        return;
+    }
+
+    Node* pLNode = _pRootNode->GetLeftNode();
+    Node* pRNode = _pRootNode->GetRightNode();
+
+    int nLDistance = FindDistanceFromNode(pLNode, inData);
+    int nRDistance = FindDistanceFromNode(pRNode, inData);
+
+    if (0 < nLDistance)
+    {
+        PrintAncestor(_pRootNode, pLNode->GetData());
+    }
+    else if (0 < nRDistance)
+    {
+        PrintAncestor(_pRootNode, pRNode->GetData());
+    }
+    else
+    {
+        std::cout << "No ancestors found for the given data element." << std::endl;
+    }
+
+    std::cout << std::endl;
+}
+*/
 
 //-------------------------------------------------------------------
 /**
@@ -487,8 +559,8 @@ void BinaryTree::PrintNonLeafNodes(Node* ipNode)
     {
         std::cout << ipNode->GetData() << " ";
 
-        PrintLeafNodes(ipNode->GetLeftNode());
-        PrintLeafNodes(ipNode->GetRightNode());
+        PrintNonLeafNodes(ipNode->GetLeftNode());
+        PrintNonLeafNodes(ipNode->GetRightNode());
     }
 }
 
@@ -518,9 +590,10 @@ void BinaryTree::PrintAllNodesAtKDistance(Node* ipNode, int inKDistance)
  * @brief Finds the distance of node with the given data element from the given node
  * @param ipNode Node to traverse
  * @param inData Data element to find
+ * @param iosNodePath Stack to store the path of the node
  * @return Distance from the given node, if found. Otherwise -1
  */
-int BinaryTree::FindDistanceFromNode(Node* ipNode, int inData)
+int BinaryTree::FindDistanceFromNode(Node* ipNode, int inData, std::stack<int>& iosNodePath)
 {
     int nDistance(-1);
 
@@ -532,13 +605,23 @@ int BinaryTree::FindDistanceFromNode(Node* ipNode, int inData)
     }
     else
     {
-        nDistance = FindDistanceFromNode(ipNode->GetLeftNode(), inData);
+        nDistance = FindDistanceFromNode(ipNode->GetLeftNode(), inData, iosNodePath);
 
         if (0 > nDistance)
-            nDistance = FindDistanceFromNode(ipNode->GetRightNode(), inData);
+        {
+            nDistance = FindDistanceFromNode(ipNode->GetRightNode(), inData, iosNodePath);
+
+            iosNodePath.push(1);
+        }
+        else
+        {
+            iosNodePath.push(0);
+        }
 
         if (0 <= nDistance)
+        {
             ++nDistance;
+        }
     }
 
     return nDistance;
@@ -546,9 +629,9 @@ int BinaryTree::FindDistanceFromNode(Node* ipNode, int inData)
 
 //-------------------------------------------------------------------
 /**
- * @brief Prints all ancestor nodes of a given data element
+ * @brief Prints immidiate ancestor node of a given data element
  * @param ipNode Node to traverse
- * @param inData Data element whose ancestors are to be printed
+ * @param inData Data element whose ancestor is to be printed
  */
 bool BinaryTree::PrintAncestor(Node* ipNode, int inData)
 {
@@ -572,11 +655,44 @@ bool BinaryTree::PrintAncestor(Node* ipNode, int inData)
     else
     {
         bFound = PrintAncestor(pLNode, inData);
+
         if (!bFound)
+        {
             bFound = PrintAncestor(pRNode, inData);
+        }
     }
 
     return bFound;
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all ancestor nodes of a given data element by traversing the path and printing the nodes
+ * @param ipNode Node to traverse
+ * @param inData Data element whose ancestors are to be printed
+ * @param iosNodePath stack to store the path of the node
+ */
+void BinaryTree::PrintAncestors(Node* ipNode, std::stack<int>& iosNodePath)
+{
+    if (nullptr == ipNode)    return;
+
+    std::cout << ipNode->GetData() << " ";
+
+    if (!iosNodePath.empty())
+    {
+        int nPathDirection = iosNodePath.top();
+
+        iosNodePath.pop();
+
+        if (0 == nPathDirection)
+        {
+            PrintAncestors(ipNode->GetLeftNode(), iosNodePath);
+        }
+        else
+        {
+            PrintAncestors(ipNode->GetRightNode(), iosNodePath);
+        }
+    }
 }
 
 //-------------------------------------------------------------------
@@ -722,7 +838,9 @@ bool BinaryTree::PrintSibling(Node* ipNode, int inData)
         bFound = PrintSibling(pLNode, inData);
 
         if (!bFound)
+        {
             bFound = PrintSibling(pRNode, inData);
+        }
     }
 
     return bFound;
