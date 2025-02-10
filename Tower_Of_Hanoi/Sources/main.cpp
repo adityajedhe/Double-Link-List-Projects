@@ -6,9 +6,14 @@
 // @date        : 2025/01/30
 //===================================================================
 
-#include <iostream>
-#include "Node.h"
+// ---------------------------------------------- Local headers
 #include "DiskStack.h"
+
+// ---------------------------------------------- Project headers
+#include "Node.h"
+
+// ---------------------------------------------- System headers
+#include <iostream>
 
 
 // Global variable to count the number of transfers

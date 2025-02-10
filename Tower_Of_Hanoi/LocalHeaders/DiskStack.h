@@ -8,8 +8,7 @@
 #ifndef _DISKSTACK_H_
 #define _DISKSTACK_H_
 
-// Forward declaration
-// -------------------
+// ---------------------------------------------- Forward declaration
 class Node;
 
 //------------------------------------------------------------------------
