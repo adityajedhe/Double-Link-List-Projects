@@ -5,8 +5,10 @@
 // @date        : 2025/02/06
 //===================================================================
 
+// ---------------------------------------------- STL Headers
 #include <stack>
 
+// ---------------------------------------------- Forward declaration
 class Node;
 
 //-------------------------------------------------------------------
@@ -67,6 +69,10 @@ class Node;
  * @param inData Data element to find
  *
  * @fn void BinaryTree::PrintAncestor(int inData)
+ * @brief Prints all ancestor nodes of a given data element
+ * @param inData Data element whose ancestors are to be printed
+ *
+ * @fn void BinaryTree::PrintAncestors(int inData)
  * @brief Prints all ancestor nodes of a given data element
  * @param inData Data element whose ancestors are to be printed
  *
