@@ -72,6 +72,10 @@ class Node;
  * @brief Prints all ancestor nodes of a given data element
  * @param inData Data element whose ancestors are to be printed
  *
+ * @fn void BinaryTree::PrintAncestors(int inData)
+ * @brief Prints all ancestor nodes of a given data element
+ * @param inData Data element whose ancestors are to be printed
+ *
  * @fn void BinaryTree::PrintCousins(int inData)
  * @brief Prints all cousin nodes of a given data element
  * @param inData Data element whose cousins are to be printed
