@@ -2,7 +2,7 @@
 CCPP = g++
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -std=c++11 -I ../SharedHeaders/ -I ./LocalHeaders/
+CFLAGS = -Wall -Wextra -Werror -std=c++23 -I ../SharedHeaders/ -I ./LocalHeaders/
 
 # Directories
 SRC_DIR = ./Sources
@@ -23,11 +23,11 @@ all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 
 # Link object files to create the executable
 $(TARGET): $(OBJS)
-	@$(CCPP) -o $@ $^ -L $(OUTPUT_DIR)/ -lNode
+	$(CCPP) -o $@ $^ -L $(OUTPUT_DIR)/ -lNode
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@$(CCPP) $(CFLAGS) -c $< -o $@
+	$(CCPP) $(CFLAGS) -c $< -o $@
 
 # Create output directory if it isn't exist
 $(OUTPUT_DIR):
@@ -38,7 +38,7 @@ $(OBJ_DIR):
 
 # Clean up build files
 clean:
-	@rm -rf $(OBJ_DIR) $(TARGET)
+	rm -rf $(OBJ_DIR) $(TARGET)
 
 # Run the program
 run: $(TARGET)
