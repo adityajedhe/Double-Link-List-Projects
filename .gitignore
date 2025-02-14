@@ -39,3 +39,6 @@ Docs/
 
 # Documentation
 # Doxyfile
+
+# Build files
+*.log

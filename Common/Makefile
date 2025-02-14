@@ -11,7 +11,7 @@ OS := $(shell uname)
 CCPP = g++
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -Werror -std=c++23 -I ../SharedHeaders/ -fPIC
+CFLAGS = -Wall -Wextra -Werror -std=c++23 -I ../SharedHeaders/
 
 # Directories
 SRC_DIR = ./Sources
@@ -41,7 +41,7 @@ all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 
 # Link object files to create the executable
 $(TARGET): $(OBJS)
-	$(CCPP) -shared -o $@ $^
+	$(CCPP) -fPIC -shared -o $@ $^
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
