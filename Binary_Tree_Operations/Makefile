@@ -38,7 +38,7 @@ $(OBJ_DIR):
 
 # Clean up build files
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
+	@rm -rf $(OBJ_DIR) $(TARGET)
 
 # Run the program
 run: $(TARGET)

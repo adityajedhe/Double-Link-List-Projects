@@ -29,6 +29,10 @@ class Node;
  * @brief Destructor for BinaryTree
  *
  * @fn void BinaryTree::InsertInBinaryTree(int inData)
+ * @brief Inserts a new value into the complete binary tree
+ * @param inData The integer value to be inserted into the binary tree.
+ *
+ * @fn void BinaryTree::InsertInBinarySearchTree(int inData)
  * @brief Inserts a new data element into the binary search tree
  * @param inData Data element to insert
  *
@@ -87,7 +91,6 @@ class Node;
 class BinaryTree
 {
 public:
-
     /**
      * @brief Constructor for BinaryTree
      */
@@ -103,7 +106,7 @@ public:
      * @param ipParentNode Parent node whose children are to be removed
      * @return True if the children are removed, false otherwise
      */
-    void RemoveChildren(Node* ipParentNode);
+    void RemoveChildren(Node *ipParentNode);
 
     /**
      * @brief Checks if the binary tree is empty
@@ -112,9 +115,25 @@ public:
     bool IsEmpty();
 
     /**
+     * @brief Inserts a new value into the binary tree while maintaining
+     *        the properties of a complete binary tree.
+     *
+     * This function inserts a new value into the binary tree while maintaining the properties of a complete binary tree.
+     * It inserts the node at each level.
+     * Once the level is full, the node is inserted at the next level.
+     *
+     * @param inData The integer value to be inserted into the binary tree.
+     */
+    void InsertInBinaryTree(int inData);
+
+    /**
      * @brief Inserts a new data element into the binary search tree
      *
-     * The binary search tree is a data structure in which each node has at most two children, referred to as the left child and the right child. Also no two nodes have the same data element. The left child of a node has a value less than the parent node, and the right child has a value greater than the parent node.
+     * The binary search tree is a data structure in which each node has at
+     * most two children, referred to as the left child and the right
+     * child. Also no two nodes have the same data element. The left child
+     * of a node has a value less than the parent node, and the right child
+     * has a value greater than the parent node.
      *
      * @param inData Data element to insert
      */
@@ -230,9 +249,20 @@ public:
      */
     void PrintSibling(int inData);
 
-
 private:
-
+    /**
+     * @brief Inserts a new node into a binary tree.
+     *
+     * This function inserts the specified new node into the binary tree at the appropriate
+     * position based on the binary search tree properties.
+     *
+     * @param[in] ipNode Pointer to the current node in the binary tree where the new node
+     *                   will be inserted. If this is null, the new node will become the root.
+     * @param[in] ipNewNode Pointer to the new node that needs to be inserted into the tree.
+     *
+     * @see DeleteNodeInBinaryTree() for removing a node from the binary tree.
+     */
+    bool InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode);
     /**
      * @brief Returns the height of sub binary tree having root node as given node
      *
@@ -241,7 +271,7 @@ private:
      * @param ipNode Node whose height is to be calculated
      * @return Height of the binary tree
      */
-    int HeightOfSubBinaryTree(Node* ipNode);
+    int HeightOfSubBinaryTree(Node *ipNode);
 
     /**
      * @brief Performs an in-order traversal of the binary tree node
@@ -250,7 +280,7 @@ private:
      *
      * @param ipNode Node to traverse
      */
-    void InOrderTraversalOfBinaryTreeNode(Node* ipNode);
+    void InOrderTraversalOfBinaryTreeNode(Node *ipNode);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
@@ -259,7 +289,7 @@ private:
      *
      * @param ipNode Node to traverse
      */
-    void PreOrderTraversalOfBinaryTreeNode(Node* ipNode);
+    void PreOrderTraversalOfBinaryTreeNode(Node *ipNode);
 
     /**
      * @brief Performs an post-order traversal of the binary tree node
@@ -268,26 +298,26 @@ private:
      *
      * @param ipNode Node to traverse
      */
-    void PostOrderTraversalOfBinaryTreeNode(Node* ipNode);
+    void PostOrderTraversalOfBinaryTreeNode(Node *ipNode);
 
     /**
      * @brief Prints all leaf nodes of sub binary tree having root node as given node
      * @param ipNode Node to traverse
      */
-    void PrintLeafNodes(Node* ipNode);
+    void PrintLeafNodes(Node *ipNode);
 
     /**
      * @brief Prints all non-leaf nodes of sub binary tree having root node as given node
      * @param ipNode Node to traverse
      */
-    void PrintNonLeafNodes(Node* ipNode);
+    void PrintNonLeafNodes(Node *ipNode);
 
     /**
      * @brief Prints all nodes at a distance k from the root node
      * @param ipNode Node to traverse
      * @param inKDistance Distance from the root node
      */
-    void PrintAllNodesAtKDistance(Node* ipNode, int inKDistance);
+    void PrintAllNodesAtKDistance(Node *ipNode, int inKDistance);
 
     /**
      * @brief Finds the node with the given data element
@@ -296,7 +326,7 @@ private:
      * @param iosNodePath Stack to store the path of the node
      * @return Distance from the given node, if found. Otherwise -1
      */
-    int FindDistanceFromNode(Node* ipNode, int inData, std::stack<int>& iosNodePath);
+    int FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &iosNodePath);
 
     /**
      * @brief Prints all ancestor nodes of a given data element
@@ -304,14 +334,14 @@ private:
      * @param inData Data element whose ancestors are to be printed
      * @return True if ancestor is found, false otherwise
      */
-    bool PrintAncestor(Node* ipNode, int inData);
+    bool PrintAncestor(Node *ipNode, int inData);
 
     /**
      * @brief Prints all ancestor nodes of a given data element by traversing the path and printing the nodes
      * @param ipNode Node to traverse
      * @param iosNodePath Stack to store the path of the node
      */
-    void PrintAncestors(Node* ipNode, std::stack<int>& iosNodePath);
+    void PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath);
 
     /**
      * @brief Prints all cousin nodes of a given data element
@@ -319,7 +349,7 @@ private:
      * @param inData Data element whose cousins are to be printed
      * @param inNodeHeight Height of the node
      */
-    void PrintCousins(Node* ipNode, int inData, int inNodeHeight);
+    void PrintCousins(Node *ipNode, int inData, int inNodeHeight);
 
     /**
      * @brief Prints sibling node of a given data element
@@ -327,8 +357,7 @@ private:
      * @param inData Data element whose cousins are to be printed
      * @return True if sibling is found, false otherwise
      */
-    bool PrintSibling(Node* ipNode, int inData);
-
+    bool PrintSibling(Node *ipNode, int inData);
 
     //---------------------------------------------------------------
     // Member variables
@@ -339,6 +368,5 @@ private:
      * The root node is the starting point of the tree.
      * It is the topmost node in the tree.
      */
-    Node* _pRootNode;
-
+    Node *_pRootNode;
 };

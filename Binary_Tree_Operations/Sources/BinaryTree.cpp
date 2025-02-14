@@ -13,17 +13,14 @@
 
 // ---------------------------------------------- System Headers
 #include <iostream>
-
-// ---------------------------------------------- STL Headers
 #include <queue>
-
+#include <thread>
 
 //-------------------------------------------------------------------
 /**
  * @brief Constructor for BinaryTree
  */
-BinaryTree::BinaryTree() :
-    _pRootNode(nullptr)
+BinaryTree::BinaryTree() : _pRootNode(nullptr)
 {
 }
 
@@ -48,15 +45,19 @@ BinaryTree::~BinaryTree()
  * @param ipParentNode Parent node whose children are to be removed
  * @return True if the children are removed, false otherwise
  */
-void BinaryTree::RemoveChildren(Node* ipParentNode)
+void BinaryTree::RemoveChildren(Node *ipParentNode)
 {
-    if (nullptr == ipParentNode)    return;
+    if (nullptr == ipParentNode)
+        return;
 
-    Node* pLNode = ipParentNode->GetLeftNode();
-    Node* pRNode = ipParentNode->GetRightNode();
+    Node *pLNode = ipParentNode->GetLeftNode();
+    Node *pRNode = ipParentNode->GetRightNode();
 
-    RemoveChildren(pLNode);
-    RemoveChildren(pRNode);
+    std::thread objThread1(&BinaryTree::RemoveChildren, this, pLNode);
+    std::thread objThread2(&BinaryTree::RemoveChildren, this, pRNode);
+
+    objThread1.join();
+    objThread2.join();
 
     delete pLNode;
     delete pRNode;
@@ -77,9 +78,47 @@ bool BinaryTree::IsEmpty()
 
 //-------------------------------------------------------------------
 /**
+ * @brief Inserts a new value into the binary tree while maintaining
+ *        the properties of a complete binary tree.
+ *
+ * This function inserts a new value into the binary tree while maintaining the properties of a complete binary tree.
+ * It inserts the node at each level.
+ * Once the level is full, the node is inserted at the next level.
+ *
+ * @param inData The integer value to be inserted into the binary tree.
+ */
+void BinaryTree::InsertInBinaryTree(int inData)
+{
+    /**
+     * Create a new node with the data element
+     * and insert it into the complete binary tree
+     */
+    Node *pNewNode = new Node(inData);
+
+    if (nullptr == pNewNode)
+        return;
+
+    if (nullptr != _pRootNode)
+    {
+        std::queue<Node *> qNodes;
+
+        qNodes.push(_pRootNode);
+    }
+    else
+    {
+        _pRootNode = pNewNode;
+    }
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Inserts a new data element into the binary search tree
  *
- * The binary search tree is a data structure in which each node has at most two children, referred to as the left child and the right child. Also no two nodes have the same data element. The left child of a node has a value less than the parent node, and the right child has a value greater than the parent node.
+ * The binary search tree is a data structure in which each node has at
+ * most two children, referred to as the left child and the right child.
+ * Also no two nodes have the same data element. The left child of a node
+ * has a value less than the parent node, and the right child has a value
+ * greater than the parent node.
  *
  * @param inData Data element to insert
  */
@@ -89,12 +128,15 @@ void BinaryTree::InsertInBinarySearchTree(int inData)
      * Create a new node with the data element
      * and insert it into the binary search tree
      */
-    Node* pNewNode = new Node(inData);
+    Node *pNewNode = new Node(inData);
+
+    if (nullptr == pNewNode)
+        return;
 
     if (nullptr != _pRootNode)
     {
-        Node* pCurrentNode = _pRootNode;
-        Node* pParentNode = nullptr;
+        Node *pCurrentNode = _pRootNode;
+        Node *pParentNode = nullptr;
 
         while (nullptr != pCurrentNode)
         {
@@ -205,15 +247,16 @@ void BinaryTree::PostOrderTraversal()
  */
 void BinaryTree::LevelOrderTraversal()
 {
-    if (nullptr == _pRootNode)    return;
+    if (nullptr == _pRootNode)
+        return;
 
     std::cout << "Level order traversal: ";
 
-    std::queue<Node*> qNodes;
+    std::queue<Node *> qNodes;
 
     qNodes.push(_pRootNode);
 
-    Node* pNode = nullptr;
+    Node *pNode = nullptr;
 
     while (!qNodes.empty())
     {
@@ -221,7 +264,8 @@ void BinaryTree::LevelOrderTraversal()
 
         qNodes.pop();
 
-        if (nullptr == pNode)    continue;
+        if (nullptr == pNode)
+            continue;
 
         std::cout << pNode->GetData() << " ";
 
@@ -241,13 +285,15 @@ void BinaryTree::LevelOrderTraversal()
 /*
 void BinaryTree::LevelOrderTraversal(std::queue<Node*>& ioqNodes)
 {
-    if (ioqNodes.empty())    return;
+    if (ioqNodes.empty())
+        return;
 
     Node* pNode = ioqNodes.front();
 
     ioqNodes.pop();
 
-    if (nullptr == pNode)    return;
+    if (nullptr == pNode)
+        return;
 
     std::cout << pNode->GetData() << " ";
 
@@ -449,6 +495,50 @@ void BinaryTree::PrintSibling(int inData)
 
 //-------------------------------------------------------------------
 /**
+ * @brief Inserts a new node into a binary tree.
+ *
+ * This function inserts the specified new node into the binary tree at the appropriate
+ * position based on the binary search tree properties.
+ *
+ * @param[in] ipNode Pointer to the current node in the binary tree where the new node
+ *                   will be inserted. If this is null, the new node will become the root.
+ * @param[in] ipNewNode Pointer to the new node that needs to be inserted into the tree.
+ *
+ * @note If the tree is empty (i.e., ipNode is null), the new node will be set as the root.
+ * @warning Ensure that ipNewNode is not null before calling this function to avoid dereferencing a null pointer.
+ * @see DeleteNodeInBinaryTree() for removing a node from the binary tree.
+ */
+bool BinaryTree::InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode)
+{
+    bool bNodeInserted(true);
+
+    if (nullptr != ipNode)
+    {
+        Node *pLNode = ipNode->GetLeftNode();
+        Node *pRNode = ipNode->GetRightNode();
+
+        if (nullptr == pLNode)
+        {
+            ipNode->SetLeftNode(ipNewNode);
+        }
+        else if (nullptr == pRNode)
+        {
+            ipNode->SetRightNode(ipNewNode);
+        }
+        else
+        {
+            bNodeInserted = InsertNodeInBinaryTree(pLNode, ipNewNode);
+
+            if (!bNodeInserted)
+                bNodeInserted = InsertNodeInBinaryTree(pRNode, ipNewNode);
+        }
+    }
+
+    return bNodeInserted;
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Returns the height of sub binary tree having root node as given node
  *
  * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
@@ -456,7 +546,7 @@ void BinaryTree::PrintSibling(int inData)
  * @param ipNode Node whose height is to be calculated
  * @return Height of the binary tree
  */
-int BinaryTree::HeightOfSubBinaryTree(Node* ipNode)
+int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
 {
     int nHeight(-1);
 
@@ -479,9 +569,10 @@ int BinaryTree::HeightOfSubBinaryTree(Node* ipNode)
  *
  * @param ipNode Node to traverse
  */
-void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node* ipNode)
+void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node *ipNode)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     InOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode());
 
@@ -500,9 +591,10 @@ void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node* ipNode)
  *
  * @param ipNode Node to traverse
  */
-void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node* ipNode)
+void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node *ipNode)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     // Print the data element
     // ----------------------------------
@@ -521,9 +613,10 @@ void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node* ipNode)
  *
  * @param ipNode Node to traverse
  */
-void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node* ipNode)
+void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     PostOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode());
 
@@ -539,9 +632,10 @@ void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node* ipNode)
  * @brief Prints all leaf nodes of sub binary tree having root node as given node
  * @param ipNode Node to traverse
  */
-void BinaryTree::PrintLeafNodes(Node* ipNode)
+void BinaryTree::PrintLeafNodes(Node *ipNode)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     if ((nullptr == ipNode->GetLeftNode()) && (nullptr == ipNode->GetRightNode()))
     {
@@ -559,9 +653,10 @@ void BinaryTree::PrintLeafNodes(Node* ipNode)
  * @brief Prints all non-leaf nodes of sub binary tree having root node as given node
  * @param ipNode Node to traverse
  */
-void BinaryTree::PrintNonLeafNodes(Node* ipNode)
+void BinaryTree::PrintNonLeafNodes(Node *ipNode)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     if ((nullptr != ipNode->GetLeftNode()) || (nullptr != ipNode->GetRightNode()))
     {
@@ -578,9 +673,10 @@ void BinaryTree::PrintNonLeafNodes(Node* ipNode)
  * @param ipNode Node to traverse
  * @param inKDistance Distance from the root node
  */
-void BinaryTree::PrintAllNodesAtKDistance(Node* ipNode, int inKDistance)
+void BinaryTree::PrintAllNodesAtKDistance(Node *ipNode, int inKDistance)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     if (0 == inKDistance)
     {
@@ -601,11 +697,12 @@ void BinaryTree::PrintAllNodesAtKDistance(Node* ipNode, int inKDistance)
  * @param iosNodePath Stack to store the path of the node
  * @return Distance from the given node, if found. Otherwise -1
  */
-int BinaryTree::FindDistanceFromNode(Node* ipNode, int inData, std::stack<int>& iosNodePath)
+int BinaryTree::FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &iosNodePath)
 {
     int nDistance(-1);
 
-    if (nullptr == ipNode)    return nDistance;
+    if (nullptr == ipNode)
+        return nDistance;
 
     if (ipNode->GetData() == inData)
     {
@@ -641,14 +738,15 @@ int BinaryTree::FindDistanceFromNode(Node* ipNode, int inData, std::stack<int>& 
  * @param ipNode Node to traverse
  * @param inData Data element whose ancestor is to be printed
  */
-bool BinaryTree::PrintAncestor(Node* ipNode, int inData)
+bool BinaryTree::PrintAncestor(Node *ipNode, int inData)
 {
     bool bFound(false);
 
-    if (nullptr == ipNode)    return bFound;
+    if (nullptr == ipNode)
+        return bFound;
 
-    Node* pLNode = ipNode->GetLeftNode();
-    Node* pRNode = ipNode->GetRightNode();
+    Node *pLNode = ipNode->GetLeftNode();
+    Node *pRNode = ipNode->GetRightNode();
 
     if ((nullptr != pLNode) && (pLNode->GetData() == inData))
     {
@@ -680,9 +778,10 @@ bool BinaryTree::PrintAncestor(Node* ipNode, int inData)
  * @param inData Data element whose ancestors are to be printed
  * @param iosNodePath stack to store the path of the node
  */
-void BinaryTree::PrintAncestors(Node* ipNode, std::stack<int>& iosNodePath)
+void BinaryTree::PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     std::cout << ipNode->GetData() << " ";
 
@@ -710,9 +809,10 @@ void BinaryTree::PrintAncestors(Node* ipNode, std::stack<int>& iosNodePath)
  * @param inData Data element whose cousins are to be printed
  * @param inNodeHeight Height of the node
  */
-void BinaryTree::PrintCousins(Node* ipNode, int inData, int inNodeHeight)
+void BinaryTree::PrintCousins(Node *ipNode, int inData, int inNodeHeight)
 {
-    if (nullptr == ipNode)    return;
+    if (nullptr == ipNode)
+        return;
 
     if (0 == inNodeHeight)
     {
@@ -720,8 +820,8 @@ void BinaryTree::PrintCousins(Node* ipNode, int inData, int inNodeHeight)
     }
     else
     {
-        Node* pLNode = ipNode->GetLeftNode();
-        Node* pRNode = ipNode->GetRightNode();
+        Node *pLNode = ipNode->GetLeftNode();
+        Node *pRNode = ipNode->GetRightNode();
 
         if (((nullptr != pLNode) && (pLNode->GetData() == inData)) ||
             ((nullptr != pRNode) && (pRNode->GetData() == inData)))
@@ -738,7 +838,8 @@ void BinaryTree::PrintCousins(Node* ipNode, int inData, int inNodeHeight)
 /*
 //-------------------------------------------------------------------
 {
-    if (nullptr == ipNode || ipNode->GetData() == inData) return;
+    if (nullptr == ipNode || ipNode->GetData() == inData)
+        return;
 
     std::queue<Node*> qNodes;
 
@@ -809,15 +910,16 @@ void BinaryTree::PrintCousins(Node* ipNode, int inData, int inNodeHeight)
  * @param ipNode Node to traverse
  * @param inData Data element whose cousins are to be printed
  */
-bool BinaryTree::PrintSibling(Node* ipNode, int inData)
+bool BinaryTree::PrintSibling(Node *ipNode, int inData)
 {
     bool bFound(false);
 
-    if (nullptr == ipNode)    return bFound;
+    if (nullptr == ipNode)
+        return bFound;
 
-    Node* pNode = nullptr;
-    Node* pLNode = ipNode->GetLeftNode();
-    Node* pRNode = ipNode->GetRightNode();
+    Node *pNode = nullptr;
+    Node *pLNode = ipNode->GetLeftNode();
+    Node *pRNode = ipNode->GetRightNode();
 
     if ((nullptr != pLNode) && (pLNode->GetData() == inData))
     {
