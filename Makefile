@@ -2,26 +2,23 @@
 
 #TARGET_MAIN = main_target
 
-OUTPUT_DIR = bin
-Project_Common = Common
-Project_BinaryTree = Binary_Tree_Operations
-Project_HanoiTower = Tower_Of_Hanoi
+OUTPUT_DIR := bin
+Project_Common := Common
+Project_BinaryTree := Binary_Tree_Operations
+Project_HanoiTower := Tower_Of_Hanoi
 
-all: $(Project_Common) $(Project_BinaryTree) $(Project_HanoiTower)
+TARGET := $(Project_Common) $(Project_BinaryTree) $(Project_HanoiTower)
 
-$(Project_Common):
-	$(MAKE) -C $(Project_Common)
+all: $(TARGET)
 
-$(Project_BinaryTree):
-	$(MAKE) -C $(Project_BinaryTree)
-
-$(Project_HanoiTower):
-	$(MAKE) -C $(Project_HanoiTower)
+$(TARGET):
+	@$(MAKE) -C $@
 
 clean:
-	$(MAKE) -C $(Project_Common) clean
-	$(MAKE) -C $(Project_BinaryTree) clean
-	$(MAKE) -C $(Project_HanoiTower) clean
-	rm -rf $(OUTPUT_DIR)
+	@echo "Cleaning output directory..."
+	@rm -rf $(OUTPUT_DIR)
+	@for project in $(TARGET); do \
+		$(MAKE) clean -C $$project; \
+	done
 
-.PHONY: all clean $(Project_Common) $(Project_BinaryTree) $(Project_HanoiTower)
+.PHONY: all clean $(TARGET)
