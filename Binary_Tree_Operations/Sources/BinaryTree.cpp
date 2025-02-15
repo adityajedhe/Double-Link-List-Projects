@@ -42,8 +42,7 @@ BinaryTree::~BinaryTree()
 //-------------------------------------------------------------------
 /**
  * @brief Removes all children of a given node
- * @param ipParentNode Parent node whose children are to be removed
- * @return True if the children are removed, false otherwise
+ * @param[in] ipParentNode Parent node whose children are to be removed
  */
 void BinaryTree::RemoveChildren(Node *ipParentNode)
 {
@@ -85,7 +84,7 @@ bool BinaryTree::IsEmpty()
  * It inserts the node at each level.
  * Once the level is full, the node is inserted at the next level.
  *
- * @param inData The integer value to be inserted into the binary tree.
+ * @param[in] inData The integer value to be inserted into the binary tree.
  */
 void BinaryTree::InsertInBinaryTree(int inData)
 {
@@ -120,7 +119,7 @@ void BinaryTree::InsertInBinaryTree(int inData)
  * has a value less than the parent node, and the right child has a value
  * greater than the parent node.
  *
- * @param inData Data element to insert
+ * @param[in] inData Data element to insert
  */
 void BinaryTree::InsertInBinarySearchTree(int inData)
 {
@@ -170,7 +169,7 @@ void BinaryTree::InsertInBinarySearchTree(int inData)
 //-------------------------------------------------------------------
 /**
  * @brief Deletes a data element from the binary tree
- * @param inData Data element to delete
+ * @param[in] inData Data element to delete
  */
 void BinaryTree::Delete(int inData)
 {
@@ -359,8 +358,22 @@ void BinaryTree::PrintNonLeafNodes()
 
 //-------------------------------------------------------------------
 /**
+ * @brief Prints all boundary nodes of binary tree
+ */
+void BinaryTree::PrintBoundaryNodes()
+{
+    if (nullptr == _pRootNode)
+        return;
+
+    PrintLeftBoundaryNodes(_pRootNode->GetLeftNode());
+    PrintLeafNodes(_pRootNode);
+    PrintRightBoundaryNodes(_pRootNode->GetRightNode());
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Prints all nodes at a distance k from the root node
- * @param inKDistance Distance from the root node
+ * @param[in] inKDistance Distance from the root node
  */
 void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
 {
@@ -373,8 +386,8 @@ void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
 
 //-------------------------------------------------------------------
 /**
- * @brief Finds the node with the given data element
- * @param inData Data element to find
+ * @brief Finds the distance of node with the given data element from the root node
+ * @param[in] inData Data element to find
  * @return Distance from the given node, if found. Otherwise -1
  */
 int BinaryTree::FindDistanceFromRootNode(int inData)
@@ -387,7 +400,7 @@ int BinaryTree::FindDistanceFromRootNode(int inData)
 //-------------------------------------------------------------------
 /**
  * @brief Prints all ancestor nodes of a given data element
- * @param inData Data element whose ancestor is to be printed
+ * @param[in] inData Data element whose ancestor is to be printed
  */
 void BinaryTree::PrintAncestor(int inData)
 {
@@ -401,7 +414,7 @@ void BinaryTree::PrintAncestor(int inData)
 //-------------------------------------------------------------------
 /**
  * @brief Prints all ancestor nodes of a given data element
- * @param inData Data element whose ancestors are to be printed
+ * @param[in] inData Data element whose ancestors are to be printed
  */
 void BinaryTree::PrintAncestors(int inData)
 {
@@ -464,7 +477,7 @@ void BinaryTree::PrintAncestors(int inData)
 //-------------------------------------------------------------------
 /**
  * @brief Prints all cousin nodes of a given data element
- * @param inData Data element whose cousins are to be printed
+ * @param[in] inData Data element whose cousins are to be printed
  */
 void BinaryTree::PrintCousins(int inData)
 {
@@ -480,7 +493,7 @@ void BinaryTree::PrintCousins(int inData)
 //-------------------------------------------------------------------
 /**
  * @brief Prints all sibling nodes of a given data element
- * @param inData Data element whose siblings are to be printed
+ * @param[in] inData Data element whose siblings are to be printed
  */
 void BinaryTree::PrintSibling(int inData)
 {
@@ -492,6 +505,10 @@ void BinaryTree::PrintSibling(int inData)
 
     std::cout << std::endl;
 }
+
+//===================================================================
+// Private Methods: Implementation
+//===================================================================
 
 //-------------------------------------------------------------------
 /**
@@ -539,11 +556,11 @@ bool BinaryTree::InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode)
 
 //-------------------------------------------------------------------
 /**
- * @brief Returns the height of sub binary tree having root node as given node
+ * @brief Returns the height of sub-binary tree having root node as given node
  *
  * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
  *
- * @param ipNode Node whose height is to be calculated
+ * @param[in] ipNode Node whose height is to be calculated
  * @return Height of the binary tree
  */
 int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
@@ -567,7 +584,7 @@ int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
  *
  * Prints all elements under the binary tree node in in-order sequence.
  *
- * @param ipNode Node to traverse
+ * @param[in] ipNode Node to traverse
  */
 void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node *ipNode)
 {
@@ -589,7 +606,7 @@ void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node *ipNode)
  *
  * Prints all elements under the binary tree node in pre-order sequence.
  *
- * @param ipNode Node to traverse
+ * @param[in] ipNode Node to traverse
  */
 void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node *ipNode)
 {
@@ -611,7 +628,7 @@ void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node *ipNode)
  *
  * Prints all elements under the binary tree node in post-order sequence.
  *
- * @param ipNode Node to traverse
+ * @param[in] ipNode Node to traverse
  */
 void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode)
 {
@@ -629,8 +646,8 @@ void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode)
 
 //-------------------------------------------------------------------
 /**
- * @brief Prints all leaf nodes of sub binary tree having root node as given node
- * @param ipNode Node to traverse
+ * @brief Prints all leaf nodes of sub-binary tree having root node as given node
+ * @param[in] ipNode Node to traverse
  */
 void BinaryTree::PrintLeafNodes(Node *ipNode)
 {
@@ -650,8 +667,8 @@ void BinaryTree::PrintLeafNodes(Node *ipNode)
 
 //-------------------------------------------------------------------
 /**
- * @brief Prints all non-leaf nodes of sub binary tree having root node as given node
- * @param ipNode Node to traverse
+ * @brief Prints all non-leaf nodes of sub-binary tree having root node as given node
+ * @param[in] ipNode Node to traverse
  */
 void BinaryTree::PrintNonLeafNodes(Node *ipNode)
 {
@@ -669,9 +686,53 @@ void BinaryTree::PrintNonLeafNodes(Node *ipNode)
 
 //-------------------------------------------------------------------
 /**
+ * @brief Prints all left boundary nodes of sub-binary tree having root node as given node
+ * @param[in] ipNode Node to traverse
+ */
+void BinaryTree::PrintLeftBoundaryNodes(Node *ipNode)
+{
+    if (nullptr == ipNode)
+        return;
+
+    Node *pNode = ipNode->GetLeftNode();
+
+    if (nullptr == pNode)
+        pNode = ipNode->GetRightNode();
+
+    if (nullptr != pNode)
+    {
+        std::cout << ipNode->GetData() << " ";
+        PrintLeftBoundaryNodes(ipNode);
+    }
+}
+
+//-------------------------------------------------------------------
+/**
+ * @brief Prints all right boundary nodes of sub-binary tree having root node as given node
+ * @param[in] ipNode Node to traverse
+ */
+void BinaryTree::PrintRightBoundaryNodes(Node *ipNode)
+{
+    if (nullptr == ipNode)
+        return;
+
+    Node *pNextNode = ipNode->GetRightNode();
+
+    if (nullptr == pNextNode)
+        pNextNode = ipNode->GetLeftNode();
+
+    if (nullptr != pNextNode)
+    {
+        std::cout << ipNode->GetData() << " ";
+        PrintLeftBoundaryNodes(pNextNode);
+    }
+}
+
+//-------------------------------------------------------------------
+/**
  * @brief Prints all nodes at a distance k from the root node
- * @param ipNode Node to traverse
- * @param inKDistance Distance from the root node
+ * @param[in] ipNode Node to traverse
+ * @param[in] inKDistance Distance from the root node
  */
 void BinaryTree::PrintAllNodesAtKDistance(Node *ipNode, int inKDistance)
 {
@@ -692,9 +753,9 @@ void BinaryTree::PrintAllNodesAtKDistance(Node *ipNode, int inKDistance)
 //-------------------------------------------------------------------
 /**
  * @brief Finds the distance of node with the given data element from the given node
- * @param ipNode Node to traverse
- * @param inData Data element to find
- * @param iosNodePath Stack to store the path of the node
+ * @param[in] ipNode Node to traverse
+ * @param[in] inData Data element to find
+ * @param[in, out] iosNodePath Stack to store the path of the node
  * @return Distance from the given node, if found. Otherwise -1
  */
 int BinaryTree::FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &iosNodePath)
@@ -735,8 +796,8 @@ int BinaryTree::FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &
 //-------------------------------------------------------------------
 /**
  * @brief Prints immidiate ancestor node of a given data element
- * @param ipNode Node to traverse
- * @param inData Data element whose ancestor is to be printed
+ * @param[in] ipNode Node to traverse
+ * @param[in] inData Data element whose ancestor is to be printed
  */
 bool BinaryTree::PrintAncestor(Node *ipNode, int inData)
 {
@@ -774,9 +835,9 @@ bool BinaryTree::PrintAncestor(Node *ipNode, int inData)
 //-------------------------------------------------------------------
 /**
  * @brief Prints all ancestor nodes of a given data element by traversing the path and printing the nodes
- * @param ipNode Node to traverse
- * @param inData Data element whose ancestors are to be printed
- * @param iosNodePath stack to store the path of the node
+ * @param[in] ipNode Node to traverse
+ * @param[in] inData Data element whose ancestors are to be printed
+ * @param[in, out] iosNodePath stack to store the path of the node
  */
 void BinaryTree::PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath)
 {
@@ -805,9 +866,9 @@ void BinaryTree::PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath)
 //-------------------------------------------------------------------
 /**
  * @brief Prints all cousin nodes of a given data element
- * @param ipNode Node to traverse
- * @param inData Data element whose cousins are to be printed
- * @param inNodeHeight Height of the node
+ * @param[in] ipNode Node to traverse
+ * @param[in] inData Data element whose cousins are to be printed
+ * @param[in] inNodeHeight Height of the node
  */
 void BinaryTree::PrintCousins(Node *ipNode, int inData, int inNodeHeight)
 {
@@ -834,7 +895,6 @@ void BinaryTree::PrintCousins(Node *ipNode, int inData, int inNodeHeight)
         }
     }
 }
-
 /*
 //-------------------------------------------------------------------
 {
@@ -907,8 +967,8 @@ void BinaryTree::PrintCousins(Node *ipNode, int inData, int inNodeHeight)
 //-------------------------------------------------------------------
 /**
  * @brief Prints sibling node of a given data element
- * @param ipNode Node to traverse
- * @param inData Data element whose cousins are to be printed
+ * @param[in] ipNode Node to traverse
+ * @param[in] inData Data element whose cousins are to be printed
  */
 bool BinaryTree::PrintSibling(Node *ipNode, int inData)
 {
