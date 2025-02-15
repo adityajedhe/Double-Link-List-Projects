@@ -27,20 +27,19 @@ class BinaryTree
 {
 public:
     /**
-     * @brief Constructor for BinaryTree
+     * @brief Creates the binary tree
+     * @note This method is static method
+     * @see RemoveBinaryTree() for deleting the binary tree
+     * @return Pointer of created binary tree object
      */
-    BinaryTree();
+    static BinaryTree *CreateBinaryTree();
 
     /**
-     * @brief Destructor for BinaryTree
+     * @brief Deletes the binary tree
+     * @note This method is static method
+     * @param Pointer of created binary tree object
      */
-    virtual ~BinaryTree();
-
-    /**
-     * @brief Removes all children of a given node
-     * @param[in] ipParentNode Parent node whose children are to be removed
-     */
-    void RemoveChildren(Node *ipParentNode);
+    static void RemoveBinaryTree(BinaryTree *&ipBinaryTree);
 
     /**
      * @brief Checks if the binary tree is empty
@@ -78,15 +77,6 @@ public:
      * @param[in] inData Data element to delete
      */
     void Delete(int inData);
-
-    /**
-     * @brief Returns the height of the binary tree
-     *
-     * The height of a binary tree is the number of edges on the longest path between the root node and a leaf node.
-     *
-     * @return Height of the binary tree
-     */
-    int HeightOfBinaryTree();
 
     /**
      * @brief Performs an in-order traversal of the binary tree
@@ -188,12 +178,37 @@ public:
      */
     void PrintSibling(int inData);
 
+    /**
+     * @brief Returns the height of the binary tree
+     *
+     * The height of a binary tree is the number of edges on the longest path between the root node and a leaf node.
+     *
+     * @return Height of the binary tree
+     */
+    int HeightOfBinaryTree();
+
 private:
+    /**
+     * @brief Constructor for BinaryTree
+     */
+    BinaryTree();
+
+    /**
+     * @brief Destructor for BinaryTree
+     */
+    virtual ~BinaryTree();
+
+    /**
+     * @brief Removes all children of a given node
+     * @param[in] ipParentNode Parent node whose children are to be removed
+     */
+    void RemoveChildren(Node *ipParentNode);
+
     /**
      * @brief Inserts a new node into a binary tree.
      *
      * This function inserts the specified new node into the binary tree at the appropriate
-     * position based on the binary search tree properties.
+     * position based on the level.
      *
      * @param[in] ipNode Pointer to the current node in the binary tree where the new node
      *                   will be inserted. If this is null, the new node will become the root.
