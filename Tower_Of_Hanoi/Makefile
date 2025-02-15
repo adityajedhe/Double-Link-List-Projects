@@ -1,15 +1,15 @@
-# Compiler
+#Compiler
 CCPP = g++
 
-# Compiler flags
+#Compiler flags
 CFLAGS = -Wall -Wextra -Werror -std=c++23 -I ../SharedHeaders/ -I ./LocalHeaders/
 
-# Directories
+#Directories
 SRC_DIR = ./Sources
 OBJ_DIR = ./Objects
 OUTPUT_DIR = ../bin
 
-# Source files
+#Source files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 
 # Object files (in the obj directory)
@@ -23,11 +23,13 @@ all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 
 # Link object files to create the executable
 $(TARGET): $(OBJS)
-	$(CCPP) -o $@ $^ -L $(OUTPUT_DIR)/ -lNode
+	@echo "==Executable:" $@
+	@$(CCPP) -o $@ $^ -L $(OUTPUT_DIR)/ -lNode
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CCPP) $(CFLAGS) -c $< -o $@
+	@echo "--Compiled:" $<
+	@$(CCPP) $(CFLAGS) -c $< -o $@
 
 # Create output directory if it isn't exist
 $(OUTPUT_DIR):
@@ -38,7 +40,8 @@ $(OBJ_DIR):
 
 # Clean up build files
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
+	@echo "Cleaning Tower Of Hanoi project directory..."
+	@rm -rf $(OBJ_DIR) $(TARGET)
 
 # Run the program
 run: $(TARGET)
