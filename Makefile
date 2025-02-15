@@ -12,7 +12,7 @@ TARGET := $(Project_Common) $(Project_BinaryTree) $(Project_HanoiTower)
 all: $(TARGET)
 
 $(TARGET):
-	@$(MAKE) -C $@
+	@$(MAKE) -s -C $@
 
 clean:
 	@echo "Cleaning output directory..."
