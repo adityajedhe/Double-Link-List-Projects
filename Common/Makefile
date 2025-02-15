@@ -58,6 +58,7 @@ $(OBJ_DIR):
 
 # Clean up build files
 clean:
+	@echo "Cleaning Common directory..."
 	@rm -rf $(OBJ_DIR) $(TARGET)
 
 # Phony targets
