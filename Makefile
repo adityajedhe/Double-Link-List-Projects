@@ -15,10 +15,10 @@ $(TARGET):
 	@$(MAKE) -s -C $@
 
 clean:
+	@for project in $(TARGET); do \
+		$(MAKE) clean -s -C $$project; \
+	done
 	@echo "Cleaning output directory..."
 	@rm -rf $(OUTPUT_DIR)
-	@for project in $(TARGET); do \
-		$(MAKE) clean -C $$project; \
-	done
 
 .PHONY: all clean $(TARGET)
