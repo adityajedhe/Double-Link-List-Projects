@@ -8,7 +8,6 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
-
 //-------------------------------------------------------------------
 /**
  * @class Node
@@ -46,7 +45,6 @@
 class Node
 {
 public:
-
     /**
      * @brief Constructor for Node
      * @param inData Data element to store in the node
@@ -69,7 +67,7 @@ public:
      *
      * @return Pointer to the left node
      */
-    Node* GetLeftNode() const;
+    Node *GetLeftNode() const;
 
     /**
      * @brief Retrieves the right node
@@ -77,23 +75,21 @@ public:
      *
      * @return Pointer to the right node
      */
-    Node* GetRightNode() const;
+    Node *GetRightNode() const;
 
     /**
      * @brief Sets the left node
      * @param ipLeftNode Pointer to the left node
      */
-    void SetLeftNode(Node* ipLeftNode);
+    void SetLeftNode(Node *ipLeftNode);
 
     /**
      * @brief Sets the right node
      * @param ipRightNode Pointer to the right node
      */
-    void SetRightNode(Node* ipRightNode);
-
+    void SetRightNode(Node *ipRightNode);
 
 private:
-
     //---------------------------------------------------------------
     // Member variables
     //---------------------------------------------------------------
@@ -105,13 +101,12 @@ private:
     /**
      * @brief Pointer to the left node
      */
-    Node* _pLeftNode;
+    Node *_pLeftNode;
 
     /**
      * @brief Pointer to the right node
      */
-    Node* _pRightNode;
-
+    Node *_pRightNode;
 };
 
 #endif // _NODE_H_
