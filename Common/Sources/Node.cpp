@@ -16,10 +16,9 @@
  * @note By default, both the nodes are set to nullptr
  *
  */
-Node::Node(const int inData) :
-    _nData(inData),
-    _pLeftNode(nullptr),
-    _pRightNode(nullptr)
+Node::Node(const int inData) : _nData(inData),
+                               _pLeftNode(nullptr),
+                               _pRightNode(nullptr)
 {
 }
 
@@ -46,7 +45,7 @@ int Node::GetData() const
  * @brief Retrieves the left node
  * @return Pointer to the left node
  */
-Node* Node::GetLeftNode() const
+Node *Node::GetLeftNode() const
 {
     return _pLeftNode;
 }
@@ -56,7 +55,7 @@ Node* Node::GetLeftNode() const
  * @brief Retrieves the right node
  * @return Pointer to the right node
  */
-Node* Node::GetRightNode() const
+Node *Node::GetRightNode() const
 {
     return _pRightNode;
 }
@@ -64,9 +63,9 @@ Node* Node::GetRightNode() const
 //-------------------------------------------------------------------
 /**
  * @brief Sets the left node
- * @param ipLeftNode Pointer to the left node
+ * @param[in] ipLeftNode Pointer to the left node
  */
-void Node::SetLeftNode(Node* ipLeftNode)
+void Node::SetLeftNode(Node *ipLeftNode)
 {
     _pLeftNode = ipLeftNode;
 }
@@ -76,7 +75,7 @@ void Node::SetLeftNode(Node* ipLeftNode)
  * @brief Sets the right node
  * @param ipRightNode Pointer to the right node
  */
-void Node::SetRightNode(Node* ipRightNode)
+void Node::SetRightNode(Node *ipRightNode)
 {
     _pRightNode = ipRightNode;
 }
