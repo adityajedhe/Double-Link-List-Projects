@@ -1,9 +1,9 @@
-//===================================================================
-// Name         : DiskStack.cpp
-// Description  : Implementation file for the DiskStack class
-// @author      : Aditya Jedhe [@adityajedhe]
-// @date        : 2025/01/30
-//===================================================================
+/**
+ * @file    DiskStack.cpp
+ * @brief   Implementation file for the DiskStack class
+ * @author  Aditya Jedhe
+ * @date    2025-01-30
+ */
 
 // ---------------------------------------------- Local headers
 #include "DiskStack.h"
@@ -15,18 +15,11 @@
 #include <iostream>
 
 //-------------------------------------------------------------------
-/**
- * @brief Constructor for DiskStack
- */
 DiskStack::DiskStack() : _pTopDisk(nullptr)
 {
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Destructor for DiskStack
- * @note Deletes all the nodes which are stacked onto the disk.
- */
 DiskStack::~DiskStack()
 {
     Node *pNode = PopFromStack();
@@ -40,25 +33,16 @@ DiskStack::~DiskStack()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Pushes a disk node onto the stack.
- * @param[in] ipNode Pointer to the disk node to be pushed onto the stack.
- */
-void DiskStack::PushToStack(Node *ipNode)
+void DiskStack::PushToStack(Node *iopNode)
 {
-    if (nullptr != ipNode)
+    if (nullptr != iopNode)
     {
-        ipNode->SetRightNode(_pTopDisk);
-        _pTopDisk = ipNode;
+        iopNode->SetRightNode(_pTopDisk);
+        _pTopDisk = iopNode;
     }
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Removes the top disk from the stack and returns it.
- * @return Node* Pointer to the disk node that was removed from the stack.
- *         Returns nullptr if the stack is empty.
- */
 Node *DiskStack::PopFromStack()
 {
     Node *pNode = _pTopDisk;
@@ -74,27 +58,6 @@ Node *DiskStack::PopFromStack()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Checks if the stack is empty.
- * @return Returns True if the stack is empty, false otherwise.
- */
-bool DiskStack::IsStackEmpty() const
-{
-    bool bEmpty(false);
-
-    if (nullptr == _pTopDisk)
-    {
-        std::cout << "ERR<<Stack is empty.>>" << std::endl;
-        bEmpty = true;
-    }
-
-    return bEmpty;
-}
-
-//-------------------------------------------------------------------
-/**
- * @brief Prints the contents of the stack.
- */
 void DiskStack::PrintStack() const
 {
     Node *pNode = _pTopDisk;
@@ -115,10 +78,25 @@ void DiskStack::PrintStack() const
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Returns the top disk node from the stack.
- */
 Node *DiskStack::GetTopDisk() const
 {
     return _pTopDisk;
+}
+
+//===================================================================
+// Private member functions
+//===================================================================
+
+//-------------------------------------------------------------------
+bool DiskStack::IsStackEmpty() const
+{
+    bool bEmpty(false);
+
+    if (nullptr == _pTopDisk)
+    {
+        std::cout << "ERR<<Stack is empty.>>" << std::endl;
+        bEmpty = true;
+    }
+
+    return bEmpty;
 }
