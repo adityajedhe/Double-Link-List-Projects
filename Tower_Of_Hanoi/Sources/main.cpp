@@ -15,7 +15,6 @@
 // ---------------------------------------------- System headers
 #include <iostream>
 
-
 // Global variable to count the number of transfers
 // ------------------------------------------------
 int nbIterations = 0;
@@ -28,10 +27,9 @@ int nbIterations = 0;
  * Pointer to the DiskStack object representing stack C.
  *
  */
-DiskStack* pStackA = nullptr;
-DiskStack* pStackB = nullptr;
-DiskStack* pStackC = nullptr;
-
+DiskStack *pStackA = nullptr;
+DiskStack *pStackB = nullptr;
+DiskStack *pStackC = nullptr;
 
 //-------------------------------------------------------------------
 /**
@@ -52,7 +50,8 @@ void PrintStacks()
     std::cout << "Rod C: ";
     pStackC->PrintStack();
 
-    std::cout << std::endl << "-----------------------------" << std::endl;
+    std::cout << std::endl
+              << "-----------------------------" << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -62,7 +61,7 @@ void PrintStacks()
  * @param ipDestinationRod Pointer to the destination rod
  * @return true if the disk was moved successfully, false otherwise
  */
-bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRod)
+bool MoveTheDiskToDestination(DiskStack *ipSourceRod, DiskStack *ipDestinationRod)
 {
     bool bDiskMoved(false);
 
@@ -70,8 +69,8 @@ bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRo
     {
         // Get the top disk from the source rod and the destination rod
         // ------------------------------------------------------------
-        Node* pSourceTop = ipSourceRod->GetTopDisk();
-        Node* pDestinationTop = ipDestinationRod->GetTopDisk();
+        Node *pSourceTop = ipSourceRod->GetTopDisk();
+        Node *pDestinationTop = ipDestinationRod->GetTopDisk();
 
         bool bMoveTheDisk(false);
 
@@ -80,10 +79,14 @@ bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRo
         // then move the disk from the source rod to the destination rod
         // ----------------------------------------------------------------------------------
         if (nullptr == pDestinationTop)
+        {
             bMoveTheDisk = true;
+        }
         else if ((nullptr != pSourceTop) && (nullptr != pDestinationTop) &&
-            (pSourceTop->GetData() < pDestinationTop->GetData()))
+                 (pSourceTop->GetData() < pDestinationTop->GetData()))
+        {
             bMoveTheDisk = true;
+        }
 
         if (bMoveTheDisk)
         {
@@ -108,7 +111,7 @@ bool MoveTheDiskToDestination(DiskStack* ipSourceRod, DiskStack* ipDestinationRo
  *
  * @note This function is a recursive function that solves the Tower of Hanoi problem.
  */
-void TowerOfHanoi(Node* ipCurrentNode, DiskStack* ipSourceRod, DiskStack* ipDestinationRod, DiskStack* ipHelperRod)
+void TowerOfHanoi(Node *ipCurrentNode, DiskStack *ipSourceRod, DiskStack *ipDestinationRod, DiskStack *ipHelperRod)
 {
     if ((nullptr == ipCurrentNode) || (nullptr == ipSourceRod) || (nullptr == ipDestinationRod) || (nullptr == ipHelperRod))
     {
@@ -116,10 +119,12 @@ void TowerOfHanoi(Node* ipCurrentNode, DiskStack* ipSourceRod, DiskStack* ipDest
         return;
     }
 
-    Node* pNode = ipCurrentNode->GetLeftNode();
+    Node *pNode = ipCurrentNode->GetLeftNode();
 
     if (nullptr == pNode)
+    {
         MoveTheDiskToDestination(ipSourceRod, ipDestinationRod);
+    }
     else
     {
         TowerOfHanoi(pNode, ipSourceRod, ipHelperRod, ipDestinationRod);
@@ -135,7 +140,7 @@ void TowerOfHanoi(Node* ipCurrentNode, DiskStack* ipSourceRod, DiskStack* ipDest
  * @brief Function to delete the stack and its all nodes
  * @param ipStack Pointer to the stack to be deleted
  */
-void DeleteStack(DiskStack*& ipStack)
+void DeleteStack(DiskStack *&ipStack)
 {
     if (nullptr != ipStack)
     {
@@ -178,8 +183,8 @@ int main()
         return -1;
     }
 
-    Node* pNode = nullptr;
-    Node* pFirstNode = nullptr;
+    Node *pNode = nullptr;
+    Node *pFirstNode = nullptr;
 
     // Push the disks onto the source rod
     // ----------------------------------
@@ -199,15 +204,19 @@ int main()
         }
 
         if (nullptr == pFirstNode)
+        {
             pFirstNode = pNode;
+        }
 
         // Set the previous disk node to the top disk node
         // This has to be done only once i.e. while initializing the stack
         // ---------------------------------------------------------------
-        Node* pTopDisk = pStackA->GetTopDisk();
+        Node *pTopDisk = pStackA->GetTopDisk();
 
         if (nullptr != pTopDisk)
+        {
             pTopDisk->SetLeftNode(pNode);
+        }
 
         // Push the disk onto the source rod
         // ---------------------------------

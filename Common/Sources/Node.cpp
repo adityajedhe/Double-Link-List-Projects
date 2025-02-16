@@ -11,7 +11,7 @@
 //-------------------------------------------------------------------
 /**
  * @brief Constructor for Node
- * @param inData Data element to store in the node
+ * @param[in] inData Data element to store in the node
  *
  * @note By default, both the nodes are set to nullptr
  *

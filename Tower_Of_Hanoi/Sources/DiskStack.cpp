@@ -18,21 +18,18 @@
 /**
  * @brief Constructor for DiskStack
  */
-DiskStack::DiskStack() :
-    _pTopDisk(nullptr)
+DiskStack::DiskStack() : _pTopDisk(nullptr)
 {
 }
 
 //-------------------------------------------------------------------
 /**
  * @brief Destructor for DiskStack
- *
- * Deletes all disk nodes in the stack.
- *
+ * @note Deletes all the nodes which are stacked onto the disk.
  */
 DiskStack::~DiskStack()
 {
-    Node* pNode = PopFromStack();
+    Node *pNode = PopFromStack();
 
     while (nullptr != pNode)
     {
@@ -45,10 +42,9 @@ DiskStack::~DiskStack()
 //-------------------------------------------------------------------
 /**
  * @brief Pushes a disk node onto the stack.
- * @return Node* Pointer to the top disk node in the stack.
- *         Returns nullptr if the stack is empty.
+ * @param[in] ipNode Pointer to the disk node to be pushed onto the stack.
  */
-void DiskStack::PushToStack(Node* ipNode)
+void DiskStack::PushToStack(Node *ipNode)
 {
     if (nullptr != ipNode)
     {
@@ -63,9 +59,9 @@ void DiskStack::PushToStack(Node* ipNode)
  * @return Node* Pointer to the disk node that was removed from the stack.
  *         Returns nullptr if the stack is empty.
  */
-Node* DiskStack::PopFromStack()
+Node *DiskStack::PopFromStack()
 {
-    Node* pNode = _pTopDisk;
+    Node *pNode = _pTopDisk;
 
     if (nullptr != pNode)
     {
@@ -80,20 +76,28 @@ Node* DiskStack::PopFromStack()
 //-------------------------------------------------------------------
 /**
  * @brief Checks if the stack is empty.
- * @return True if the stack is empty, false otherwise.
+ * @return Returns True if the stack is empty, false otherwise.
  */
 bool DiskStack::IsStackEmpty() const
 {
-    return (nullptr == _pTopDisk);
+    bool bEmpty(false);
+
+    if (nullptr == _pTopDisk)
+    {
+        std::cout << "ERR<<Stack is empty.>>" << std::endl;
+        bEmpty = true;
+    }
+
+    return bEmpty;
 }
 
 //-------------------------------------------------------------------
 /**
  * @brief Prints the contents of the stack.
  */
-void DiskStack::PrintStack()
+void DiskStack::PrintStack() const
 {
-    Node* pNode = _pTopDisk;
+    Node *pNode = _pTopDisk;
 
     while (nullptr != pNode)
     {
@@ -102,7 +106,9 @@ void DiskStack::PrintStack()
         pNode = pNode->GetRightNode();
 
         if (nullptr != pNode)
+        {
             std::cout << ", ";
+        }
     }
 
     std::cout << std::endl;
@@ -112,7 +118,7 @@ void DiskStack::PrintStack()
 /**
  * @brief Returns the top disk node from the stack.
  */
-Node* DiskStack::GetTopDisk() const
+Node *DiskStack::GetTopDisk() const
 {
     return _pTopDisk;
 }

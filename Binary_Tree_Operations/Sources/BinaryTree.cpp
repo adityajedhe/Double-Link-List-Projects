@@ -36,6 +36,11 @@ BinaryTree *BinaryTree::CreateBinaryTree()
  */
 void BinaryTree::RemoveBinaryTree(BinaryTree *&ipBinaryTree)
 {
+    if ((nullptr == ipBinaryTree) || (ipBinaryTree->IsEmpty()))
+    {
+        return;
+    }
+
     Node *pRootNode = ipBinaryTree->_pRootNode;
 
     ipBinaryTree->RemoveChildren(pRootNode);
@@ -167,6 +172,11 @@ void BinaryTree::InsertInBinarySearchTree(int inData)
  */
 void BinaryTree::Delete(int inData)
 {
+    if (IsEmpty())
+    {
+        return;
+    }
+
     std::cout << "Deleting data element: " << inData << std::endl;
 }
 
@@ -179,6 +189,11 @@ void BinaryTree::Delete(int inData)
  */
 void BinaryTree::InOrderTraversal()
 {
+    if (IsEmpty())
+    {
+        return;
+    }
+
     std::cout << "In order traversal: ";
 
     InOrderTraversalOfBinaryTreeNode(_pRootNode);
@@ -195,6 +210,11 @@ void BinaryTree::InOrderTraversal()
  */
 void BinaryTree::PreOrderTraversal()
 {
+    if (IsEmpty())
+    {
+        return;
+    }
+
     std::cout << "Pre order traversal: ";
 
     PreOrderTraversalOfBinaryTreeNode(_pRootNode);
@@ -211,6 +231,11 @@ void BinaryTree::PreOrderTraversal()
  */
 void BinaryTree::PostOrderTraversal()
 {
+    if (IsEmpty())
+    {
+        return;
+    }
+
     std::cout << "Post order traversal: ";
 
     PostOrderTraversalOfBinaryTreeNode(_pRootNode);
@@ -269,6 +294,11 @@ void BinaryTree::LevelOrderTraversal()
 /*
 void BinaryTree::LevelOrderTraversal(std::queue<Node*>& ioqNodes)
 {
+    if (IsEmpty())
+    {
+        return;
+    }
+
     if (ioqNodes.empty())
     {
         return;
@@ -306,6 +336,10 @@ void BinaryTree::LevelOrderTraversal(std::queue<Node*>& ioqNodes)
  */
 void BinaryTree::ReverseLevelOrderTraversal()
 {
+    if (IsEmpty())
+    {
+        return;
+    }
 }
 
 //-------------------------------------------------------------------
@@ -317,6 +351,10 @@ void BinaryTree::ReverseLevelOrderTraversal()
  */
 void BinaryTree::SpiralOrderTraversal()
 {
+    if (IsEmpty())
+    {
+        return;
+    }
 }
 
 //-------------------------------------------------------------------
@@ -325,6 +363,11 @@ void BinaryTree::SpiralOrderTraversal()
  */
 void BinaryTree::PrintLeafNodes()
 {
+    if (IsEmpty())
+    {
+        return;
+    }
+
     std::cout << "Leaf nodes: ";
 
     PrintLeafNodes(_pRootNode);
@@ -338,6 +381,11 @@ void BinaryTree::PrintLeafNodes()
  */
 void BinaryTree::PrintNonLeafNodes()
 {
+    if (IsEmpty())
+    {
+        return;
+    }
+
     std::cout << "Non-leaf nodes: ";
 
     PrintNonLeafNodes(_pRootNode);
