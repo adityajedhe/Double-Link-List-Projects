@@ -63,7 +63,7 @@ Node *Node::GetRightNode() const
 //-------------------------------------------------------------------
 /**
  * @brief Sets the left node
- * @param ipLeftNode Pointer to the left node
+ * @param[in] ipLeftNode Pointer to the left node
  */
 void Node::SetLeftNode(Node *ipLeftNode)
 {
