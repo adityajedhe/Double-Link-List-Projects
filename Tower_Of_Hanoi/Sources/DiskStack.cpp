@@ -1,9 +1,11 @@
+//-------------------------------------------------------------------
 /**
- * @file    DiskStack.cpp
- * @brief   Implementation file for the DiskStack class
- * @author  Aditya Jedhe
- * @date    2025-01-30
+ * @file DiskStack.cpp
+ * @brief Implementation file for the DiskStack class
+ * @author Aditya Jedhe
+ * @date 2025-01-30
  */
+//-------------------------------------------------------------------
 
 // ---------------------------------------------- Local headers
 #include "DiskStack.h"

@@ -1,10 +1,12 @@
+//-------------------------------------------------------------------
 /**
- * @file    main.cpp
- * @brief   This is main file
- * @details This file contains the main function that solves the Tower of Hanoi problem.
- * @author  Aditya Jedhe
- * @date    2025-01-30
+ * @file main.cpp
+ * @brief The file contains the main function of the project
+ * @details It contains the algorithm to solve Tower of Hanoi problem.
+ * @author Aditya Jedhe
+ * @date 2025-01-30
  */
+//-------------------------------------------------------------------
 
 // ---------------------------------------------- Local headers
 #include "DiskStack.h"
@@ -17,54 +19,35 @@
 
 /**
  * @brief Main function to solve the Tower of Hanoi problem
- *
- * ------------------------------------------------------------------
  */
 int main();
 
 /**
  * @brief Function to delete the stack and its all nodes
- *
- * ------------------------------------------------------------------
  * @param[in, out] iopStack Pointer to the stack to be deleted
- *
- * ------------------------------------------------------------------
  */
 void DeleteStack(DiskStack *&iopStack);
 
 /**
  * @brief Function to solve the Tower of Hanoi problem
- *
- * ------------------------------------------------------------------
  * @param[in] ipCurrentNode Pointer to the current disk node
  * @param[in] ipSourceRod Pointer to the source rod
  * @param[in] ipDestinationRod Pointer to the destination rod
  * @param[in] ipHelperRod Pointer to the helper rod
- *
  * @note This function calls itself recursively
- *
- * ------------------------------------------------------------------
  */
 void TowerOfHanoi(Node *ipCurrentNode, DiskStack *ipSourceRod, DiskStack *ipDestinationRod, DiskStack *ipHelperRod);
 
 /**
  * @brief Function to move the disk from the source rod to the destination rod
- *
- * ------------------------------------------------------------------
  * @param[in, out] iopSourceRod Pointer to the source rod
  * @param[in, out] iopDestinationRod Pointer to the destination rod
- *
- * ------------------------------------------------------------------
  * @return Return true if the disk was moved successfully, false otherwise
- *
- * ------------------------------------------------------------------
  */
 bool MoveTheDiskToDestination(DiskStack *iopSourceRod, DiskStack *iopDestinationRod);
 
 /**
  * @brief Function to print the contents of the three rods
- *
- * ------------------------------------------------------------------
  */
 void PrintStacks();
 

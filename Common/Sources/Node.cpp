@@ -1,9 +1,11 @@
+//-------------------------------------------------------------------
 /**
- * @file    Node.cpp
- * @brief   Implementation file for the Node class
- * @author  Aditya Jedhe
- * @date    2025-02-05
+ * @file Node.cpp
+ * @brief Implementation file for the Node class
+ * @author Aditya Jedhe
+ * @date 2025-02-05
  */
+//-------------------------------------------------------------------
 
 // ---------------------------------------------- Project Headers
 #include "Node.h"

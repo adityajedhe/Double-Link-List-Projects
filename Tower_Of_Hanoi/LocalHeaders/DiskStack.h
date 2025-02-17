@@ -1,12 +1,11 @@
+//-------------------------------------------------------------------
 /**
- * ------------------------------------------------------------------
- * @file    : DiskStack.h
- * @brief   : Header file for the DiskStack class
- * @author  : Aditya Jedhe
- * @date    : 2025-01-30
- *
- * ------------------------------------------------------------------
+ * @file DiskStack.h
+ * @brief Header file for the DiskStack class
+ * @author Aditya Jedhe
+ * @date 2025-01-30
  */
+//-------------------------------------------------------------------
 
 #ifndef _DISKSTACK_H_
 #define _DISKSTACK_H_
@@ -15,17 +14,14 @@
 class Node;
 
 /**
- * ------------------------------------------------------------------
  * @class DiskStack
- * @brief Represents a stack of disks in the Tower of Hanoi problem.
- *
- * The DiskStack class is used to model the stacks of disks in the Tower of Hanoi problem.
+ * @brief Represents a stack of disks.
+ * @details The DiskStack class is used to model the stacks of disks.
  * Each stack contains a list of disks, with the top disk being the most recently added disk.
  * @note This class manages memory for the disk nodes.
- * All the disk nodes which are stacked on disk stack are deleted when disk stack is deleted.
- * It is the responsibility of the user to ensure that the disk nodes remain valid
+ * All the Node which are stacked on disk stack are deleted when disk stack is deleted.
+ * It is the responsibility of the user to ensure that all the Node stacked remain valid
  * for the lifetime of the DiskStack instance.
- * ------------------------------------------------------------------
  */
 class DiskStack
 {
@@ -37,10 +33,7 @@ public:
 
     /**
      * @brief Destructor for DiskStack
-     *
      * @note Deletes all the nodes which are stacked onto the disk.
-     *
-     * --------------------------------------------------------------
      */
     virtual ~DiskStack();
 
