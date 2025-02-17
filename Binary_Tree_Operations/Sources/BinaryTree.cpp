@@ -17,23 +17,12 @@
 #include <thread>
 
 //-------------------------------------------------------------------
-/**
- * @brief Creates the binary tree
- * @note This method is static method
- * @see RemoveBinaryTree() for deleting the binary tree
- * @return Pointer of created binary tree object
- */
 BinaryTree *BinaryTree::CreateBinaryTree()
 {
     return new BinaryTree;
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Deletes the binary tree
- * @note This method is static method
- * @param Pointer of created binary tree object
- */
 void BinaryTree::RemoveBinaryTree(BinaryTree *&ipBinaryTree)
 {
     if ((nullptr == ipBinaryTree) || (ipBinaryTree->IsEmpty()))
@@ -53,10 +42,6 @@ void BinaryTree::RemoveBinaryTree(BinaryTree *&ipBinaryTree)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Checks if the binary tree is empty
- * @return True if the binary tree is empty, false otherwise
- */
 bool BinaryTree::IsEmpty()
 {
     bool bEmpty(false);
@@ -71,16 +56,6 @@ bool BinaryTree::IsEmpty()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Inserts a new value into the binary tree while maintaining
- *        the properties of a complete binary tree.
- *
- * This function inserts a new value into the binary tree while maintaining the properties of a complete binary tree.
- * It inserts the node at each level.
- * Once the level is full, the node is inserted at the next level.
- *
- * @param[in] inData The integer value to be inserted into the binary tree.
- */
 void BinaryTree::InsertInBinaryTree(int inData)
 {
     /**
@@ -107,17 +82,6 @@ void BinaryTree::InsertInBinaryTree(int inData)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Inserts a new data element into the binary search tree
- *
- * The binary search tree is a data structure in which each node has at
- * most two children, referred to as the left child and the right child.
- * Also no two nodes have the same data element. The left child of a node
- * has a value less than the parent node, and the right child has a value
- * greater than the parent node.
- *
- * @param[in] inData Data element to insert
- */
 void BinaryTree::InsertInBinarySearchTree(int inData)
 {
     /**
@@ -166,10 +130,6 @@ void BinaryTree::InsertInBinarySearchTree(int inData)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Deletes a data element from the binary tree
- * @param[in] inData Data element to delete
- */
 void BinaryTree::Delete(int inData)
 {
     if (IsEmpty())
@@ -181,12 +141,6 @@ void BinaryTree::Delete(int inData)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Performs an in-order traversal of the binary tree
- *
- * Prints all elements in the binary tree in in-order sequence.
- *
- */
 void BinaryTree::InOrderTraversal()
 {
     if (IsEmpty())
@@ -202,12 +156,6 @@ void BinaryTree::InOrderTraversal()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Performs an pre-order traversal of the binary tree
- *
- * Prints all elements in the binary tree in pre-order sequence.
- *
- */
 void BinaryTree::PreOrderTraversal()
 {
     if (IsEmpty())
@@ -223,12 +171,6 @@ void BinaryTree::PreOrderTraversal()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Performs an post-order traversal of the binary tree
- *
- * Prints all elements in the binary tree in post-order sequence.
- *
- */
 void BinaryTree::PostOrderTraversal()
 {
     if (IsEmpty())
@@ -244,12 +186,6 @@ void BinaryTree::PostOrderTraversal()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Performs a level-order traversal of the binary tree
- *
- * Prints all elements in the binary tree in level-order sequence.
- *
- */
 void BinaryTree::LevelOrderTraversal()
 {
     if (IsEmpty())
@@ -328,12 +264,6 @@ void BinaryTree::LevelOrderTraversal(std::queue<Node*>& ioqNodes)
 //*/
 
 //-------------------------------------------------------------------
-/**
- * @brief Performs a reverse level-order traversal of the binary tree
- *
- * Prints all elements in the binary tree in level-order sequence in reverse manner.
- *
- */
 void BinaryTree::ReverseLevelOrderTraversal()
 {
     if (IsEmpty())
@@ -343,12 +273,6 @@ void BinaryTree::ReverseLevelOrderTraversal()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Performs a spiral order traversal of the binary tree
- *
- * Prints all elements in the binary tree in spiral order sequence.
- *
- */
 void BinaryTree::SpiralOrderTraversal()
 {
     if (IsEmpty())
@@ -358,9 +282,6 @@ void BinaryTree::SpiralOrderTraversal()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all leaf nodes of the binary tree
- */
 void BinaryTree::PrintLeafNodes()
 {
     if (IsEmpty())
@@ -376,9 +297,6 @@ void BinaryTree::PrintLeafNodes()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all non-leaf nodes of the binary tree
- */
 void BinaryTree::PrintNonLeafNodes()
 {
     if (IsEmpty())
@@ -394,9 +312,6 @@ void BinaryTree::PrintNonLeafNodes()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all boundary nodes of binary tree
- */
 void BinaryTree::PrintBoundaryNodes()
 {
     if (IsEmpty())
@@ -410,10 +325,6 @@ void BinaryTree::PrintBoundaryNodes()
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all nodes at a distance k from the root node
- * @param[in] inKDistance Distance from the root node
- */
 void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
 {
     std::cout << "All nodes at 'k' distance: ";
@@ -424,11 +335,6 @@ void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Finds the distance of node with the given data element from the root node
- * @param[in] inData Data element to find
- * @return Distance from the given node, if found. Otherwise -1
- */
 int BinaryTree::FindDistanceFromRootNode(int inData)
 {
     std::stack<int> sNodePath;
@@ -437,10 +343,6 @@ int BinaryTree::FindDistanceFromRootNode(int inData)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all ancestor nodes of a given data element
- * @param[in] inData Data element whose ancestor is to be printed
- */
 void BinaryTree::PrintAncestor(int inData)
 {
     std::cout << "Ancestor of " << inData << ": ";
@@ -451,10 +353,6 @@ void BinaryTree::PrintAncestor(int inData)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all ancestor nodes of a given data element
- * @param[in] inData Data element whose ancestors are to be printed
- */
 void BinaryTree::PrintAncestors(int inData)
 {
     std::cout << "Ancestors of " << inData << ": ";
@@ -512,10 +410,6 @@ void BinaryTree::PrintAncestors(int inData)
 */
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all cousin nodes of a given data element
- * @param[in] inData Data element whose cousins are to be printed
- */
 void BinaryTree::PrintCousins(int inData)
 {
     std::cout << "Cousins of " << inData << ": ";
@@ -528,10 +422,6 @@ void BinaryTree::PrintCousins(int inData)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Prints all sibling nodes of a given data element
- * @param[in] inData Data element whose siblings are to be printed
- */
 void BinaryTree::PrintSibling(int inData)
 {
     std::cout << "Sibling of " << inData << ": ";
@@ -544,13 +434,6 @@ void BinaryTree::PrintSibling(int inData)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Returns the height of the binary tree
- *
- * The height of a binary tree is the number of edges on the longest path between the root node and a leaf node.
- *
- * @return Height of the binary tree
- */
 int BinaryTree::HeightOfBinaryTree()
 {
     return HeightOfSubBinaryTree(_pRootNode);
@@ -561,29 +444,16 @@ int BinaryTree::HeightOfBinaryTree()
 //===================================================================
 
 //-------------------------------------------------------------------
-/**
- * @brief Constructor for BinaryTree
- */
 BinaryTree::BinaryTree() : _pRootNode(nullptr)
 {
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Destructor for BinaryTree
- *
- * Deletes all nodes in the binary tree.
- *
- */
 BinaryTree::~BinaryTree()
 {
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Removes all children of a given node
- * @param[in] ipParentNode Parent node whose children are to be removed
- */
 void BinaryTree::RemoveChildren(Node *ipParentNode)
 {
     if (nullptr == ipParentNode)
@@ -608,19 +478,6 @@ void BinaryTree::RemoveChildren(Node *ipParentNode)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Inserts a new node into a binary tree.
- *
- * This function inserts the specified new node into the binary tree at the appropriate
- * position based on the level.
- *
- * @param[in] ipNode Pointer to the current node in the binary tree where the new node
- *                   will be inserted. If this is null, the new node will become the root.
- * @param[in] ipNewNode Pointer to the new node that needs to be inserted into the tree.
- *
- * @note If the tree is empty (i.e., ipNode is null), the new node will be set as the root.
- * @see DeleteNodeInBinaryTree() for removing a node from the binary tree.
- */
 bool BinaryTree::InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode)
 {
     if ((nullptr == ipNode) && (nullptr == ipNewNode))
@@ -655,14 +512,6 @@ bool BinaryTree::InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Returns the height of sub-binary tree having root node as given node
- *
- * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
- *
- * @param[in] ipNode Node whose height is to be calculated
- * @return Height of the binary tree
- */
 int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
 {
     int nHeight(-1);
@@ -679,13 +528,6 @@ int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
 }
 
 //-------------------------------------------------------------------
-/**
- * @brief Performs an in-order traversal of the binary tree node
- *
- * Prints all elements under the binary tree node in in-order sequence.
- *
- * @param[in] ipNode Node to traverse
- */
 void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node *ipNode)
 {
     if (nullptr == ipNode)

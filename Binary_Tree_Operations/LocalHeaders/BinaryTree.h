@@ -28,18 +28,18 @@ class BinaryTree
 public:
     /**
      * @brief Creates the binary tree
-     * @note This method is static method
-     * @see RemoveBinaryTree() for deleting the binary tree
      * @return Pointer of created binary tree object
+     * @see RemoveBinaryTree() for deleting the binary tree
+     * @note This method is static method
      */
     static BinaryTree *CreateBinaryTree();
 
     /**
      * @brief Deletes the binary tree
+     * @param[in, out] iopBinaryTree created binary tree object
      * @note This method is static method
-     * @param Pointer of created binary tree object
      */
-    static void RemoveBinaryTree(BinaryTree *&ipBinaryTree);
+    static void RemoveBinaryTree(BinaryTree *&iopBinaryTree);
 
     /**
      * @brief Checks if the binary tree is empty
