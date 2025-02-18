@@ -1,8 +1,8 @@
 //-------------------------------------------------------------------
 /**
  * @file main.cpp
- * @brief This file contains the main function that lists all the operations that can be performed on a binary tree.
- * @details It contains the algorithm to solve Tower of Hanoi problem.
+ * @brief The file contains the main function of the project
+ * @details This file lists all the operations that can be performed on a binary tree.
  * @author Aditya Jedhe
  * @date 2025-02-10
  */
@@ -37,10 +37,27 @@ BinaryTree *RetrieveInitialisedTree();
  */
 BinaryTree *RetrieveInitialisedSearchTree();
 
+/**
+ * @brief Displays the list of all the operations of binary tree
+ * @return Option number chosen by user w.r.t. the operation
+ */
+int RetrieveUserOperation();
+
+/**
+ * @brief Perform the operation on binary tree base on user selected option
+ * @param[in] ipBinaryTree Binary tree on which operation will be performed
+ * @param[in] inOption An option selected by user
+ */
+void PerformOperation(BinaryTree *ipBinaryTree, int inOption);
+
 //-------------------------------------------------------------------
 int main()
 {
     BinaryTree *pBinaryTree = RetrieveInitialisedTree();
+
+    int nOption = RetrieveUserOperation();
+
+    PerformOperation(pBinaryTree, nOption);
 
     BinaryTree::RemoveBinaryTree(pBinaryTree);
 
@@ -63,29 +80,68 @@ BinaryTree *RetrieveInitialisedTree()
 }
 
 //-------------------------------------------------------------------
+int RetrieveUserOperation()
 {
     std::cout
         << "List of operations:\
                   01. Insert a node in the binary tree\
-                  02. Delete a node from the binary tree[Not yet impl'd]\
-                  03. Search for a node in the binary tree[Not yet impl'd]\
-                  03. Search for a node in the binary search tree[Not yet impl'd]\
-                  04. Traverse the binary tree: Pre-order\
-                  05. Traverse the binary tree: In-order\
-                  06. Traverse the binary tree: Post-order\
-                  07. Traverse the binary tree: Level-order\
-                  07. Traverse the binary tree: Reverse-Level-order[Not yet impl'd]\
-                  07. Traverse the binary tree: Spiral-order[Not yet impl'd]\
-                  08. Print all the leaf nodes in the binary tree\
-                  09. Print all the non-leaf nodes in the binary tree\
-                  11. Print all the full nodes in the binary tree\
-                  12. Print all the half nodes in the binary tree\
-                  13. Print all the siblings of a node in the binary tree\
-                  14. Print all the ancestors of a node in the binary tree\
-                  15. Print all the descendants of a node in the binary tree\
-                  07. Find the height of the binary tree\
-                  08. Find the depth of a node in the binary tree[Not yet impl'd]\
-                  16. Find the level of a node in the binary tree\
-                  17. Find the all the nodes at the border of the binary tree"
+                  02. Insert a node in the binary search tree\
+                  03. Delete a node from the binary tree[Not yet impl'd]\
+                  04. Search for a node in the binary tree\
+                  05. Search for a node in the binary search tree[Not yet impl'd]\
+                  06. Traverse the binary tree: Pre-order\
+                  06. Traverse the binary tree: In-order\
+                  07. Traverse the binary tree: Post-order\
+                  08. Traverse the binary tree: Level-order\
+                  09. Traverse the binary tree: Reverse-Level-order[Not yet impl'd]\
+                  10. Traverse the binary tree: Spiral-order[Not yet impl'd]\
+                  11. Print all the leaf nodes in the binary tree\
+                  12. Print all the non-leaf nodes in the binary tree\
+                  13. Print all the full nodes in the binary tree\
+                  14. Print all the half nodes in the binary tree\
+                  15. Print all the siblings of a node in the binary tree\
+                  16. Print all the ancestors of a node in the binary tree\
+                  17. Print all the descendants of a node in the binary tree\
+                  18. Find the height of the binary tree\
+                  19. Find the depth of a node in the binary tree[Not yet impl'd]\
+                  20. Find the level of a node in the binary tree\
+                  21. Find the all the nodes at the border of the binary tree"
         << std::endl;
+
+    int nOption(0);
+
+    std::cin >> nOption;
+
+    return nOption;
+}
+
+//-------------------------------------------------------------------
+void PerformOperation(BinaryTree *ipBinaryTree, int inOption)
+{
+    if ((nullptr == ipBinaryTree) || (1 > inOption) || (21 < inOption))
+    {
+        return;
+    }
+
+    switch (inOption)
+    {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+        break;
+    case 8:
+        break;
+    case 9:
+        break;
+    }
 }

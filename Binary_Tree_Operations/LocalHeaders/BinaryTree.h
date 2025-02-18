@@ -1,11 +1,13 @@
-//===================================================================
-// Name         : BinaryTree.h
-// Description  : Header file for the BinaryTree class
-// @author      : Aditya Jedhe [@adityajedhe]
-// @date        : 2025/02/06
-//===================================================================
+//-------------------------------------------------------------------
+/**
+ * @file BinaryTree.h
+ * @brief Header file for the BinaryTree class.
+ * @author Aditya Jedhe
+ * @date 2025-02-06
+ */
+//-------------------------------------------------------------------
 
-// ---------------------------------------------- STL Headers
+// ---------------------------------------------- System Headers
 #include <stack>
 
 // ---------------------------------------------- Forward declaration
@@ -79,7 +81,14 @@ public:
     void Delete(int inData);
 
     /**
-     * @brief Performs an in-order traversal of the binary tree
+     * @brief Finds the distance of node with the given data element from the root node
+     * @param[in] inData Data element to find
+     * @return Distance from the given node, if found. Otherwise -1
+     */
+    int SearchInBinaryTree(int inData);
+
+    /**
+     * @brief Performs and in-order traversal of the binary tree
      *
      * Prints all elements in the binary tree in in-order sequence.
      *
@@ -148,13 +157,6 @@ public:
     void PrintAllNodesAtKDistance(int inKDistance);
 
     /**
-     * @brief Finds the distance of node with the given data element from the root node
-     * @param[in] inData Data element to find
-     * @return Distance from the given node, if found. Otherwise -1
-     */
-    int FindDistanceFromRootNode(int inData);
-
-    /**
      * @brief Prints immidiate ancestor node of a given data element
      * @param[in] inData Data element whose ancestor is to be printed
      */
@@ -213,10 +215,18 @@ private:
      * @param[in] ipNode Pointer to the current node in the binary tree where the new node
      *                   will be inserted. If this is null, the new node will become the root.
      * @param[in] ipNewNode Pointer to the new node that needs to be inserted into the tree.
-     *
      * @see DeleteNodeInBinaryTree() for removing a node from the binary tree.
      */
     bool InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode);
+
+    /**
+     * @brief Finds the node with the given data element
+     * @param[in] ipNode Node to traverse
+     * @param[in] inData Data element to find
+     * @param[in, out] iosNodePath Stack to store the path of the node
+     * @return Distance from the given node, if found. Otherwise -1
+     */
+    int FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &iosNodePath);
 
     /**
      * @brief Returns the height of sub binary tree having root node as given node
@@ -285,15 +295,6 @@ private:
      * @param[in] inKDistance Distance from the root node
      */
     void PrintAllNodesAtKDistance(Node *ipNode, int inKDistance);
-
-    /**
-     * @brief Finds the node with the given data element
-     * @param[in] ipNode Node to traverse
-     * @param[in] inData Data element to find
-     * @param[in, out] iosNodePath Stack to store the path of the node
-     * @return Distance from the given node, if found. Otherwise -1
-     */
-    int FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &iosNodePath);
 
     /**
      * @brief Prints all ancestor nodes of a given data element
