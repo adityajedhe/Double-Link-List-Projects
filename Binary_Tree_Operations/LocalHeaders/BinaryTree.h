@@ -17,11 +17,9 @@ class Node;
 /**
  * @class BinaryTree
  * @brief A class representing a binary tree data structure.
- *
- * This class provides functionalities to insert, delete, and search for data elements
+ * @details This class provides functionalities to insert, delete, and search for data elements
  * in a binary tree. It also includes various traversal methods and functions to print
  * specific nodes or levels of the tree.
- *
  * @note The binary tree is represented by a root node, which is the topmost node in the tree.
  *
  */
@@ -78,7 +76,7 @@ public:
      * @brief Deletes a data element from the binary tree
      * @param[in] inData Data element to delete
      */
-    void Delete(int inData);
+    void DeleteBinaryTreeNode(int inData);
 
     /**
      * @brief Finds the distance of node with the given data element from the root node
@@ -88,20 +86,20 @@ public:
     int SearchInBinaryTree(int inData);
 
     /**
-     * @brief Performs and in-order traversal of the binary tree
-     *
-     * Prints all elements in the binary tree in in-order sequence.
-     *
-     */
-    void InOrderTraversal();
-
-    /**
      * @brief Performs an pre-order traversal of the binary tree
      *
      * Prints all elements in the binary tree in pre-order sequence.
      *
      */
     void PreOrderTraversal();
+
+    /**
+     * @brief Performs and in-order traversal of the binary tree
+     *
+     * Prints all elements in the binary tree in in-order sequence.
+     *
+     */
+    void InOrderTraversal();
 
     /**
      * @brief Performs a post-order traversal of the binary tree
@@ -151,28 +149,22 @@ public:
     void PrintBoundaryNodes();
 
     /**
+     * @brief Prints all nodes of binary tree which are having both the childs
+     * @warning not implemented
+     */
+    void PrintAllFullNodes();
+
+    /**
+     * @brief Prints all nodes of binary tree which are having only one child
+     * @warning not implemented
+     */
+    void PrintAllHalfNodes();
+
+    /**
      * @brief Prints all nodes at a distance k from the root node
      * @param[in] inKDistance Distance from the root node
      */
     void PrintAllNodesAtKDistance(int inKDistance);
-
-    /**
-     * @brief Prints immidiate ancestor node of a given data element
-     * @param[in] inData Data element whose ancestor is to be printed
-     */
-    void PrintAncestor(int inData);
-
-    /**
-     * @brief Prints all ancestor nodes of a given data element
-     * @param[in] inData Data element whose ancestors are to be printed
-     */
-    void PrintAncestors(int inData);
-
-    /**
-     * @brief Prints all cousin nodes of a given data element
-     * @param[in] inData Data element whose cousins are to be printed
-     */
-    void PrintCousins(int inData);
 
     /**
      * @brief Prints all sibling nodes of a given data element
@@ -181,13 +173,42 @@ public:
     void PrintSibling(int inData);
 
     /**
+     * @brief Prints all cousin nodes of a given data element
+     * @param[in] inData Data element whose cousins are to be printed
+     */
+    void PrintCousins(int inData);
+
+    /**
+     * @brief Prints all ancestor nodes of a given data element
+     * @param[in] inData Data element whose ancestors are to be printed
+     */
+    void PrintAncestors(int inData);
+
+    /**
+     * @brief Prints all decendant nodes of a given data element
+     * @param[in] inData Data element whose ancestors are to be printed
+     */
+    void PrintDecendants(int inData);
+
+    /**
+     * @brief Prints immidiate ancestor node of a given data element
+     * @param[in] inData Data element whose ancestor is to be printed
+     */
+    void PrintAncestor(int inData);
+
+    /**
      * @brief Returns the height of the binary tree
-     *
-     * The height of a binary tree is the number of edges on the longest path between the root node and a leaf node.
-     *
+     * @details The height of a binary tree is the number of edges on the longest path between the root node and a leaf node.
      * @return Height of the binary tree
      */
     int HeightOfBinaryTree();
+
+    /**
+     * @brief Returns the level of node in the binary tree
+     * @details Level of the node in binary tree is the number of nodes required to traverse from root node
+     * @return Level of node in binary tree
+     */
+    int FindLevelOfNode(int inData);
 
 private:
     /**
@@ -208,14 +229,12 @@ private:
 
     /**
      * @brief Inserts a new node into a binary tree.
-     *
-     * This function inserts the specified new node into the binary tree at the appropriate
+     * @details This function inserts the specified new node into the binary tree at the appropriate
      * position based on the level.
-     *
      * @param[in] ipNode Pointer to the current node in the binary tree where the new node
      *                   will be inserted. If this is null, the new node will become the root.
      * @param[in] ipNewNode Pointer to the new node that needs to be inserted into the tree.
-     * @see DeleteNodeInBinaryTree() for removing a node from the binary tree.
+     * @see DeleteBinaryTreeNode() for removing a node from the binary tree.
      */
     bool InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode);
 
@@ -239,15 +258,6 @@ private:
     int HeightOfSubBinaryTree(Node *ipNode);
 
     /**
-     * @brief Performs an in-order traversal of the binary tree node
-     *
-     * Prints all elements under the binary tree node in in-order sequence.
-     *
-     * @param[in] ipNode Node to traverse
-     */
-    void InOrderTraversalOfBinaryTreeNode(Node *ipNode);
-
-    /**
      * @brief Performs an pre-order traversal of the binary tree node
      *
      * Prints all elements under the binary tree node in pre-order sequence.
@@ -255,6 +265,15 @@ private:
      * @param[in] ipNode Node to traverse
      */
     void PreOrderTraversalOfBinaryTreeNode(Node *ipNode);
+
+    /**
+     * @brief Performs an in-order traversal of the binary tree node
+     *
+     * Prints all elements under the binary tree node in in-order sequence.
+     *
+     * @param[in] ipNode Node to traverse
+     */
+    void InOrderTraversalOfBinaryTreeNode(Node *ipNode);
 
     /**
      * @brief Performs an post-order traversal of the binary tree node
@@ -297,19 +316,12 @@ private:
     void PrintAllNodesAtKDistance(Node *ipNode, int inKDistance);
 
     /**
-     * @brief Prints all ancestor nodes of a given data element
+     * @brief Prints sibling node of a given data element
      * @param[in] ipNode Node to traverse
-     * @param[in] inData Data element whose ancestors are to be printed
-     * @return True if ancestor is found, false otherwise
+     * @param[in] inData Data element whose cousins are to be printed
+     * @return True if sibling is found, false otherwise
      */
-    bool PrintAncestor(Node *ipNode, int inData);
-
-    /**
-     * @brief Prints all ancestor nodes of a given data element by traversing the path and printing the nodes
-     * @param[in] ipNode Node to traverse
-     * @param[in, out] iosNodePath Stack to store the path of the node
-     */
-    void PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath);
+    bool PrintSibling(Node *ipNode, int inData);
 
     /**
      * @brief Prints all cousin nodes of a given data element
@@ -320,16 +332,20 @@ private:
     void PrintCousins(Node *ipNode, int inData, int inNodeHeight);
 
     /**
-     * @brief Prints sibling node of a given data element
+     * @brief Prints all ancestor nodes of a given data element by traversing the path and printing the nodes
      * @param[in] ipNode Node to traverse
-     * @param[in] inData Data element whose cousins are to be printed
-     * @return True if sibling is found, false otherwise
+     * @param[in, out] iosNodePath Stack to store the path of the node
      */
-    bool PrintSibling(Node *ipNode, int inData);
+    void PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath);
 
-    //---------------------------------------------------------------
-    // Member variables
-    //---------------------------------------------------------------
+    /**
+     * @brief Prints all ancestor nodes of a given data element
+     * @param[in] ipNode Node to traverse
+     * @param[in] inData Data element whose ancestors are to be printed
+     * @return True if ancestor is found, false otherwise
+     */
+    bool PrintAncestor(Node *ipNode, int inData);
+
     /**
      * @brief Represents the root node of the binary tree
      *

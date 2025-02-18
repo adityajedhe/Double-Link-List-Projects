@@ -90,22 +90,24 @@ int RetrieveUserOperation()
                   04. Search for a node in the binary tree\
                   05. Search for a node in the binary search tree[Not yet impl'd]\
                   06. Traverse the binary tree: Pre-order\
-                  06. Traverse the binary tree: In-order\
-                  07. Traverse the binary tree: Post-order\
-                  08. Traverse the binary tree: Level-order\
-                  09. Traverse the binary tree: Reverse-Level-order[Not yet impl'd]\
-                  10. Traverse the binary tree: Spiral-order[Not yet impl'd]\
-                  11. Print all the leaf nodes in the binary tree\
-                  12. Print all the non-leaf nodes in the binary tree\
-                  13. Print all the full nodes in the binary tree\
-                  14. Print all the half nodes in the binary tree\
-                  15. Print all the siblings of a node in the binary tree\
-                  16. Print all the ancestors of a node in the binary tree\
-                  17. Print all the descendants of a node in the binary tree\
-                  18. Find the height of the binary tree\
-                  19. Find the depth of a node in the binary tree[Not yet impl'd]\
-                  20. Find the level of a node in the binary tree\
-                  21. Find the all the nodes at the border of the binary tree"
+                  07. Traverse the binary tree: In-order\
+                  08. Traverse the binary tree: Post-order\
+                  09. Traverse the binary tree: Level-order\
+                  10. Traverse the binary tree: Reverse-Level-order[Not yet impl'd]\
+                  11. Traverse the binary tree: Spiral-order[Not yet impl'd]\
+                  12. Print all the leaf nodes in the binary tree\
+                  13. Print all the non-leaf nodes in the binary tree\
+                  14. Print all the border nodes of the binary tree\
+                  15. Print all the full nodes in the binary tree\
+                  16. Print all the half nodes in the binary tree\
+                  17. Print all the nodes in the binary tree at k-level\
+                  18. Print all the siblings of a node in the binary tree\
+                  19. Print all the cousins of a node in the binary tree\
+                  20. Print all the ancestors of a node in the binary tree\
+                  21. Print all the descendants of a node in the binary tree\
+                  22. Find the immidiate ancestor of a node in the binary tree\
+                  23. Find the height of the binary tree\
+                  24. Find the level of a node in the binary tree"
         << std::endl;
 
     int nOption(0);
