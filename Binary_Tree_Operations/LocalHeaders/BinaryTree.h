@@ -9,6 +9,7 @@
 
 // ---------------------------------------------- System Headers
 #include <stack>
+#include <vector>
 
 // ---------------------------------------------- Forward declaration
 class Node;
@@ -103,6 +104,8 @@ public:
      * @details Prints all elements in the binary tree in level-order sequence.
      */
     void LevelOrderTraversal();
+
+    void LevelOrderTraversal(std::vector<Node *> &ovNodes);
 
     /**
      * @brief Performs a reverse level-order traversal of the binary tree

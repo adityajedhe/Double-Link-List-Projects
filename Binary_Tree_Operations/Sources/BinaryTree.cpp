@@ -203,75 +203,53 @@ void BinaryTree::LevelOrderTraversal()
         return;
     }
 
+    std::vector<Node *> vNodes;
+
+    LevelOrderTraversal(vNodes);
+
     std::cout << "Level order traversal: ";
 
-    std::queue<Node *> qNodes;
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 
-    qNodes.push(_pRootNode);
+    std::cout << std::endl;
+}
 
+//-------------------------------------------------------------------
+void BinaryTree::LevelOrderTraversal(std::vector<Node *> &ovNodes)
+{
     Node *pNode = nullptr;
 
-    while (!qNodes.empty())
-    {
-        pNode = qNodes.front();
+    ovNodes.push_back(_pRootNode);
 
-        qNodes.pop();
+    for (int nIdx = 0; nIdx < (int)(ovNodes.size()); ++nIdx)
+    {
+        pNode = ovNodes[nIdx];
 
         if (nullptr == pNode)
         {
             continue;
         }
 
-        std::cout << pNode->GetData() << " ";
+        Node *pLNode = pNode->GetLeftNode();
+        Node *pRNode = pNode->GetRightNode();
 
-        if (nullptr != pNode->GetLeftNode())
+        if (nullptr != pLNode)
         {
-            qNodes.push(pNode->GetLeftNode());
+            ovNodes.push_back(pLNode);
         }
 
-        if (nullptr != pNode->GetRightNode())
+        if (nullptr != pRNode)
         {
-            qNodes.push(pNode->GetRightNode());
+            ovNodes.push_back(pRNode);
         }
     }
-
-    std::cout << std::endl;
 }
-/*
-void BinaryTree::LevelOrderTraversal(std::queue<Node*>& ioqNodes)
-{
-    if (IsEmpty())
-    {
-        return;
-    }
-
-    if (ioqNodes.empty())
-    {
-        return;
-    }
-
-    Node* pNode = ioqNodes.front();
-
-    ioqNodes.pop();
-
-    if (nullptr == pNode)
-    {
-        return;
-    }
-
-    std::cout << pNode->GetData() << " ";
-
-    if (nullptr != pNode->GetLeftNode())
-    {
-        ioqNodes.push(pNode->GetLeftNode());
-    }
-
-    if (nullptr != pNode->GetRightNode())
-    {
-        ioqNodes.push(pNode->GetRightNode());
-    }
-}
-//*/
 
 //-------------------------------------------------------------------
 void BinaryTree::ReverseLevelOrderTraversal()
