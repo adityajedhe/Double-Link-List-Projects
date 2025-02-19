@@ -100,12 +100,9 @@ public:
     void PostOrderTraversal();
 
     /**
-     * @brief Performs a level-order traversal of the binary tree
-     * @details Prints all elements in the binary tree in level-order sequence.
+     * @brief Prints all elements in the binary tree in level-order sequence.
      */
     void LevelOrderTraversal();
-
-    void LevelOrderTraversal(std::vector<Node *> &ovNodes);
 
     /**
      * @brief Performs a reverse level-order traversal of the binary tree
@@ -238,16 +235,6 @@ private:
     int FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &iosNodePath);
 
     /**
-     * @brief Returns the height of sub binary tree having root node as given node
-     *
-     * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
-     *
-     * @param[in] ipNode Node whose height is to be calculated
-     * @return Height of the binary tree
-     */
-    int HeightOfSubBinaryTree(Node *ipNode);
-
-    /**
      * @brief Performs an pre-order traversal of the binary tree node
      *
      * Prints all elements under the binary tree node in pre-order sequence.
@@ -273,6 +260,13 @@ private:
      * @param[in] ipNode Node to traverse
      */
     void PostOrderTraversalOfBinaryTreeNode(Node *ipNode);
+
+    /**
+     * @brief Performs a level-order traversal of the binary tree
+     * @details Each level is traversed and all the nodes are added sequentially to the vector
+     * @param[out] ovNodes Vector containing pointers of nodes
+     */
+    void LevelOrderTraversal(std::vector<Node *> &ovNodes);
 
     /**
      * @brief Prints all leaf nodes of sub binary tree having root node as given node
@@ -335,6 +329,16 @@ private:
      * @return True if ancestor is found, false otherwise
      */
     bool PrintAncestor(Node *ipNode, int inData);
+
+    /**
+     * @brief Returns the height of sub binary tree having root node as given node
+     *
+     * The height of a given binary tree node is the number of edges on the longest path between the given node and a leaf node.
+     *
+     * @param[in] ipNode Node whose height is to be calculated
+     * @return Height of the binary tree
+     */
+    int HeightOfSubBinaryTree(Node *ipNode);
 
     /**
      * @brief Represents the root node of the binary tree

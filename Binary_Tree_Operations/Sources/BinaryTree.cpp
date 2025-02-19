@@ -221,37 +221,6 @@ void BinaryTree::LevelOrderTraversal()
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::LevelOrderTraversal(std::vector<Node *> &ovNodes)
-{
-    Node *pNode = nullptr;
-
-    ovNodes.push_back(_pRootNode);
-
-    for (int nIdx = 0; nIdx < (int)(ovNodes.size()); ++nIdx)
-    {
-        pNode = ovNodes[nIdx];
-
-        if (nullptr == pNode)
-        {
-            continue;
-        }
-
-        Node *pLNode = pNode->GetLeftNode();
-        Node *pRNode = pNode->GetRightNode();
-
-        if (nullptr != pLNode)
-        {
-            ovNodes.push_back(pLNode);
-        }
-
-        if (nullptr != pRNode)
-        {
-            ovNodes.push_back(pRNode);
-        }
-    }
-}
-
-//-------------------------------------------------------------------
 void BinaryTree::ReverseLevelOrderTraversal()
 {
     if (IsEmpty())
@@ -606,19 +575,34 @@ void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode)
 }
 
 //-------------------------------------------------------------------
-int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
+void BinaryTree::LevelOrderTraversal(std::vector<Node *> &ovNodes)
 {
-    int nHeight(-1);
+    Node *pNode = nullptr;
 
-    if (nullptr != ipNode)
+    ovNodes.push_back(_pRootNode);
+
+    for (int nIdx = 0; nIdx < (int)(ovNodes.size()); ++nIdx)
     {
-        int nLHeight = HeightOfSubBinaryTree(ipNode->GetLeftNode());
-        int nRHeight = HeightOfSubBinaryTree(ipNode->GetRightNode());
+        pNode = ovNodes[nIdx];
 
-        nHeight = (nLHeight > nRHeight) ? (nLHeight + 1) : (nRHeight + 1);
+        if (nullptr == pNode)
+        {
+            continue;
+        }
+
+        Node *pLNode = pNode->GetLeftNode();
+        Node *pRNode = pNode->GetRightNode();
+
+        if (nullptr != pLNode)
+        {
+            ovNodes.push_back(pLNode);
+        }
+
+        if (nullptr != pRNode)
+        {
+            ovNodes.push_back(pRNode);
+        }
     }
-
-    return nHeight;
 }
 
 //-------------------------------------------------------------------
@@ -859,4 +843,20 @@ bool BinaryTree::PrintAncestor(Node *ipNode, int inData)
     }
 
     return bFound;
+}
+
+//-------------------------------------------------------------------
+int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
+{
+    int nHeight(-1);
+
+    if (nullptr != ipNode)
+    {
+        int nLHeight = HeightOfSubBinaryTree(ipNode->GetLeftNode());
+        int nRHeight = HeightOfSubBinaryTree(ipNode->GetRightNode());
+
+        nHeight = (nLHeight > nRHeight) ? (nLHeight + 1) : (nRHeight + 1);
+    }
+
+    return nHeight;
 }
