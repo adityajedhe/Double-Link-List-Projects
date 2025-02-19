@@ -37,8 +37,8 @@ Docs/
 
 # Project config files
 
-# Documentation
-# Doxyfile
+# Backup files
+*.bak
 
 # Build files
 *.log
