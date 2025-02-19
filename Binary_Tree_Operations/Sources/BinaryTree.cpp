@@ -695,15 +695,15 @@ void BinaryTree::LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vect
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
+void BinaryTree::ReverseLevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
 {
     bool bTraverseDirection(true);
 
-    std::vector<Node *> vNodesAtALevel;
-    std::vector<Node *> vTemp;
+    std::stack<Node *> sAllNodes;
+    std::queue<Node *> qCurrentLevel;
 
     ovNodes.push_back(ipRootNode);
-    vTemp.push_back(ipRootNode);
+    qCurrentLevel.push(ipRootNode);
 
     Node *pNode = nullptr;
     Node *pLNode = nullptr;
@@ -711,9 +711,9 @@ void BinaryTree::SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vec
 
     while (1)
     {
-        for (int nIdx = 0; nIdx < (int)(vTemp.size()); ++nIdx)
+        while (!qCurrentLevel.empty())
         {
-            pNode = vTemp[nIdx];
+            pNode = qCurrentLevel.front();
 
             if (nullptr == pNode)
             {
@@ -725,34 +725,97 @@ void BinaryTree::SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vec
 
             if (nullptr != pLNode)
             {
-                vNodesAtALevel.push_back(pLNode);
+                sAllNodes.push(pLNode);
             }
 
             if (nullptr != pRNode)
             {
-                vNodesAtALevel.push_back(pRNode);
+                sAllNodes.push(pRNode);
             }
         }
 
-        vTemp.clear();
-
-        if (0 == vNodesAtALevel.size())
+        if (sAllNodes.empty())
         {
             break;
         }
 
-        vTemp.insert(vTemp.begin(), vNodesAtALevel.begin(), vNodesAtALevel.end());
+        // vTemp.insert(vTemp.begin(), vNodesAtALevel.begin(), vNodesAtALevel.end());
 
         if (bTraverseDirection)
         {
-            std::reverse(vNodesAtALevel.begin(), vNodesAtALevel.end());
+            // std::reverse(vNodesAtALevel.begin(), vNodesAtALevel.end());
         }
 
         bTraverseDirection = !bTraverseDirection;
 
-        ovNodes.insert(ovNodes.begin() + ovNodes.size(), vNodesAtALevel.begin(), vNodesAtALevel.end());
+        // ovNodes.insert(ovNodes.end(), vNodesAtALevel.begin(), vNodesAtALevel.end());
 
-        vNodesAtALevel.clear();
+        // vNodesAtALevel.l;
+    }
+}
+
+//-------------------------------------------------------------------
+void BinaryTree::SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
+{
+    bool bTraverseDirection(true);
+
+    std::vector<Node *> vNodesAtNextLevel;
+    std::queue<Node *> qCurrentLevel;
+
+    ovNodes.push_back(ipRootNode);
+    qCurrentLevel.push(ipRootNode);
+
+    Node *pNode = nullptr;
+    Node *pLNode = nullptr;
+    Node *pRNode = nullptr;
+
+    while (1)
+    {
+        if (!qCurrentLevel.empty())
+        {
+            pNode = qCurrentLevel.front();
+
+            qCurrentLevel.pop();
+
+            if (nullptr == pNode)
+            {
+                continue;
+            }
+
+            pLNode = pNode->GetLeftNode();
+            pRNode = pNode->GetRightNode();
+
+            if (nullptr != pLNode)
+            {
+                vNodesAtNextLevel.push_back(pLNode);
+            }
+
+            if (nullptr != pRNode)
+            {
+                vNodesAtNextLevel.push_back(pRNode);
+            }
+        }
+
+        if (0 == vNodesAtNextLevel.size())
+        {
+            break;
+        }
+
+        for (auto pNode : vNodesAtNextLevel)
+        {
+            qCurrentLevel.push(pNode);
+        }
+
+        if (bTraverseDirection)
+        {
+            std::reverse(vNodesAtNextLevel.begin(), vNodesAtNextLevel.end());
+        }
+
+        bTraverseDirection = !bTraverseDirection;
+
+        ovNodes.insert(ovNodes.end(), vNodesAtNextLevel.begin(), vNodesAtNextLevel.end());
+
+        vNodesAtNextLevel.clear();
     }
 }
 

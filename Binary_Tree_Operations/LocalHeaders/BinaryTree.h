@@ -265,6 +265,14 @@ private:
     void LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes);
 
     /**
+     * @brief Performs a reverse level-order traversal of the binary tree
+     * @details Each level of sub-binary tree is traversed in reverse level-order sequence and the nodes are added to the vector.
+     * @param[in] ipRootNode Root node of the binary tree
+     * @param[out] ovNodes Vector containing list of pointers of ouput nodes
+     */
+    void ReverseLevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes);
+
+    /**
      * @brief Performs a level-order traversal of the binary tree in spiral manner.
      * @details Each level of sub-binary tree is traversed in spiral level-order sequence and the nodes are added to the vector.
      * @param[in] ipNode Node to traverse
