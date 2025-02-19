@@ -29,7 +29,7 @@ $(TARGET): $(OBJS)
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "--Compiled:" $<
-	@$(CCPP) $(CFLAGS) -c $< -o $@
+	@$(CCPP) $(CFLAGS) -ggdb -c $< -o $@
 
 # Create output directory if it isn't exist
 $(OUTPUT_DIR):

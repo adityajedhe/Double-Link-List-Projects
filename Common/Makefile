@@ -42,12 +42,12 @@ all: $(OBJ_DIR) $(OUTPUT_DIR) $(TARGET)
 # Link object files to create the executable
 $(TARGET): $(OBJS)
 	@echo "==Library:" $@
-	@$(CCPP) -shared -o $@ $^
+	@$(CCPP) -ggdb -shared -o $@ $^
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "--Compiled:" $<
-	@$(CCPP) $(CFLAGS) -c $< -o $@
+	@$(CCPP) $(CFLAGS) -ggdb -c $< -o $@
 
 # Create output directory if it isn't exist
 $(OUTPUT_DIR):
