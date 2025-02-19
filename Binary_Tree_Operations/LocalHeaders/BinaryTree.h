@@ -21,7 +21,6 @@ class Node;
  * in a binary tree. It also includes various traversal methods and functions to print
  * specific nodes or levels of the tree.
  * @note The binary tree is represented by a root node, which is the topmost node in the tree.
- *
  */
 class BinaryTree
 {
@@ -50,24 +49,19 @@ public:
     /**
      * @brief Inserts a new value into the binary tree while maintaining
      *        the properties of a complete binary tree.
-     *
-     * This function inserts a new value into the binary tree while maintaining the properties of a complete binary tree.
-     * It inserts the node at each level.
-     * Once the level is full, the node is inserted at the next level.
-     *
+     * @details This function inserts a new value into the binary tree while maintaining the properties of a complete binary tree.
+     * It inserts the node at each level. Once the level is full, the node is inserted at the next level.
      * @param[in] inData The integer value to be inserted into the binary tree.
      */
     void InsertInBinaryTree(int inData);
 
     /**
      * @brief Inserts a new data element into the binary search tree
-     *
-     * The binary search tree is a data structure in which each node has at
+     * @details The binary search tree is a data structure in which each node has at
      * most two children, referred to as the left child and the right
      * child. Also no two nodes have the same data element. The left child
      * of a node has a value less than the parent node, and the right child
      * has a value greater than the parent node.
-     *
      * @param[in] inData Data element to insert
      */
     void InsertInBinarySearchTree(int inData);
@@ -75,6 +69,7 @@ public:
     /**
      * @brief Deletes a data element from the binary tree
      * @param[in] inData Data element to delete
+     * @warning not implemented
      */
     void DeleteBinaryTreeNode(int inData);
 
@@ -87,49 +82,39 @@ public:
 
     /**
      * @brief Performs an pre-order traversal of the binary tree
-     *
-     * Prints all elements in the binary tree in pre-order sequence.
-     *
+     * @details Prints all elements in the binary tree in pre-order sequence.
      */
     void PreOrderTraversal();
 
     /**
      * @brief Performs and in-order traversal of the binary tree
-     *
-     * Prints all elements in the binary tree in in-order sequence.
-     *
+     * @details Prints all elements in the binary tree in in-order sequence.
      */
     void InOrderTraversal();
 
     /**
      * @brief Performs a post-order traversal of the binary tree
-     *
-     * Prints all elements in the binary tree in post-order sequence.
-     *
+     * @details Prints all elements in the binary tree in post-order sequence.
      */
     void PostOrderTraversal();
 
     /**
      * @brief Performs a level-order traversal of the binary tree
-     *
-     * Prints all elements in the binary tree in level-order sequence.
-     *
+     * @details Prints all elements in the binary tree in level-order sequence.
      */
     void LevelOrderTraversal();
 
     /**
      * @brief Performs a reverse level-order traversal of the binary tree
-     *
-     * Prints all elements in the binary tree in level-order sequence in reverse manner.
-     *
+     * @details Prints all elements in the binary tree in level-order sequence in reverse manner.
+     * @warning not implemented
      */
     void ReverseLevelOrderTraversal();
 
     /**
      * @brief Performs a spiral order traversal of the binary tree
-     *
-     * Prints all elements in the binary tree in spiral order sequence.
-     *
+     * @details Prints all elements in the binary tree in spiral order sequence.
+     * @warning not implemented
      */
     void SpiralOrderTraversal();
 
@@ -149,7 +134,7 @@ public:
     void PrintBoundaryNodes();
 
     /**
-     * @brief Prints all nodes of binary tree which are having both the childs
+     * @brief Prints all nodes of binary tree which are having 0 or 2 children
      * @warning not implemented
      */
     void PrintAllFullNodes();
@@ -187,6 +172,7 @@ public:
     /**
      * @brief Prints all decendant nodes of a given data element
      * @param[in] inData Data element whose ancestors are to be printed
+     * @warning not implemented
      */
     void PrintDecendants(int inData);
 
@@ -207,6 +193,7 @@ public:
      * @brief Returns the level of node in the binary tree
      * @details Level of the node in binary tree is the number of nodes required to traverse from root node
      * @return Level of node in binary tree
+     * @warning not implemented
      */
     int FindLevelOfNode(int inData);
 

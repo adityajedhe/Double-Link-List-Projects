@@ -359,9 +359,9 @@ void BinaryTree::PrintSibling(int inData)
 {
     std::cout << "Sibling of " << inData << ": ";
 
-    int nDistance = SearchInBinaryTree(inData);
+    // int nDistance = SearchInBinaryTree(inData);
 
-    PrintCousins(_pRootNode, inData, nDistance);
+    PrintSibling(_pRootNode, inData /*, nDistance*/);
 
     std::cout << std::endl;
 }
@@ -819,79 +819,6 @@ void BinaryTree::PrintCousins(Node *ipNode, int inData, int inNodeHeight)
         }
     }
 }
-/*
-//-------------------------------------------------------------------
-{
-    if (nullptr == ipNode || ipNode->GetData() == inData)
-    {
-        return;
-    }
-
-    std::queue<Node*> qNodes;
-
-    qNodes.push(ipNode);
-
-    Node* pNode = nullptr;
-    Node* pLNode = nullptr;
-    Node* pRNode = nullptr;
-
-    bool bFound = false;
-
-    while (!qNodes.empty() && !bFound)
-    {
-        int size = qNodes.size();
-
-        while (size--)
-        {
-            pNode = qNodes.front();
-
-            qNodes.pop();
-
-            if (nullptr == pNode)
-            {
-                continue;
-            }
-
-            pLNode = pNode->GetLeftNode();
-            pRNode = pNode->GetRightNode();
-
-            if (((nullptr != pLNode) && (pLNode->GetData() == inData)) ||
-                ((nullptr != pRNode) && (pRNode->GetData() == inData)))
-            {
-                bFound = true;
-            }
-            else
-            {
-                if (nullptr != pLNode)
-                {
-                    qNodes.push(pNode->GetLeftNode());
-                }
-
-                if (nullptr != pRNode)
-                {
-                    qNodes.push(pNode->GetRightNode());
-                }
-            }
-        }
-    }
-
-    if (bFound)
-    {
-        while (!qNodes.empty())
-        {
-            pNode = qNodes.front();
-
-            qNodes.pop();
-
-            std::cout << pNode->GetData() << " ";
-        }
-    }
-    else
-    {
-        std::cout << "No cousins found for the given data element." << std::endl;
-    }
-}
-//*/
 
 //-------------------------------------------------------------------
 void BinaryTree::PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath)
