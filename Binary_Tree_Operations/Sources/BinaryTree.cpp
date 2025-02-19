@@ -257,6 +257,24 @@ void BinaryTree::ReverseLevelOrderTraversal()
     {
         return;
     }
+
+    std::vector<Node *> vNodes;
+
+    LevelOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
+
+    std::reverse(vNodes.begin(), vNodes.end());
+
+    std::cout << "Reverse-level order traversal: ";
+
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -266,6 +284,22 @@ void BinaryTree::SpiralOrderTraversal()
     {
         return;
     }
+
+    std::vector<Node *> vNodes;
+
+    SpiralOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
+
+    std::cout << "Spiral-level order traversal: ";
+
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -657,6 +691,68 @@ void BinaryTree::LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vect
         {
             ovNodes.push_back(pRNode);
         }
+    }
+}
+
+//-------------------------------------------------------------------
+void BinaryTree::SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
+{
+    bool bTraverseDirection(true);
+
+    std::vector<Node *> vNodesAtALevel;
+    std::vector<Node *> vTemp;
+
+    ovNodes.push_back(ipRootNode);
+    vTemp.push_back(ipRootNode);
+
+    Node *pNode = nullptr;
+    Node *pLNode = nullptr;
+    Node *pRNode = nullptr;
+
+    while (1)
+    {
+        for (int nIdx = 0; nIdx < (int)(vTemp.size()); ++nIdx)
+        {
+            pNode = vTemp[nIdx];
+
+            if (nullptr == pNode)
+            {
+                continue;
+            }
+
+            pLNode = pNode->GetLeftNode();
+            pRNode = pNode->GetRightNode();
+
+            if (nullptr != pLNode)
+            {
+                vNodesAtALevel.push_back(pLNode);
+            }
+
+            if (nullptr != pRNode)
+            {
+                vNodesAtALevel.push_back(pRNode);
+            }
+        }
+
+        vTemp.clear();
+
+        if (0 == vNodesAtALevel.size())
+        {
+            break;
+        }
+
+        vTemp.insert(vTemp.begin(), vNodesAtALevel.begin(), vNodesAtALevel.end());
+
+        if (bTraverseDirection)
+        {
+            std::reverse(vNodesAtALevel.begin(), vNodesAtALevel.end());
+        }
+
+        bTraverseDirection = !bTraverseDirection;
+
+        ovNodes.insert(ovNodes.begin() + ovNodes.size(), vNodesAtALevel.begin(), vNodesAtALevel.end());
+
+        vNodesAtALevel.clear();
     }
 }
 

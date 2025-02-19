@@ -55,9 +55,19 @@ int main()
 {
     BinaryTree *pBinaryTree = RetrieveInitialisedTree();
 
-    int nOption = RetrieveUserOperation();
+    // int nOption = RetrieveUserOperation();
+    //
+    // PerformOperation(pBinaryTree, nOption);
 
-    PerformOperation(pBinaryTree, nOption);
+    pBinaryTree->PreOrderTraversal();
+    pBinaryTree->InOrderTraversal();
+    pBinaryTree->PostOrderTraversal();
+    pBinaryTree->LevelOrderTraversal();
+    pBinaryTree->ReverseLevelOrderTraversal();
+    pBinaryTree->SpiralOrderTraversal();
+    pBinaryTree->PrintLeafNodes();
+    pBinaryTree->PrintNonLeafNodes();
+    pBinaryTree->PrintBoundaryNodes();
 
     BinaryTree::RemoveBinaryTree(pBinaryTree);
 
@@ -69,7 +79,7 @@ BinaryTree *RetrieveInitialisedTree()
 {
     BinaryTree *pBinaryTree = BinaryTree::CreateBinaryTree();
 
-    std::vector<int> vValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+    std::vector<int> vValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
 
     for (auto nValue : vValues)
     {
@@ -93,8 +103,8 @@ int RetrieveUserOperation()
                   07. Traverse the binary tree: In-order\
                   08. Traverse the binary tree: Post-order\
                   09. Traverse the binary tree: Level-order\
-                  10. Traverse the binary tree: Reverse-Level-order[Not yet impl'd]\
-                  11. Traverse the binary tree: Spiral-order[Not yet impl'd]\
+                  10. Traverse the binary tree: Reverse-Level-order\
+                  11. Traverse the binary tree: Spiral-order\
                   12. Print all the leaf nodes in the binary tree\
                   13. Print all the non-leaf nodes in the binary tree\
                   14. Print all the border nodes of the binary tree\
@@ -138,12 +148,28 @@ void PerformOperation(BinaryTree *ipBinaryTree, int inOption)
     case 5:
         break;
     case 6:
+        ipBinaryTree->PreOrderTraversal();
         break;
     case 7:
+        ipBinaryTree->InOrderTraversal();
         break;
     case 8:
+        ipBinaryTree->PostOrderTraversal();
         break;
     case 9:
+        ipBinaryTree->LevelOrderTraversal();
+        break;
+    case 10:
+        ipBinaryTree->ReverseLevelOrderTraversal();
+        break;
+    case 11:
+        ipBinaryTree->PrintLeafNodes();
+        break;
+    case 12:
+        ipBinaryTree->PrintNonLeafNodes();
+        break;
+    case 13:
+        ipBinaryTree->PrintBoundaryNodes();
         break;
     }
 }

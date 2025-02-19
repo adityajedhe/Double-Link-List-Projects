@@ -107,14 +107,12 @@ public:
     /**
      * @brief Performs a reverse level-order traversal of the binary tree
      * @details Prints all elements in the binary tree in level-order sequence in reverse manner.
-     * @warning not implemented
      */
     void ReverseLevelOrderTraversal();
 
     /**
      * @brief Performs a spiral order traversal of the binary tree
      * @details Prints all elements in the binary tree in spiral order sequence.
-     * @warning not implemented
      */
     void SpiralOrderTraversal();
 
@@ -261,10 +259,18 @@ private:
     /**
      * @brief Performs a level-order traversal of the binary tree
      * @details Each level of sub-binary tree is traversed in level-order sequence and the nodes are added to the vector.
-     * @param[in] ipRootNode
+     * @param[in] ipRootNode Root node of the binary tree
      * @param[out] ovNodes Vector containing list of pointers of ouput nodes
      */
     void LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes);
+
+    /**
+     * @brief Performs a level-order traversal of the binary tree in spiral manner.
+     * @details Each level of sub-binary tree is traversed in spiral level-order sequence and the nodes are added to the vector.
+     * @param[in] ipNode Node to traverse
+     * @param[out] ovNodes Vector containing list of pointers of ouput nodes
+     */
+    void SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes);
 
     /**
      * @brief Retrieves all leaf nodes of sub binary tree having root node as given node
