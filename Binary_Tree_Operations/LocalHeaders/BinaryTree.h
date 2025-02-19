@@ -236,37 +236,34 @@ private:
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
-     *
-     * Prints all elements under the binary tree node in pre-order sequence.
-     *
+     * @details Retrieves all elements under the given node in pre-order sequence.
      * @param[in] ipNode Node to traverse
+     * @param[in, out] iovNodes Vector containing pointers of ouput nodes
      */
-    void PreOrderTraversalOfBinaryTreeNode(Node *ipNode);
+    void PreOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
 
     /**
      * @brief Performs an in-order traversal of the binary tree node
-     *
-     * Prints all elements under the binary tree node in in-order sequence.
-     *
+     * @details Retrieves all elements under the given node in in-order sequence.
      * @param[in] ipNode Node to traverse
+     * @param[in, out] iovNodes Vector containing pointers of ouput nodes
      */
-    void InOrderTraversalOfBinaryTreeNode(Node *ipNode);
+    void InOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
 
     /**
      * @brief Performs an post-order traversal of the binary tree node
-     *
-     * Prints all elements under the binary tree node in post-order sequence.
-     *
+     * @details Prints all elements under the binary tree node in post-order sequence.
      * @param[in] ipNode Node to traverse
+     * @param[in, out] iovNodes Vector containing pointers of ouput nodes
      */
-    void PostOrderTraversalOfBinaryTreeNode(Node *ipNode);
+    void PostOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
 
     /**
      * @brief Performs a level-order traversal of the binary tree
      * @details Each level is traversed and all the nodes are added sequentially to the vector
-     * @param[out] ovNodes Vector containing pointers of nodes
+     * @param[out] ovNodes Vector containing pointers of ouput nodes
      */
-    void LevelOrderTraversal(std::vector<Node *> &ovNodes);
+    void LevelOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &ovNodes);
 
     /**
      * @brief Prints all leaf nodes of sub binary tree having root node as given node
