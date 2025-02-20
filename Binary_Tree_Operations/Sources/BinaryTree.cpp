@@ -158,9 +158,19 @@ void BinaryTree::PreOrderTraversal()
         return;
     }
 
+    std::vector<Node *> vNodes;
+
+    PreOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
+
     std::cout << "Pre order traversal: ";
 
-    PreOrderTraversalOfBinaryTreeNode(_pRootNode);
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 
     std::cout << std::endl;
 }
@@ -173,9 +183,19 @@ void BinaryTree::InOrderTraversal()
         return;
     }
 
+    std::vector<Node *> vNodes;
+
+    InOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
+
     std::cout << "In order traversal: ";
 
-    InOrderTraversalOfBinaryTreeNode(_pRootNode);
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 
     std::cout << std::endl;
 }
@@ -188,9 +208,19 @@ void BinaryTree::PostOrderTraversal()
         return;
     }
 
+    std::vector<Node *> vNodes;
+
+    PostOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
+
     std::cout << "Post order traversal: ";
 
-    PostOrderTraversalOfBinaryTreeNode(_pRootNode);
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 
     std::cout << std::endl;
 }
@@ -205,7 +235,7 @@ void BinaryTree::LevelOrderTraversal()
 
     std::vector<Node *> vNodes;
 
-    LevelOrderTraversal(vNodes);
+    LevelOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
 
     std::cout << "Level order traversal: ";
 
@@ -221,43 +251,34 @@ void BinaryTree::LevelOrderTraversal()
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::LevelOrderTraversal(std::vector<Node *> &ovNodes)
-{
-    Node *pNode = nullptr;
-
-    ovNodes.push_back(_pRootNode);
-
-    for (int nIdx = 0; nIdx < (int)(ovNodes.size()); ++nIdx)
-    {
-        pNode = ovNodes[nIdx];
-
-        if (nullptr == pNode)
-        {
-            continue;
-        }
-
-        Node *pLNode = pNode->GetLeftNode();
-        Node *pRNode = pNode->GetRightNode();
-
-        if (nullptr != pLNode)
-        {
-            ovNodes.push_back(pLNode);
-        }
-
-        if (nullptr != pRNode)
-        {
-            ovNodes.push_back(pRNode);
-        }
-    }
-}
-
-//-------------------------------------------------------------------
 void BinaryTree::ReverseLevelOrderTraversal()
 {
     if (IsEmpty())
     {
         return;
     }
+
+    std::deque<Node *> dqNodes;
+
+    ReverseLevelOrderTraversalOfBinaryTreeNode(_pRootNode, dqNodes);
+
+    std::cout << "Reverse-level order traversal: ";
+
+    Node *pNode = nullptr;
+
+    while (!dqNodes.empty())
+    {
+        pNode = dqNodes.front();
+
+        dqNodes.pop_front();
+
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -267,6 +288,22 @@ void BinaryTree::SpiralOrderTraversal()
     {
         return;
     }
+
+    std::vector<Node *> vNodes;
+
+    SpiralOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
+
+    std::cout << "Spiral-level order traversal: ";
+
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -277,9 +314,19 @@ void BinaryTree::PrintLeafNodes()
         return;
     }
 
+    std::vector<Node *> vNodes;
+
+    RetrieveLeafNodesOfBinaryTreeNode(_pRootNode, vNodes);
+
     std::cout << "Leaf nodes: ";
 
-    PrintLeafNodes(_pRootNode);
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 
     std::cout << std::endl;
 }
@@ -292,9 +339,19 @@ void BinaryTree::PrintNonLeafNodes()
         return;
     }
 
+    std::vector<Node *> vNodes;
+
+    RetrieveNonLeafNodesOfBinaryTreeNode(_pRootNode, vNodes);
+
     std::cout << "Non-leaf nodes: ";
 
-    PrintNonLeafNodes(_pRootNode);
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 
     std::cout << std::endl;
 }
@@ -307,9 +364,23 @@ void BinaryTree::PrintBoundaryNodes()
         return;
     }
 
-    PrintLeftBoundaryNodes(_pRootNode->GetLeftNode());
-    PrintLeafNodes(_pRootNode);
-    PrintRightBoundaryNodes(_pRootNode->GetRightNode());
+    std::vector<Node *> vNodes;
+
+    vNodes.push_back(_pRootNode);
+
+    RetrieveLeftBoundaryNodesOfBinaryTreeNode(_pRootNode->GetLeftNode(), vNodes);
+    RetrieveLeafNodesOfBinaryTreeNode(_pRootNode, vNodes);
+    RetrieveRightBoundaryNodesOfBinaryTreeNode(_pRootNode->GetRightNode(), vNodes);
+
+    std::cout << "Boundary nodes: ";
+
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 }
 
 //-------------------------------------------------------------------
@@ -552,77 +623,202 @@ int BinaryTree::FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node *ipNode)
+void BinaryTree::PreOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes)
 {
     if (nullptr == ipNode)
     {
         return;
     }
 
-    /**
-     * Print the data element
-     */
-    std::cout << ipNode->GetData() << " ";
+    iovNodes.push_back(ipNode);
 
-    PreOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode());
+    PreOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode(), iovNodes);
 
-    PreOrderTraversalOfBinaryTreeNode(ipNode->GetRightNode());
+    PreOrderTraversalOfBinaryTreeNode(ipNode->GetRightNode(), iovNodes);
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node *ipNode)
+void BinaryTree::InOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes)
 {
     if (nullptr == ipNode)
     {
         return;
     }
 
-    InOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode());
+    InOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode(), iovNodes);
 
-    /**
-     * Print the data element
-     */
-    std::cout << ipNode->GetData() << " ";
+    iovNodes.push_back(ipNode);
 
-    InOrderTraversalOfBinaryTreeNode(ipNode->GetRightNode());
+    InOrderTraversalOfBinaryTreeNode(ipNode->GetRightNode(), iovNodes);
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode)
+void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes)
 {
     if (nullptr == ipNode)
     {
         return;
     }
 
-    PostOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode());
+    PostOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode(), iovNodes);
 
-    PostOrderTraversalOfBinaryTreeNode(ipNode->GetRightNode());
+    PostOrderTraversalOfBinaryTreeNode(ipNode->GetRightNode(), iovNodes);
 
-    /**
-     * Print the data element
-     */
-    std::cout << ipNode->GetData() << " ";
+    iovNodes.push_back(ipNode);
 }
 
 //-------------------------------------------------------------------
-int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
+void BinaryTree::LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
 {
-    int nHeight(-1);
+    Node *pNode = nullptr;
 
-    if (nullptr != ipNode)
+    ovNodes.push_back(ipRootNode);
+
+    for (int nIdx = 0; nIdx < (int)(ovNodes.size()); ++nIdx)
     {
-        int nLHeight = HeightOfSubBinaryTree(ipNode->GetLeftNode());
-        int nRHeight = HeightOfSubBinaryTree(ipNode->GetRightNode());
+        pNode = ovNodes[nIdx];
 
-        nHeight = (nLHeight > nRHeight) ? (nLHeight + 1) : (nRHeight + 1);
+        if (nullptr == pNode)
+        {
+            continue;
+        }
+
+        Node *pLNode = pNode->GetLeftNode();
+        Node *pRNode = pNode->GetRightNode();
+
+        if (nullptr != pLNode)
+        {
+            ovNodes.push_back(pLNode);
+        }
+
+        if (nullptr != pRNode)
+        {
+            ovNodes.push_back(pRNode);
+        }
     }
-
-    return nHeight;
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::PrintLeafNodes(Node *ipNode)
+void BinaryTree::ReverseLevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::deque<Node *> &odqNodes)
+{
+    std::deque<Node *> dqNextLevelNodes;
+
+    std::deque<Node *> dqCurrentLevel;
+
+    odqNodes.push_front(ipRootNode);
+    dqCurrentLevel.push_back(ipRootNode);
+
+    Node *pNode = nullptr;
+    Node *pLNode = nullptr;
+    Node *pRNode = nullptr;
+
+    while (!dqCurrentLevel.empty())
+    {
+        pNode = dqCurrentLevel.front();
+
+        dqCurrentLevel.pop_front();
+
+        if (nullptr == pNode)
+        {
+            continue;
+        }
+
+        pLNode = pNode->GetLeftNode();
+        pRNode = pNode->GetRightNode();
+
+        if (nullptr != pLNode)
+        {
+            dqNextLevelNodes.push_back(pLNode);
+        }
+
+        if (nullptr != pRNode)
+        {
+            dqNextLevelNodes.push_back(pRNode);
+        }
+
+        if (dqCurrentLevel.empty())
+        {
+            dqCurrentLevel = dqNextLevelNodes;
+
+            while (!dqNextLevelNodes.empty())
+            {
+                pNode = dqNextLevelNodes.back();
+
+                dqNextLevelNodes.pop_back();
+
+                odqNodes.push_front(pNode);
+            }
+        }
+    }
+}
+
+//-------------------------------------------------------------------
+void BinaryTree::SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
+{
+    bool bTraverseDirection(true);
+
+    std::vector<Node *> vNodesAtNextLevel;
+    std::queue<Node *> qCurrentLevel;
+
+    ovNodes.push_back(ipRootNode);
+    qCurrentLevel.push(ipRootNode);
+
+    Node *pNode = nullptr;
+    Node *pLNode = nullptr;
+    Node *pRNode = nullptr;
+
+    while (1)
+    {
+        if (!qCurrentLevel.empty())
+        {
+            pNode = qCurrentLevel.front();
+
+            qCurrentLevel.pop();
+
+            if (nullptr == pNode)
+            {
+                continue;
+            }
+
+            pLNode = pNode->GetLeftNode();
+            pRNode = pNode->GetRightNode();
+
+            if (nullptr != pLNode)
+            {
+                vNodesAtNextLevel.push_back(pLNode);
+            }
+
+            if (nullptr != pRNode)
+            {
+                vNodesAtNextLevel.push_back(pRNode);
+            }
+        }
+
+        if (0 == vNodesAtNextLevel.size())
+        {
+            break;
+        }
+
+        for (auto pNode : vNodesAtNextLevel)
+        {
+            qCurrentLevel.push(pNode);
+        }
+
+        if (bTraverseDirection)
+        {
+            std::reverse(vNodesAtNextLevel.begin(), vNodesAtNextLevel.end());
+        }
+
+        bTraverseDirection = !bTraverseDirection;
+
+        ovNodes.insert(ovNodes.end(), vNodesAtNextLevel.begin(), vNodesAtNextLevel.end());
+
+        vNodesAtNextLevel.clear();
+    }
+}
+
+//-------------------------------------------------------------------
+void BinaryTree::RetrieveLeafNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes)
 {
     if (nullptr == ipNode)
     {
@@ -631,17 +827,17 @@ void BinaryTree::PrintLeafNodes(Node *ipNode)
 
     if ((nullptr == ipNode->GetLeftNode()) && (nullptr == ipNode->GetRightNode()))
     {
-        std::cout << ipNode->GetData() << " ";
+        iovNodes.push_back(ipNode);
     }
     else
     {
-        PrintLeafNodes(ipNode->GetLeftNode());
-        PrintLeafNodes(ipNode->GetRightNode());
+        RetrieveLeafNodesOfBinaryTreeNode(ipNode->GetLeftNode(), iovNodes);
+        RetrieveLeafNodesOfBinaryTreeNode(ipNode->GetRightNode(), iovNodes);
     }
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::PrintNonLeafNodes(Node *ipNode)
+void BinaryTree::RetrieveNonLeafNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes)
 {
     if (nullptr == ipNode)
     {
@@ -650,15 +846,15 @@ void BinaryTree::PrintNonLeafNodes(Node *ipNode)
 
     if ((nullptr != ipNode->GetLeftNode()) || (nullptr != ipNode->GetRightNode()))
     {
-        std::cout << ipNode->GetData() << " ";
+        iovNodes.push_back(ipNode);
 
-        PrintNonLeafNodes(ipNode->GetLeftNode());
-        PrintNonLeafNodes(ipNode->GetRightNode());
+        RetrieveNonLeafNodesOfBinaryTreeNode(ipNode->GetLeftNode(), iovNodes);
+        RetrieveNonLeafNodesOfBinaryTreeNode(ipNode->GetRightNode(), iovNodes);
     }
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::PrintLeftBoundaryNodes(Node *ipNode)
+void BinaryTree::RetrieveLeftBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes)
 {
     if (nullptr == ipNode)
     {
@@ -674,13 +870,13 @@ void BinaryTree::PrintLeftBoundaryNodes(Node *ipNode)
 
     if (nullptr != pNode)
     {
-        std::cout << ipNode->GetData() << " ";
-        PrintLeftBoundaryNodes(ipNode);
+        iovNodes.push_back(ipNode);
+        RetrieveLeftBoundaryNodesOfBinaryTreeNode(pNode, iovNodes);
     }
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::PrintRightBoundaryNodes(Node *ipNode)
+void BinaryTree::RetrieveRightBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes)
 {
     if (nullptr == ipNode)
     {
@@ -696,8 +892,8 @@ void BinaryTree::PrintRightBoundaryNodes(Node *ipNode)
 
     if (nullptr != pNextNode)
     {
-        std::cout << ipNode->GetData() << " ";
-        PrintRightBoundaryNodes(pNextNode);
+        iovNodes.push_back(ipNode);
+        RetrieveRightBoundaryNodesOfBinaryTreeNode(pNextNode, iovNodes);
     }
 }
 
@@ -859,4 +1055,20 @@ bool BinaryTree::PrintAncestor(Node *ipNode, int inData)
     }
 
     return bFound;
+}
+
+//-------------------------------------------------------------------
+int BinaryTree::HeightOfSubBinaryTree(Node *ipNode)
+{
+    int nHeight(-1);
+
+    if (nullptr != ipNode)
+    {
+        int nLHeight = HeightOfSubBinaryTree(ipNode->GetLeftNode());
+        int nRHeight = HeightOfSubBinaryTree(ipNode->GetRightNode());
+
+        nHeight = (nLHeight > nRHeight) ? (nLHeight + 1) : (nRHeight + 1);
+    }
+
+    return nHeight;
 }
