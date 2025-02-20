@@ -100,12 +100,8 @@ public:
     void PostOrderTraversal();
 
     /**
-<<<<<<< HEAD
      * @brief Performs a level-order traversal of the binary tree
      * @details Prints all elements in the binary tree in level-order sequence.
-=======
-     * @brief Prints all elements in the binary tree in level-order sequence.
->>>>>>> BinTree
      */
     void LevelOrderTraversal();
 
@@ -114,20 +110,12 @@ public:
     /**
      * @brief Performs a reverse level-order traversal of the binary tree
      * @details Prints all elements in the binary tree in level-order sequence in reverse manner.
-<<<<<<< HEAD
-     * @warning not implemented
-=======
->>>>>>> BinTree
      */
     void ReverseLevelOrderTraversal();
 
     /**
      * @brief Performs a spiral order traversal of the binary tree
      * @details Prints all elements in the binary tree in spiral order sequence.
-<<<<<<< HEAD
-     * @warning not implemented
-=======
->>>>>>> BinTree
      */
     void SpiralOrderTraversal();
 
