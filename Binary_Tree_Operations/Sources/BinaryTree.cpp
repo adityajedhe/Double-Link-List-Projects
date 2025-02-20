@@ -258,16 +258,20 @@ void BinaryTree::ReverseLevelOrderTraversal()
         return;
     }
 
-    std::vector<Node *> vNodes;
+    std::deque<Node *> dqNodes;
 
-    LevelOrderTraversalOfBinaryTreeNode(_pRootNode, vNodes);
-
-    std::reverse(vNodes.begin(), vNodes.end());
+    ReverseLevelOrderTraversalOfBinaryTreeNode(_pRootNode, dqNodes);
 
     std::cout << "Reverse-level order traversal: ";
 
-    for (auto pNode : vNodes)
+    Node *pNode = nullptr;
+
+    while (!dqNodes.empty())
     {
+        pNode = dqNodes.front();
+
+        dqNodes.pop_front();
+
         if (nullptr != pNode)
         {
             std::cout << pNode->GetData() << " ";
@@ -695,62 +699,56 @@ void BinaryTree::LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vect
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::ReverseLevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
+void BinaryTree::ReverseLevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::deque<Node *> &odqNodes)
 {
-    bool bTraverseDirection(true);
+    std::deque<Node *> dqNextLevelNodes;
 
-    std::stack<Node *> sAllNodes;
-    std::queue<Node *> qCurrentLevel;
+    std::deque<Node *> dqCurrentLevel;
 
-    ovNodes.push_back(ipRootNode);
-    qCurrentLevel.push(ipRootNode);
+    odqNodes.push_front(ipRootNode);
+    dqCurrentLevel.push_back(ipRootNode);
 
     Node *pNode = nullptr;
     Node *pLNode = nullptr;
     Node *pRNode = nullptr;
 
-    while (1)
+    while (!dqCurrentLevel.empty())
     {
-        while (!qCurrentLevel.empty())
+        pNode = dqCurrentLevel.front();
+
+        dqCurrentLevel.pop_front();
+
+        if (nullptr == pNode)
         {
-            pNode = qCurrentLevel.front();
-
-            if (nullptr == pNode)
-            {
-                continue;
-            }
-
-            pLNode = pNode->GetLeftNode();
-            pRNode = pNode->GetRightNode();
-
-            if (nullptr != pLNode)
-            {
-                sAllNodes.push(pLNode);
-            }
-
-            if (nullptr != pRNode)
-            {
-                sAllNodes.push(pRNode);
-            }
+            continue;
         }
 
-        if (sAllNodes.empty())
+        pLNode = pNode->GetLeftNode();
+        pRNode = pNode->GetRightNode();
+
+        if (nullptr != pLNode)
         {
-            break;
+            dqNextLevelNodes.push_back(pLNode);
         }
 
-        // vTemp.insert(vTemp.begin(), vNodesAtALevel.begin(), vNodesAtALevel.end());
-
-        if (bTraverseDirection)
+        if (nullptr != pRNode)
         {
-            // std::reverse(vNodesAtALevel.begin(), vNodesAtALevel.end());
+            dqNextLevelNodes.push_back(pRNode);
         }
 
-        bTraverseDirection = !bTraverseDirection;
+        if (dqCurrentLevel.empty())
+        {
+            dqCurrentLevel = dqNextLevelNodes;
 
-        // ovNodes.insert(ovNodes.end(), vNodesAtALevel.begin(), vNodesAtALevel.end());
+            while (!dqNextLevelNodes.empty())
+            {
+                pNode = dqNextLevelNodes.back();
 
-        // vNodesAtALevel.l;
+                dqNextLevelNodes.pop_back();
+
+                odqNodes.push_front(pNode);
+            }
+        }
     }
 }
 
