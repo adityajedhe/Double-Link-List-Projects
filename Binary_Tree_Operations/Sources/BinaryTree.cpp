@@ -16,6 +16,7 @@
 // ---------------------------------------------- System Headers
 #include <iostream>
 #include <queue>
+#include <algorithm>
 #include <thread>
 
 //-------------------------------------------------------------------
@@ -757,63 +758,62 @@ void BinaryTree::SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vec
 {
     bool bTraverseDirection(true);
 
-    std::vector<Node *> vNodesAtNextLevel;
-    std::queue<Node *> qCurrentLevel;
+    std::deque<Node *> dqNodesAtNextLevel;
+    std::deque<Node *> dqCurrentLevel;
 
     ovNodes.push_back(ipRootNode);
-    qCurrentLevel.push(ipRootNode);
+    dqCurrentLevel.push_back(ipRootNode);
 
     Node *pNode = nullptr;
     Node *pLNode = nullptr;
     Node *pRNode = nullptr;
 
-    while (1)
+    while (!dqCurrentLevel.empty())
     {
-        if (!qCurrentLevel.empty())
+        pNode = dqCurrentLevel.front();
+
+        dqCurrentLevel.pop_front();
+
+        if (nullptr == pNode)
         {
-            pNode = qCurrentLevel.front();
+            continue;
+        }
 
-            qCurrentLevel.pop();
+        pLNode = pNode->GetLeftNode();
+        pRNode = pNode->GetRightNode();
 
-            if (nullptr == pNode)
+        if (nullptr != pLNode)
+        {
+            dqNodesAtNextLevel.push_back(pLNode);
+        }
+
+        if (nullptr != pRNode)
+        {
+            dqNodesAtNextLevel.push_back(pRNode);
+        }
+
+        if (dqCurrentLevel.empty())
+        {
+            dqCurrentLevel = dqNodesAtNextLevel;
+
+            while (!dqNodesAtNextLevel.empty())
             {
-                continue;
+                if (bTraverseDirection)
+                {
+                    pNode = dqNodesAtNextLevel.back();
+                    dqNodesAtNextLevel.pop_back();
+                }
+                else
+                {
+                    pNode = dqNodesAtNextLevel.front();
+                    dqNodesAtNextLevel.pop_front();
+                }
+
+                ovNodes.push_back(pNode);
             }
 
-            pLNode = pNode->GetLeftNode();
-            pRNode = pNode->GetRightNode();
-
-            if (nullptr != pLNode)
-            {
-                vNodesAtNextLevel.push_back(pLNode);
-            }
-
-            if (nullptr != pRNode)
-            {
-                vNodesAtNextLevel.push_back(pRNode);
-            }
+            bTraverseDirection = !bTraverseDirection;
         }
-
-        if (0 == vNodesAtNextLevel.size())
-        {
-            break;
-        }
-
-        for (auto pNode : vNodesAtNextLevel)
-        {
-            qCurrentLevel.push(pNode);
-        }
-
-        if (bTraverseDirection)
-        {
-            std::reverse(vNodesAtNextLevel.begin(), vNodesAtNextLevel.end());
-        }
-
-        bTraverseDirection = !bTraverseDirection;
-
-        ovNodes.insert(ovNodes.end(), vNodesAtNextLevel.begin(), vNodesAtNextLevel.end());
-
-        vNodesAtNextLevel.clear();
     }
 }
 
