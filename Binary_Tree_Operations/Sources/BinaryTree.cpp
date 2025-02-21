@@ -382,11 +382,28 @@ void BinaryTree::PrintBoundaryNodes()
             std::cout << pNode->GetData() << " ";
         }
     }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
 void BinaryTree::PrintAllFullNodes()
 {
+    std::vector<Node *> vNodes;
+
+    PrintFullNodes(_pRootNode, vNodes);
+
+    std::cout << "Full nodes: ";
+
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -895,6 +912,27 @@ void BinaryTree::RetrieveRightBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::v
         iovNodes.push_back(ipNode);
         RetrieveRightBoundaryNodesOfBinaryTreeNode(pNextNode, iovNodes);
     }
+}
+
+//-------------------------------------------------------------------
+void BinaryTree::PrintFullNodes(Node *ipNode, std::vector<Node *> &iovNodes)
+{
+    if (nullptr == ipNode)
+    {
+        return;
+    }
+
+    Node *pLNode = ipNode->GetLeftNode();
+    Node *pRNode = ipNode->GetRightNode();
+
+    if (((nullptr == pLNode) && (nullptr == pRNode)) ||
+        ((nullptr != pLNode) && (nullptr != pRNode)))
+    {
+        iovNodes.push_back(ipNode);
+    }
+
+    PrintFullNodes(pLNode, iovNodes);
+    PrintFullNodes(pRNode, iovNodes);
 }
 
 //-------------------------------------------------------------------

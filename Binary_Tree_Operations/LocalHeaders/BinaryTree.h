@@ -136,7 +136,6 @@ public:
 
     /**
      * @brief Prints all nodes of binary tree which are having 0 or 2 children
-     * @warning not implemented
      */
     void PrintAllFullNodes();
 
@@ -305,11 +304,18 @@ private:
     void RetrieveLeftBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
 
     /**
-     * @brief Prints all right boundary nodes of sub-binary tree having root node as given node
+     * @brief Retrieves all right boundary nodes of sub-binary tree having root node as given node
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
     void RetrieveRightBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+
+    /**
+     * @brief Retrieves all full nodes of sub-binary tree whose root is ipNode
+     * @param[in] ipNode Node to traverse
+     * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
+     */
+    void PrintFullNodes(Node *ipNode, std::vector<Node *> &iovNodes);
 
     /**
      * @brief Prints all nodes at a distance k from the root node
