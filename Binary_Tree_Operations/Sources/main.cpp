@@ -69,6 +69,7 @@ int main()
     pBinaryTree->PrintNonLeafNodes();
     pBinaryTree->PrintBoundaryNodes();
     pBinaryTree->PrintAllFullNodes();
+    pBinaryTree->PrintAllHalfNodes();
 
     BinaryTree::RemoveBinaryTree(pBinaryTree);
 

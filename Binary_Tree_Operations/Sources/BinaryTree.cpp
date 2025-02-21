@@ -409,6 +409,21 @@ void BinaryTree::PrintAllFullNodes()
 //-------------------------------------------------------------------
 void BinaryTree::PrintAllHalfNodes()
 {
+    std::vector<Node *> vNodes;
+
+    PrintHalfNodes(_pRootNode, vNodes);
+
+    std::cout << "Half nodes: ";
+
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -933,6 +948,27 @@ void BinaryTree::PrintFullNodes(Node *ipNode, std::vector<Node *> &iovNodes)
 
     PrintFullNodes(pLNode, iovNodes);
     PrintFullNodes(pRNode, iovNodes);
+}
+
+//-------------------------------------------------------------------
+void BinaryTree::PrintHalfNodes(Node *ipNode, std::vector<Node *> &iovNodes)
+{
+    if (nullptr == ipNode)
+    {
+        return;
+    }
+
+    Node *pLNode = ipNode->GetLeftNode();
+    Node *pRNode = ipNode->GetRightNode();
+
+    if (((nullptr != pLNode) && (nullptr == pRNode)) ||
+        ((nullptr == pLNode) && (nullptr != pRNode)))
+    {
+        iovNodes.push_back(ipNode);
+    }
+
+    PrintHalfNodes(pLNode, iovNodes);
+    PrintHalfNodes(pRNode, iovNodes);
 }
 
 //-------------------------------------------------------------------

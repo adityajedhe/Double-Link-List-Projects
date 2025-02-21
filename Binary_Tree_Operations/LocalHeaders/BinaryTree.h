@@ -318,6 +318,13 @@ private:
     void PrintFullNodes(Node *ipNode, std::vector<Node *> &iovNodes);
 
     /**
+     * @brief Retrieves all half nodes of sub-binary tree whose root is ipNode
+     * @param[in] ipNode Node to traverse
+     * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
+     */
+    void PrintHalfNodes(Node *ipNode, std::vector<Node *> &iovNodes);
+
+    /**
      * @brief Prints all nodes at a distance k from the root node
      * @param[in] ipNode Node to traverse
      * @param[in] inKDistance Distance from the root node
