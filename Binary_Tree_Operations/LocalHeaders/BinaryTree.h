@@ -229,7 +229,7 @@ private:
      * @param[in, out] iodqNodes Dequeue to store all the nodes while traversing to the node
      * @return true if found. Otherwise false.
      */
-    bool FindDistanceFromNode(Node *ipNode, int inData, std::deque<Node *> &iodqNodes);
+    bool SearchInBinaryTree(Node *ipNode, int inData, std::deque<Node *> &iodqNodes);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node

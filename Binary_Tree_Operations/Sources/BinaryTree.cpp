@@ -150,7 +150,7 @@ int BinaryTree::SearchInBinaryTree(int inData)
 
     std::deque<Node *> dqNodes;
 
-    bool bFound = FindDistanceFromNode(_pRootNode, inData, dqNodes);
+    bool bFound = SearchInBinaryTree(_pRootNode, inData, dqNodes);
 
     if (bFound)
     {
@@ -479,7 +479,7 @@ void BinaryTree::PrintAncestors(int inData)
 
     std::deque<Node *> dqNodes;
 
-    bool bFound = FindDistanceFromNode(_pRootNode, inData, dqNodes);
+    bool bFound = SearchInBinaryTree(_pRootNode, inData, dqNodes);
 
     if (bFound)
     {
@@ -512,7 +512,7 @@ void BinaryTree::PrintAncestor(int inData)
 {
     std::deque<Node *> dqNodes;
 
-    bool bFound = FindDistanceFromNode(_pRootNode, inData, dqNodes);
+    bool bFound = SearchInBinaryTree(_pRootNode, inData, dqNodes);
 
     Node *pNode = nullptr;
 
@@ -618,7 +618,7 @@ bool BinaryTree::InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode)
 }
 
 //-------------------------------------------------------------------
-bool BinaryTree::FindDistanceFromNode(Node *ipNode, int inData, std::deque<Node *> &iodqNodes)
+bool BinaryTree::SearchInBinaryTree(Node *ipNode, int inData, std::deque<Node *> &iodqNodes)
 {
     bool bFound(false);
 
@@ -630,11 +630,11 @@ bool BinaryTree::FindDistanceFromNode(Node *ipNode, int inData, std::deque<Node 
         }
         else
         {
-            bFound = FindDistanceFromNode(ipNode->GetLeftNode(), inData, iodqNodes);
+            bFound = SearchInBinaryTree(ipNode->GetLeftNode(), inData, iodqNodes);
 
             if (!bFound)
             {
-                bFound = FindDistanceFromNode(ipNode->GetRightNode(), inData, iodqNodes);
+                bFound = SearchInBinaryTree(ipNode->GetRightNode(), inData, iodqNodes);
             }
 
             if (bFound)
