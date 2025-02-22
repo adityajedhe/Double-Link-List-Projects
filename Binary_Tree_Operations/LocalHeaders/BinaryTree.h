@@ -141,7 +141,6 @@ public:
 
     /**
      * @brief Prints all nodes of binary tree which are having only one child
-     * @warning not implemented
      */
     void PrintAllHalfNodes();
 
@@ -229,10 +228,10 @@ private:
      * @brief Finds the node with the given data element
      * @param[in] ipNode Node to traverse
      * @param[in] inData Data element to find
-     * @param[in, out] iosNodePath Stack to store the path of the node
-     * @return Distance from the given node, if found. Otherwise -1
+     * @param[in, out] iodqNodes Dequeue to store all the nodes while traversing to the node
+     * @return true if found. Otherwise false.
      */
-    int FindDistanceFromNode(Node *ipNode, int inData, std::stack<int> &iosNodePath);
+    bool FindDistanceFromNode(Node *ipNode, int inData, std::deque<Node *> &iodqNodes);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
@@ -346,13 +345,6 @@ private:
      * @param[in] inNodeHeight Height of the node
      */
     void PrintCousins(Node *ipNode, int inData, int inNodeHeight);
-
-    /**
-     * @brief Prints all ancestor nodes of a given data element by traversing the path and printing the nodes
-     * @param[in] ipNode Node to traverse
-     * @param[in, out] iosNodePath Stack to store the path of the node
-     */
-    void PrintAncestors(Node *ipNode, std::stack<int> &iosNodePath);
 
     /**
      * @brief Prints all ancestor nodes of a given data element
