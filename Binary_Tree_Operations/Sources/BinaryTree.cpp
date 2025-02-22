@@ -510,9 +510,25 @@ void BinaryTree::PrintDecendants(int inData)
 //-------------------------------------------------------------------
 void BinaryTree::PrintAncestor(int inData)
 {
-    std::cout << "Ancestor of " << inData << ": ";
+    std::deque<Node *> dqNodes;
 
-    PrintAncestor(_pRootNode, inData);
+    bool bFound = FindDistanceFromNode(_pRootNode, inData, dqNodes);
+
+    Node *pNode = nullptr;
+
+    if (bFound)
+    {
+        pNode = dqNodes.back();
+    }
+
+    if (nullptr != pNode)
+    {
+        std::cout << "Ancestor of " << inData << ": " << pNode->GetData();
+    }
+    else
+    {
+        std::cout << "Node is not found for the given data." << std::endl;
+    }
 
     std::cout << std::endl;
 }
@@ -1039,42 +1055,6 @@ void BinaryTree::PrintCousins(Node *ipNode, int inData, int inNodeHeight)
             PrintAllNodesAtKDistance(pRNode, inNodeHeight - 1);
         }
     }
-}
-
-//-------------------------------------------------------------------
-bool BinaryTree::PrintAncestor(Node *ipNode, int inData)
-{
-    bool bFound(false);
-
-    if (nullptr == ipNode)
-    {
-        return bFound;
-    }
-
-    Node *pLNode = ipNode->GetLeftNode();
-    Node *pRNode = ipNode->GetRightNode();
-
-    if ((nullptr != pLNode) && (pLNode->GetData() == inData))
-    {
-        std::cout << ipNode->GetData() << " ";
-        bFound = true;
-    }
-    else if ((nullptr != pRNode) && (pRNode->GetData() == inData))
-    {
-        std::cout << ipNode->GetData() << " ";
-        bFound = true;
-    }
-    else
-    {
-        bFound = PrintAncestor(pLNode, inData);
-
-        if (!bFound)
-        {
-            bFound = PrintAncestor(pRNode, inData);
-        }
-    }
-
-    return bFound;
 }
 
 //-------------------------------------------------------------------

@@ -105,8 +105,6 @@ public:
      */
     void LevelOrderTraversal();
 
-    void LevelOrderTraversal(std::vector<Node *> &ovNodes);
-
     /**
      * @brief Performs a reverse level-order traversal of the binary tree
      * @details Prints all elements in the binary tree in level-order sequence in reverse manner.
@@ -345,14 +343,6 @@ private:
      * @param[in] inNodeHeight Height of the node
      */
     void PrintCousins(Node *ipNode, int inData, int inNodeHeight);
-
-    /**
-     * @brief Prints all ancestor nodes of a given data element
-     * @param[in] ipNode Node to traverse
-     * @param[in] inData Data element whose ancestors are to be printed
-     * @return True if ancestor is found, false otherwise
-     */
-    bool PrintAncestor(Node *ipNode, int inData);
 
     /**
      * @brief Returns the height of sub binary tree having root node as given node
