@@ -75,7 +75,7 @@ public:
     void DeleteBinaryTreeNode(int inData);
 
     /**
-     * @brief Finds the distance of node with the given data element from the root node
+     * @brief Searches for the node with the given data element from the root node
      * @param[in] inData Data element to find
      * @return Distance from the given node, if found. Otherwise -1
      */
@@ -225,9 +225,9 @@ private:
     bool InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode);
 
     /**
-     * @brief Finds the node with the given data element
+     * @brief Finds the node with the given data
      * @param[in] ipNode Node to traverse
-     * @param[in] inData Data element to find
+     * @param[in] inData Data to be searchedin the binary tree
      * @param[in, out] iodqNodes Dequeue to store all the nodes while traversing to the node
      * @return true if found. Otherwise false.
      */
