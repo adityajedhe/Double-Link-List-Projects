@@ -72,6 +72,7 @@ int main()
     pBinaryTree->PrintAllHalfNodes();
     pBinaryTree->PrintAncestors(30);
     pBinaryTree->PrintAncestor(30);
+    pBinaryTree->PrintDecendants(6);
 
     BinaryTree::RemoveBinaryTree(pBinaryTree);
 

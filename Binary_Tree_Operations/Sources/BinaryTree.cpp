@@ -144,22 +144,22 @@ void BinaryTree::DeleteBinaryTreeNode(int inData)
 }
 
 //-------------------------------------------------------------------
-int BinaryTree::SearchInBinaryTree(int inData)
+bool BinaryTree::SearchInBinaryTree(int inData)
 {
-    int nDistance(-1);
+    bool bFound(false);
 
     std::deque<Node *> dqNodes;
 
-    bool bFound = SearchInBinaryTree(_pRootNode, inData, dqNodes);
+    Node *pNode = SearchInBinaryTree(_pRootNode, inData, dqNodes);
 
-    if (bFound)
+    if (nullptr != pNode)
     {
-        nDistance = dqNodes.size();
-
-        dqNodes.clear();
+        bFound = true;
     }
 
-    return nDistance;
+    dqNodes.clear();
+
+    return bFound;
 }
 
 //-------------------------------------------------------------------
@@ -450,9 +450,11 @@ void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
 //-------------------------------------------------------------------
 void BinaryTree::PrintSibling(int inData)
 {
-    std::cout << "Sibling of " << inData << ": ";
+    std::vector<Node *> vNodes;
 
-    PrintSibling(_pRootNode, inData /*, nDistance*/);
+    PrintSibling(_pRootNode, inData);
+
+    std::cout << "Sibling of " << inData << ": ";
 
     std::cout << std::endl;
 }
@@ -462,9 +464,13 @@ void BinaryTree::PrintCousins(int inData)
 {
     std::cout << "Cousins of " << inData << ": ";
 
-    int nDistance = SearchInBinaryTree(inData);
+    std::deque<Node *> dqNodes;
 
-    PrintCousins(_pRootNode, inData, nDistance);
+    Node *pNode = SearchInBinaryTree(_pRootNode, inData, dqNodes);
+
+    int nLevel = dqNodes.size();
+
+    PrintCousins(_pRootNode, inData, nLevel);
 
     std::cout << std::endl;
 }
@@ -479,9 +485,9 @@ void BinaryTree::PrintAncestors(int inData)
 
     std::deque<Node *> dqNodes;
 
-    bool bFound = SearchInBinaryTree(_pRootNode, inData, dqNodes);
+    Node *pNode = SearchInBinaryTree(_pRootNode, inData, dqNodes);
 
-    if (bFound)
+    if (nullptr != pNode)
     {
         std::cout << "Ancestors of " << inData << ": ";
 
@@ -504,7 +510,26 @@ void BinaryTree::PrintAncestors(int inData)
 //-------------------------------------------------------------------
 void BinaryTree::PrintDecendants(int inData)
 {
-    std::cout << inData;
+    if (IsEmpty())
+    {
+        return;
+    }
+
+    std::vector<Node *> vNodes;
+
+    RetrieveDecendants(_pRootNode, inData, vNodes);
+
+    std::cout << "Decendants of " << inData << ": ";
+
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
+
+    std::cout << std::endl;
 }
 
 //-------------------------------------------------------------------
@@ -618,33 +643,33 @@ bool BinaryTree::InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode)
 }
 
 //-------------------------------------------------------------------
-bool BinaryTree::SearchInBinaryTree(Node *ipNode, int inData, std::deque<Node *> &iodqNodes)
+Node *BinaryTree::SearchInBinaryTree(Node *ipNode, int inData, std::deque<Node *> &iodqNodes)
 {
-    bool bFound(false);
+    Node *pNode = nullptr;
 
     if (nullptr != ipNode)
     {
         if (ipNode->GetData() == inData)
         {
-            bFound = true;
+            pNode = ipNode;
         }
         else
         {
-            bFound = SearchInBinaryTree(ipNode->GetLeftNode(), inData, iodqNodes);
+            pNode = SearchInBinaryTree(ipNode->GetLeftNode(), inData, iodqNodes);
 
-            if (!bFound)
+            if (nullptr == pNode)
             {
-                bFound = SearchInBinaryTree(ipNode->GetRightNode(), inData, iodqNodes);
+                pNode = SearchInBinaryTree(ipNode->GetRightNode(), inData, iodqNodes);
             }
 
-            if (bFound)
+            if (pNode)
             {
                 iodqNodes.push_front(ipNode);
             }
         }
     }
 
-    return bFound;
+    return pNode;
 }
 
 //-------------------------------------------------------------------
@@ -1056,6 +1081,24 @@ void BinaryTree::PrintCousins(Node *ipNode, int inData, int inNodeHeight)
         {
             PrintAllNodesAtKDistance(pLNode, inNodeHeight - 1);
             PrintAllNodesAtKDistance(pRNode, inNodeHeight - 1);
+        }
+    }
+}
+
+//-------------------------------------------------------------------
+void BinaryTree::RetrieveDecendants(Node *ipNode, int inData, std::vector<Node *> &iovNodes)
+{
+    if (nullptr != ipNode)
+    {
+        if (ipNode->GetData() == inData)
+        {
+            iovNodes.push_back(ipNode);
+
+            RetrieveDecendants(ipNode->GetLeftNode(), inData, iovNodes);
+            RetrieveDecendants(ipNode->GetRightNode(), inData, iovNodes);
+        }
+        else
+        {
         }
     }
 }

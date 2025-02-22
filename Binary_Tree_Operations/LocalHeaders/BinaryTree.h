@@ -79,7 +79,7 @@ public:
      * @param[in] inData Data element to find
      * @return Distance from the given node, if found. Otherwise -1
      */
-    int SearchInBinaryTree(int inData);
+    bool SearchInBinaryTree(int inData);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree
@@ -169,7 +169,6 @@ public:
     /**
      * @brief Prints all decendant nodes of a given data element
      * @param[in] inData Data element whose ancestors are to be printed
-     * @warning not implemented
      */
     void PrintDecendants(int inData);
 
@@ -227,9 +226,9 @@ private:
      * @param[in] ipNode Node to traverse
      * @param[in] inData Data to be searchedin the binary tree
      * @param[in, out] iodqNodes Dequeue to store all the nodes while traversing to the node
-     * @return true if found. Otherwise false.
+     * @return Pointer of node. Otherwise nullptr.
      */
-    bool SearchInBinaryTree(Node *ipNode, int inData, std::deque<Node *> &iodqNodes);
+    Node *SearchInBinaryTree(Node *ipNode, int inData, std::deque<Node *> &iodqNodes);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
@@ -274,7 +273,7 @@ private:
     /**
      * @brief Performs a level-order traversal of the binary tree in spiral manner.
      * @details Each level of sub-binary tree is traversed in spiral level-order sequence and the nodes are added to the vector.
-     * @param[in] ipNode Node to traverse
+     * @param[in] ipRootNode Node to traverse
      * @param[out] ovNodes Vector containing list of pointers of ouput nodes
      */
     void SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes);
@@ -343,6 +342,14 @@ private:
      * @param[in] inNodeHeight Height of the node
      */
     void PrintCousins(Node *ipNode, int inData, int inNodeHeight);
+
+    /**
+     * @brief Retrieve all decendant nodes of a given data
+     * @param[in] ipNode Node to traverse
+     * @param[in] inData Data element whose ancestors are to be printed
+     * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
+     */
+    void RetrieveDecendants(Node *ipNode, int inData, std::vector<Node *> &iovNodes);
 
     /**
      * @brief Returns the height of sub binary tree having root node as given node
