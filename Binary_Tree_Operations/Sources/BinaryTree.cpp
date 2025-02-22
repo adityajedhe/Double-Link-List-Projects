@@ -472,8 +472,6 @@ void BinaryTree::PrintCousins(int inData)
 //-------------------------------------------------------------------
 void BinaryTree::PrintAncestors(int inData)
 {
-    std::cout << "Ancestors of " << inData << ": ";
-
     if (IsEmpty())
     {
         return;
@@ -485,6 +483,8 @@ void BinaryTree::PrintAncestors(int inData)
 
     if (bFound)
     {
+        std::cout << "Ancestors of " << inData << ": ";
+
         for (auto pNode : dqNodes)
         {
             if (nullptr != pNode)
@@ -635,7 +635,10 @@ bool BinaryTree::FindDistanceFromNode(Node *ipNode, int inData, std::deque<Node 
             if (!bFound)
             {
                 bFound = FindDistanceFromNode(ipNode->GetRightNode(), inData, iodqNodes);
+            }
 
+            if (bFound)
+            {
                 iodqNodes.push_front(ipNode);
             }
         }
