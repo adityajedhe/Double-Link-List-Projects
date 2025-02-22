@@ -321,11 +321,12 @@ private:
     void PrintHalfNodes(Node *ipNode, std::vector<Node *> &iovNodes);
 
     /**
-     * @brief Prints all nodes at a distance k from the root node
+     * @brief Retrieves all nodes at a distance k from the root node
      * @param[in] ipNode Node to traverse
      * @param[in] inKDistance Distance from the root node
+     * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void PrintAllNodesAtKDistance(Node *ipNode, int inKDistance);
+    void RetrieveAllNodesAtKDistance(Node *ipNode, int inKDistance, std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves sibling node of a given data

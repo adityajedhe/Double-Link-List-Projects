@@ -440,9 +440,19 @@ void BinaryTree::PrintAllHalfNodes()
 //-------------------------------------------------------------------
 void BinaryTree::PrintAllNodesAtKDistance(int inKDistance)
 {
+    std::vector<Node *> vNodes;
+
+    RetrieveAllNodesAtKDistance(_pRootNode, inKDistance, vNodes);
+
     std::cout << "All nodes at 'k' distance: ";
 
-    PrintAllNodesAtKDistance(_pRootNode, inKDistance);
+    for (auto pNode : vNodes)
+    {
+        if (nullptr != pNode)
+        {
+            std::cout << pNode->GetData() << " ";
+        }
+    }
 
     std::cout << std::endl;
 }
@@ -999,21 +1009,19 @@ void BinaryTree::PrintHalfNodes(Node *ipNode, std::vector<Node *> &iovNodes)
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::PrintAllNodesAtKDistance(Node *ipNode, int inKDistance)
+void BinaryTree::RetrieveAllNodesAtKDistance(Node *ipNode, int inKDistance, std::vector<Node *> &iovNodes)
 {
-    if (nullptr == ipNode)
+    if (nullptr != ipNode)
     {
-        return;
-    }
-
-    if (0 == inKDistance)
-    {
-        std::cout << ipNode->GetData() << " ";
-    }
-    else
-    {
-        PrintAllNodesAtKDistance(ipNode->GetLeftNode(), inKDistance - 1);
-        PrintAllNodesAtKDistance(ipNode->GetRightNode(), inKDistance - 1);
+        if (0 == inKDistance)
+        {
+            iovNodes.push_back(ipNode);
+        }
+        else
+        {
+            RetrieveAllNodesAtKDistance(ipNode->GetLeftNode(), inKDistance - 1, iovNodes);
+            RetrieveAllNodesAtKDistance(ipNode->GetRightNode(), inKDistance - 1, iovNodes);
+        }
     }
 }
 
