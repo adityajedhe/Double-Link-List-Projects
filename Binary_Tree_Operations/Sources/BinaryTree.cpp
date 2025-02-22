@@ -157,8 +157,6 @@ bool BinaryTree::SearchInBinaryTree(int inData)
         bFound = true;
     }
 
-    dqNodes.clear();
-
     return bFound;
 }
 
@@ -529,11 +527,6 @@ void BinaryTree::PrintAncestors(int inData)
 //-------------------------------------------------------------------
 void BinaryTree::PrintDecendants(int inData)
 {
-    if (IsEmpty())
-    {
-        return;
-    }
-
     std::deque<Node *> dqNodes;
 
     Node *pNode = SearchInBinaryTree(_pRootNode, inData, dqNodes);
@@ -724,7 +717,6 @@ void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<No
     if (nullptr != ipNode)
     {
         PostOrderTraversalOfBinaryTreeNode(ipNode->GetLeftNode(), iovNodes);
-
         PostOrderTraversalOfBinaryTreeNode(ipNode->GetRightNode(), iovNodes);
 
         iovNodes.push_back(ipNode);
@@ -926,6 +918,7 @@ void BinaryTree::RetrieveLeftBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::ve
         if (nullptr != pNode)
         {
             iovNodes.push_back(ipNode);
+
             RetrieveLeftBoundaryNodesOfBinaryTreeNode(pNode, iovNodes);
         }
     }
@@ -946,6 +939,7 @@ void BinaryTree::RetrieveRightBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::v
         if (nullptr != pNextNode)
         {
             iovNodes.push_back(ipNode);
+
             RetrieveRightBoundaryNodesOfBinaryTreeNode(pNextNode, iovNodes);
         }
     }
