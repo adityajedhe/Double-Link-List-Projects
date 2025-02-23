@@ -48,13 +48,13 @@ public:
     bool IsEmpty();
 
     /**
-     * @brief Inserts a new value into the binary tree while maintaining
-     *        the properties of a complete binary tree.
-     * @details This function inserts a new value into the binary tree while maintaining the properties of a complete binary tree.
-     * It inserts the node at each level. Once the level is full, the node is inserted at the next level.
+     * @brief Inserts a new node into a binary tree.
+     * @details This function inserts a new value into the binary tree while maintaining the properties of a complete binary tree. It inserts the node at each level.
+     * Once the level is full, the node is inserted at the next level.
      * @param[in] inData The integer value to be inserted into the binary tree.
+     * @see DeleteBinaryTreeNode() for removing a node from the binary tree.
      */
-    void InsertInBinaryTree(int inData);
+    void InsertNodeInBinaryTree(int inData);
 
     /**
      * @brief Inserts a new data into the binary search tree
@@ -65,7 +65,7 @@ public:
      * has a value greater than the parent node.
      * @param[in] inData Data to insert
      */
-    void InsertInBinarySearchTree(int inData);
+    void InsertNodeInBinarySearchTree(int inData);
 
     /**
      * @brief Deletes a data from the binary tree
@@ -209,17 +209,6 @@ private:
      * @param[in] ipParentNode Parent node whose children are to be removed
      */
     void RemoveChildren(Node *ipParentNode);
-
-    /**
-     * @brief Inserts a new node into a binary tree.
-     * @details This function inserts the specified new node into the binary tree at the appropriate
-     * position based on the level.
-     * @param[in] ipNode Pointer to the current node in the binary tree where the new node
-     *                   will be inserted. If this is null, the new node will become the root.
-     * @param[in] ipNewNode Pointer to the new node that needs to be inserted into the tree.
-     * @see DeleteBinaryTreeNode() for removing a node from the binary tree.
-     */
-    bool InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode);
 
     /**
      * @brief Finds the node with the given data

@@ -59,7 +59,7 @@ bool BinaryTree::IsEmpty()
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::InsertInBinaryTree(int inData)
+void BinaryTree::InsertNodeInBinaryTree(int inData)
 {
     /**
      * Create a new node with the data and
@@ -76,7 +76,52 @@ void BinaryTree::InsertInBinaryTree(int inData)
 
     if (nullptr != _pRootNode)
     {
-        InsertNodeInBinaryTree(_pRootNode, pNewNode);
+        bool bNodeInserted(false);
+
+        Node *pNode = nullptr;
+        Node *pLNode = nullptr;
+        Node *pRNode = nullptr;
+
+        std::queue<Node *> qNodes;
+
+        qNodes.push(_pRootNode);
+
+        while ((!qNodes.empty()) && (!bNodeInserted))
+        {
+            pNode = qNodes.front();
+
+            qNodes.pop();
+
+            if (nullptr == pNode)
+            {
+                continue;
+            }
+
+            pLNode = pNode->GetLeftNode();
+            pRNode = pNode->GetRightNode();
+
+            if (nullptr == pLNode)
+            {
+                pNode->SetLeftNode(pNewNode);
+
+                bNodeInserted = true;
+            }
+            else
+            {
+                qNodes.push(pLNode);
+
+                if (nullptr == pRNode)
+                {
+                    pNode->SetRightNode(pNewNode);
+
+                    bNodeInserted = true;
+                }
+                else
+                {
+                    qNodes.push(pRNode);
+                }
+            }
+        }
     }
     else
     {
@@ -85,7 +130,7 @@ void BinaryTree::InsertInBinaryTree(int inData)
 }
 
 //-------------------------------------------------------------------
-void BinaryTree::InsertInBinarySearchTree(int inData)
+void BinaryTree::InsertNodeInBinarySearchTree(int inData)
 {
     /**
      * Create a new node with the data
@@ -616,44 +661,6 @@ void BinaryTree::RemoveChildren(Node *ipParentNode)
         pLNode = nullptr;
         pRNode = nullptr;
     }
-}
-
-//-------------------------------------------------------------------
-bool BinaryTree::InsertNodeInBinaryTree(Node *ipNode, Node *ipNewNode)
-{
-    if ((nullptr == ipNode) && (nullptr == ipNewNode))
-    {
-        return false;
-    }
-
-    bool bNodeInserted(false);
-
-    Node *pLNode = ipNode->GetLeftNode();
-    Node *pRNode = ipNode->GetRightNode();
-
-    if (nullptr == pLNode)
-    {
-        ipNode->SetLeftNode(ipNewNode);
-
-        bNodeInserted = true;
-    }
-    else if (nullptr == pRNode)
-    {
-        ipNode->SetRightNode(ipNewNode);
-
-        bNodeInserted = true;
-    }
-    else
-    {
-        bNodeInserted = InsertNodeInBinaryTree(pLNode, ipNewNode);
-
-        if (!bNodeInserted)
-        {
-            bNodeInserted = InsertNodeInBinaryTree(pRNode, ipNewNode);
-        }
-    }
-
-    return bNodeInserted;
 }
 
 //-------------------------------------------------------------------
