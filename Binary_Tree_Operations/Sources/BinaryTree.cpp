@@ -92,33 +92,31 @@ void BinaryTree::InsertNodeInBinaryTree(int inData)
 
             qNodes.pop();
 
-            if (nullptr == pNode)
+            if (nullptr != pNode)
             {
-                continue;
-            }
+                pLNode = pNode->GetLeftNode();
+                pRNode = pNode->GetRightNode();
 
-            pLNode = pNode->GetLeftNode();
-            pRNode = pNode->GetRightNode();
-
-            if (nullptr == pLNode)
-            {
-                pNode->SetLeftNode(pNewNode);
-
-                bNodeInserted = true;
-            }
-            else
-            {
-                qNodes.push(pLNode);
-
-                if (nullptr == pRNode)
+                if (nullptr == pLNode)
                 {
-                    pNode->SetRightNode(pNewNode);
+                    pNode->SetLeftNode(pNewNode);
 
                     bNodeInserted = true;
                 }
                 else
                 {
-                    qNodes.push(pRNode);
+                    qNodes.push(pLNode);
+
+                    if (nullptr == pRNode)
+                    {
+                        pNode->SetRightNode(pNewNode);
+
+                        bNodeInserted = true;
+                    }
+                    else
+                    {
+                        qNodes.push(pRNode);
+                    }
                 }
             }
         }
@@ -734,6 +732,8 @@ void BinaryTree::PostOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<No
 void BinaryTree::LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes)
 {
     Node *pNode = nullptr;
+    Node *pLNode = nullptr;
+    Node *pRNode = nullptr;
 
     ovNodes.push_back(ipRootNode);
 
@@ -741,22 +741,20 @@ void BinaryTree::LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vect
     {
         pNode = ovNodes[nIdx];
 
-        if (nullptr == pNode)
+        if (nullptr != pNode)
         {
-            continue;
-        }
+            pLNode = pNode->GetLeftNode();
+            pRNode = pNode->GetRightNode();
 
-        Node *pLNode = pNode->GetLeftNode();
-        Node *pRNode = pNode->GetRightNode();
+            if (nullptr != pLNode)
+            {
+                ovNodes.push_back(pLNode);
+            }
 
-        if (nullptr != pLNode)
-        {
-            ovNodes.push_back(pLNode);
-        }
-
-        if (nullptr != pRNode)
-        {
-            ovNodes.push_back(pRNode);
+            if (nullptr != pRNode)
+            {
+                ovNodes.push_back(pRNode);
+            }
         }
     }
 }
@@ -1065,23 +1063,21 @@ void BinaryTree::RetrieveCousins(Node *ipRootNode, int inData, std::vector<Node 
 
         qCurrLevelNodes.pop();
 
-        if (nullptr == pNode)
+        if (nullptr != pNode)
         {
-            continue;
-        }
+            pLNode = pNode->GetLeftNode();
+            pRNode = pNode->GetRightNode();
 
-        pLNode = pNode->GetLeftNode();
-        pRNode = pNode->GetRightNode();
-
-        if (((nullptr != pLNode) && (pLNode->GetData() == inData)) ||
-            ((nullptr != pRNode) && (pRNode->GetData() == inData)))
-        {
-            bFound = true;
-        }
-        else
-        {
-            qNextLevelNodes.push(pLNode);
-            qNextLevelNodes.push(pRNode);
+            if (((nullptr != pLNode) && (pLNode->GetData() == inData)) ||
+                ((nullptr != pRNode) && (pRNode->GetData() == inData)))
+            {
+                bFound = true;
+            }
+            else
+            {
+                qNextLevelNodes.push(pLNode);
+                qNextLevelNodes.push(pRNode);
+            }
         }
 
         if ((qCurrLevelNodes.empty()) && (!bFound))
