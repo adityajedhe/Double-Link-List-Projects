@@ -1,6 +1,8 @@
 # Exclude all directories from being tracked by Git
 .vscode/
 Docs/
+out/
+build/
 
 # Prerequisites
 *.d
