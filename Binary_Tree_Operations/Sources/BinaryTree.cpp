@@ -622,7 +622,16 @@ int BinaryTree::HeightOfBinaryTree()
 //-------------------------------------------------------------------
 int BinaryTree::FindLevelOfNode(int inData)
 {
-    return inData;
+    int nLevel(-1);
+
+    std::deque<Node *> dqNodes;
+
+    if (SearchInBinaryTree(_pRootNode, inData, dqNodes))
+    {
+        nLevel = dqNodes.size();
+    }
+
+    return nLevel;
 }
 
 //===================================================================

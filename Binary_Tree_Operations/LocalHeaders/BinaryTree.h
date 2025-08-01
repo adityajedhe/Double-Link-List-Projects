@@ -189,7 +189,6 @@ public:
      * @brief Returns the level of node in the binary tree
      * @details Level of the node in binary tree is the number of nodes required to traverse from root node
      * @return Level of node in binary tree
-     * @warning not implemented
      */
     int FindLevelOfNode(int inData);
 
@@ -212,12 +211,12 @@ private:
 
     /**
      * @brief Finds the node with the given data
-     * @param[in] ipNode Node to traverse
+     * @param[in] ipRootNode Root node of sub-binary tree
      * @param[in] inData Data to be searchedin the binary tree
      * @param[in, out] iodqNodes Dequeue to store all the nodes while traversing to the node
      * @return Pointer of node. Otherwise nullptr.
      */
-    Node *SearchInBinaryTree(Node *ipNode, int inData, std::deque<Node *> &iodqNodes);
+    Node *SearchInBinaryTree(Node *ipRootNode, int inData, std::deque<Node *> &iodqNodes);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
