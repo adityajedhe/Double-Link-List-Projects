@@ -216,7 +216,9 @@ private:
      * @param[in, out] iodqNodes Dequeue to store all the nodes while traversing to the node
      * @return Pointer of node. Otherwise nullptr.
      */
-    Node *SearchInBinaryTree(Node *ipRootNode, int inData, std::deque<Node *> &iodqNodes);
+    Node *SearchInBinaryTree(Node *ipRootNode,
+                             int inData,
+                             std::deque<Node *> &iodqNodes);
 
     /**
      * @brief Performs an pre-order traversal of the binary tree node
@@ -224,7 +226,8 @@ private:
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void PreOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+    void PreOrderTraversalOfBinaryTreeNode(Node *ipNode,
+                                           std::vector<Node *> &iovNodes);
 
     /**
      * @brief Performs an in-order traversal of the binary tree node
@@ -232,7 +235,8 @@ private:
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void InOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+    void InOrderTraversalOfBinaryTreeNode(Node *ipNode,
+                                          std::vector<Node *> &iovNodes);
 
     /**
      * @brief Performs an post-order traversal of the binary tree node
@@ -240,7 +244,8 @@ private:
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void PostOrderTraversalOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+    void PostOrderTraversalOfBinaryTreeNode(Node *ipNode,
+                                            std::vector<Node *> &iovNodes);
 
     /**
      * @brief Performs a level-order traversal of the binary tree
@@ -248,7 +253,8 @@ private:
      * @param[in] ipRootNode Root node of the binary tree
      * @param[out] ovNodes Vector containing list of pointers of ouput nodes
      */
-    void LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes);
+    void LevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode,
+                                             std::vector<Node *> &ovNodes);
 
     /**
      * @brief Performs a reverse level-order traversal of the binary tree
@@ -256,7 +262,8 @@ private:
      * @param[in] ipRootNode Root node of the binary tree
      * @param[out] odqNodes Dequeue containing list of pointers of ouput nodes
      */
-    void ReverseLevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::deque<Node *> &odqNodes);
+    void ReverseLevelOrderTraversalOfBinaryTreeNode(Node *ipRootNode,
+                                                    std::deque<Node *> &odqNodes);
 
     /**
      * @brief Performs a level-order traversal of the binary tree in spiral manner.
@@ -264,49 +271,56 @@ private:
      * @param[in] ipRootNode Root node of the binary tree
      * @param[out] ovNodes Vector containing list of pointers of ouput nodes
      */
-    void SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode, std::vector<Node *> &ovNodes);
+    void SpiralOrderTraversalOfBinaryTreeNode(Node *ipRootNode,
+                                              std::vector<Node *> &ovNodes);
 
     /**
      * @brief Retrieves all leaf nodes of sub binary tree having root node as given node
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void RetrieveLeafNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+    void RetrieveLeafNodesOfBinaryTreeNode(Node *ipNode,
+                                           std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves all non-leaf nodes of sub binary tree having root node as given node
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void RetrieveNonLeafNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+    void RetrieveNonLeafNodesOfBinaryTreeNode(Node *ipNode,
+                                              std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves all boundary nodes of sub-binary tree having root node as given node
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void RetrieveLeftBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+    void RetrieveLeftBoundaryNodesOfBinaryTreeNode(Node *ipNode,
+                                                   std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves all right boundary nodes of sub-binary tree having root node as given node
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void RetrieveRightBoundaryNodesOfBinaryTreeNode(Node *ipNode, std::vector<Node *> &iovNodes);
+    void RetrieveRightBoundaryNodesOfBinaryTreeNode(Node *ipNode,
+                                                    std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves all full nodes of sub-binary tree whose root is ipNode
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void PrintFullNodes(Node *ipNode, std::vector<Node *> &iovNodes);
+    void PrintFullNodes(Node *ipNode,
+                        std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves all half nodes of sub-binary tree whose root is ipNode
      * @param[in] ipNode Node to traverse
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void PrintHalfNodes(Node *ipNode, std::vector<Node *> &iovNodes);
+    void PrintHalfNodes(Node *ipNode,
+                        std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves all nodes at a distance k from the root node
@@ -314,7 +328,9 @@ private:
      * @param[in] inKDistance Distance from the root node
      * @param[in, out] iovNodes Vector containing list of pointers of ouput nodes
      */
-    void RetrieveAllNodesAtKDistance(Node *ipNode, int inKDistance, std::vector<Node *> &iovNodes);
+    void RetrieveAllNodesAtKDistance(Node *ipNode,
+                                     int inKDistance,
+                                     std::vector<Node *> &iovNodes);
 
     /**
      * @brief Retrieves sibling node of a given data
@@ -322,7 +338,8 @@ private:
      * @param[in] inData Data of a node whose cousins are to be printed
      * @return True if sibling is found, false otherwise
      */
-    Node *RetrieveSibling(Node *ipNode, int inData);
+    Node *RetrieveSibling(Node *ipNode,
+                          int inData);
 
     /**
      * @brief Retrieves all cousin nodes of a given data
@@ -330,7 +347,9 @@ private:
      * @param[in] inData Data of a node whose cousins are to be printed
      * @param[out] ovNodes Vector containing list of pointers of ouput nodes
      */
-    void RetrieveCousins(Node *ipRootNode, int inData, std::vector<Node *> &ovNodes);
+    void RetrieveCousins(Node *ipRootNode,
+                         int inData,
+                         std::vector<Node *> &ovNodes);
 
     /**
      * @brief Returns the height of sub binary tree having root node as given node
